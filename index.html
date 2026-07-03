@@ -17,6 +17,7 @@
     --line:#dcdfd4;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
   body{
     background:var(--sage);
     color:var(--ink);
@@ -154,6 +155,42 @@
     margin-bottom:8px;
   }
 
+  .nav-btns{
+    position:fixed;
+    right:20px;
+    bottom:24px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    z-index:50;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.25s ease;
+  }
+  .nav-btns.show{
+    opacity:1;
+    pointer-events:auto;
+  }
+  .nav-btns button{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    border:none;
+    background:var(--green);
+    color:var(--sage);
+    font-size:20px;
+    line-height:1;
+    cursor:pointer;
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background 0.2s ease,transform 0.15s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .nav-btns button:hover{background:#39694a;}
+  .nav-btns button:active{transform:scale(0.92);}
+
   @media (max-width:600px){
     header{padding:40px 20px 32px;}
     header h1{font-size:27px;}
@@ -162,6 +199,8 @@
     .card h2{font-size:24px;margin-bottom:24px;}
     .toc{padding:28px 26px;}
     .say{font-size:16px;}
+    .nav-btns{right:16px;bottom:18px;}
+    .nav-btns button{width:44px;height:44px;font-size:19px;}
   }
 </style>
 </head>
@@ -426,6 +465,33 @@
   </footer>
 
 </div>
+
+<div class="nav-btns" id="navBtns">
+  <button id="toTop" aria-label="Scroll to top">&#8593;</button>
+  <button id="toBottom" aria-label="Scroll to bottom">&#8595;</button>
+</div>
+
+<script>
+  var navBtns = document.getElementById('navBtns');
+  var toTop = document.getElementById('toTop');
+  var toBottom = document.getElementById('toBottom');
+
+  window.addEventListener('scroll', function(){
+    if (window.scrollY > 300) {
+      navBtns.classList.add('show');
+    } else {
+      navBtns.classList.remove('show');
+    }
+  });
+
+  toTop.addEventListener('click', function(){
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+
+  toBottom.addEventListener('click', function(){
+    window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+  });
+</script>
 
 </body>
 </html>
