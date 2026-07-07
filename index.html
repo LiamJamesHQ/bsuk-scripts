@@ -6,7 +6,7 @@
 <title>BSUK — Closer Scripts</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --green:#2B5336;
@@ -20,8 +20,8 @@
     --ink:#33352f;
     --muted:#6a6f64;
     --line:#dcdfd4;
-    --body:"Roboto",Helvetica,Arial,sans-serif;
-    --head:"Montserrat","Roboto",Helvetica,Arial,sans-serif;
+    --body:Arial,Helvetica,"Segoe UI",Roboto,sans-serif;
+    --head:"Montserrat",Arial,Helvetica,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
@@ -290,6 +290,28 @@
     .nav-btns{right:16px;bottom:18px;}
     .nav-btns button{width:44px;height:44px;font-size:19px;}
   }
+
+  /* --- subtle accentuations --- */
+  header{border-bottom:3px solid var(--terracotta);}
+  .card{scroll-margin-top:175px;}
+  .toc,.ground-rules{scroll-margin-top:175px;}
+  .card:target{border-color:var(--terracotta);box-shadow:0 1px 3px rgba(0,0,0,0.06),0 0 0 2px var(--terracotta);}
+  .price{display:inline-block;background:rgba(43,83,54,0.08);border-radius:6px;padding:1px 8px;font-weight:600;color:var(--green);white-space:nowrap;}
+  @media (hover:hover){
+    .card{transition:box-shadow 0.2s ease;}
+    .card:hover{box-shadow:0 6px 20px rgba(0,0,0,0.08);}
+  }
+  @media (max-width:600px){
+    .card,.toc,.ground-rules{scroll-margin-top:135px;}
+  }
+  @media print{
+    body{background:#fff;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    header{position:static;box-shadow:none;}
+    .nav-btns{display:none !important;}
+    .wrap{max-width:100%;padding:0;}
+    .card,.toc,.ground-rules,.story,.move,.send,.jamesline{break-inside:avoid;page-break-inside:avoid;}
+    a{color:inherit;text-decoration:none;}
+  }
 </style>
 </head>
 <body>
@@ -483,7 +505,6 @@
       <span class="story-tag">Example anecdote — the big one</span>
       <p>There's a guy in Devon — "Escape to the Sauna" — put his life savings in, tested two or three spots a week, Monday–Tuesday one place, Wednesday–Thursday another. Now he's on his second and third units. Even once he got planning for the third, he kept it mobile — boxed into decking, raised, steps up to it, looks the part, and he can still move it whenever.</p>
     </div>
-    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
   <div class="card" id="c10">
@@ -492,11 +513,10 @@
     <span class="label">What to say</span>
     <div class="say">
       <p>"We make them bespoke — different shapes and sizes — but personally I like a round tub, looks nice and authentic and classic, and it's cladded in the same material as the saunas so they sit beautifully side by side. Basic, or we add air jets, jacuzzi jets, massage jets, LED lights."</p>
-      <p>"Bought together with a sauna there's a package deal — 5k plus VAT, and that includes the lot: hot tub, steps, thermocover, jets, all the accessories."</p>
+      <p>"Bought together with a sauna there's a package deal — <span class="price">5k plus VAT</span>, and that includes the lot: hot tub, steps, thermocover, jets, all the accessories."</p>
       <p>Competitors like ScareGuards look cheaper on the surface, but once you stack up the extras they quote separately — underwater lights, steps, filtration, heater plates — it lands close to what we charge anyway, and ours already includes the lot from the start.</p>
     </div>
     <div class="move"><strong>The move:</strong> Picking a favourite for them cuts through choice paralysis. The package price feels like real value against a big sauna spend.</div>
-    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
   <div class="card" id="c11">
@@ -505,7 +525,7 @@
     <span class="label">What to say</span>
     <div class="say">
       <p>"So there's the single dipper and the double dipper. Both come with a chiller, cooler, filter and heater machine — heats to 40 degrees, cools to zero, so it's both an ice bath and a hot tub. It's not a flick-on-and-jump-in job — you'd decide, ice bath tomorrow or hot tub tomorrow, and switch it overnight. Comes complete with thin wood steps, lids, inserts, seats, the lot."</p>
-      <p>"Single dipper's 3,995 plus VAT, double's 5,995 plus VAT."</p>
+      <p>"Single dipper's <span class="price">3,995 plus VAT</span>, double's <span class="price">5,995 plus VAT</span>."</p>
       <p>Hold the dual function back rather than leading with it — talk about it as a lovely cold tub first, have a proper chat, and only mention near the end that it doubles as a hot tub too. Landing it last makes it feel like a bonus rather than a sales point.</p>
       <p>"With the double you might end up in a bit of a war with your partner — they flick it to hot tub, you flick it to ice bath. Just come to a custody arrangement for the week."</p>
       <p>"It's like a big deep solid outdoor bath tub — one head each side, go through the pain together."</p>
@@ -530,7 +550,6 @@
     </div>
     <div class="move"><strong>The move:</strong> Sell the finished look, not just the function — it's decorative as much as practical. On commercial, the hygiene angle turns it from a nice-to-have into something that feels necessary. It's an add-on, but a high-value, easy-yes one.</div>
     <div class="jamesline"><strong>James's line:</strong> "The glass roof's lovely — though maybe don't have it in your own back garden. If you're having a proper naked shower out there, no real need for a glass roof over the top, is there."</div>
-    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
   <div class="card" id="c13">
@@ -562,7 +581,6 @@
       <span class="story-tag">Example anecdote — proof it works anywhere</span>
       <p>There was a double-dipper and sauna job in London recently — really difficult access, small house, long narrow scary garden. It all got carried through, decked round tree roots, the deck cut around a tree stump, ending with the dipper and sauna side by side in matching wood. Looked brilliant once it was in.</p>
     </div>
-    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
   <div class="card" id="c15">
@@ -602,7 +620,6 @@
       <p>For commercial jobs, mention branding: we can put a name or logo on the build itself — worth a quick mention for anyone doing a commercial space, since it makes the whole thing feel personal to them (think "the Smith's House" style naming).</p>
     </div>
     <div class="move"><strong>The move:</strong> Give, don't sell. A voucher lands warmer than an add-on list.</div>
-    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
   <div class="card" id="c18">
