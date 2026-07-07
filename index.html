@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet">
 <style>
   :root{
     --green:#2B5336;
@@ -20,6 +21,7 @@
     --ink:#33352f;
     --muted:#6a6f64;
     --line:#dcdfd4;
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
@@ -31,34 +33,52 @@
     -webkit-font-smoothing:antialiased;
     padding:0 0 100px;
   }
+
+  #progress{
+    position:fixed;top:0;left:0;height:4px;width:0%;
+    background:var(--terracotta);z-index:60;
+    transition:width 0.08s linear;
+  }
+
   header{
     background:var(--green);
     color:var(--sage);
     padding:56px 24px 48px;
     text-align:center;
-    position:sticky;
-    top:0;
-    z-index:10;
+    position:sticky;top:0;z-index:10;
+    overflow:hidden;
+    border-bottom:3px solid var(--terracotta);
     box-shadow:0 2px 12px rgba(0,0,0,0.12);
   }
+  header::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(130% 150% at 50% -30%, rgba(160,82,45,0.22), transparent 60%),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 27px);
+  }
+  header::after{
+    content:"";position:absolute;left:50%;bottom:-42%;
+    width:620px;height:620px;transform:translateX(-50%);
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='620' height='620' viewBox='0 0 620 620'%3E%3Cg fill='none' stroke='%23f1f2ec' stroke-opacity='0.10' stroke-width='2'%3E%3Ccircle cx='310' cy='310' r='120'/%3E%3Ccircle cx='310' cy='310' r='190'/%3E%3Ccircle cx='310' cy='310' r='260'/%3E%3Ccircle cx='310' cy='310' r='300'/%3E%3C/g%3E%3C/svg%3E") no-repeat center/contain;
+    pointer-events:none;
+  }
+  header h1,header p{position:relative;z-index:1;}
   header h1{
-    font-weight:800;
-    font-size:34px;
-    letter-spacing:0.5px;
-    margin-bottom:10px;
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:38px;
+    letter-spacing:0.3px;
+    margin-bottom:12px;
   }
   header p{
     font-size:12.5px;
     font-weight:500;
-    opacity:0.82;
+    opacity:0.85;
     letter-spacing:2px;
     text-transform:uppercase;
   }
-  .wrap{
-    max-width:920px;
-    margin:0 auto;
-    padding:40px 24px 0;
-  }
+  .wrap{max-width:920px;margin:0 auto;padding:40px 24px 0;}
+
   .card{
     background:#fff;
     border-radius:16px;
@@ -66,227 +86,156 @@
     margin-bottom:32px;
     box-shadow:0 1px 3px rgba(0,0,0,0.06);
     border:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+    scroll-margin-top:150px;
   }
+  .card::before{
+    content:attr(data-n);
+    position:absolute;top:-14px;right:22px;
+    font-family:var(--serif);font-weight:600;
+    font-size:150px;line-height:1;
+    color:var(--green);opacity:0.05;
+    pointer-events:none;z-index:0;
+  }
+  .card>*{position:relative;z-index:1;}
+
   .num{
     display:inline-block;
-    font-style:italic;
-    font-weight:500;
-    font-size:15px;
-    letter-spacing:0.5px;
+    font-family:var(--serif);
+    font-style:italic;font-weight:500;
+    font-size:16px;letter-spacing:0.3px;
     color:var(--terracotta);
     margin-bottom:12px;
   }
   .card h2{
-    font-weight:700;
-    font-size:28px;
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:30px;
     color:var(--green);
-    margin-bottom:32px;
-    line-height:1.35;
-    letter-spacing:0.2px;
+    margin-bottom:30px;
+    line-height:1.3;
   }
   .label{
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-    color:var(--terracotta);
-    display:block;
-    margin:0 0 14px;
+    font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--terracotta);display:block;margin:0 0 14px;
   }
   .say{
-    font-size:16.5px;
-    font-weight:400;
-    color:var(--ink);
-    margin-bottom:32px;
+    font-size:16.5px;font-weight:400;color:var(--ink);margin-bottom:32px;
   }
   .say p{margin-bottom:20px;}
   .say p:last-child{margin-bottom:0;}
+
+  .say.lines{
+    font-family:var(--serif);
+    font-size:18px;
+    line-height:1.8;
+    color:#2c2e28;
+  }
+  .say.lines p{margin-bottom:18px;}
+
   .move{
-    background:var(--sage);
-    border-left:3px solid var(--green);
-    padding:20px 24px;
-    border-radius:0 10px 10px 0;
-    font-size:15px;
-    color:var(--muted);
-    line-height:1.75;
+    background:var(--sage);border-left:3px solid var(--green);
+    padding:20px 24px;border-radius:0 10px 10px 0;
+    font-size:15px;color:var(--muted);line-height:1.75;
   }
   .move strong{color:var(--green);font-weight:700;}
   .jamesline{
-    margin-top:20px;
-    background:#fbf3ee;
-    border:1px dashed var(--terracotta);
-    padding:18px 22px;
-    border-radius:10px;
-    font-size:14.5px;
-    font-style:italic;
-    color:#6b4a3a;
-    line-height:1.7;
+    margin-top:20px;background:#fbf3ee;border:1px dashed var(--terracotta);
+    padding:18px 22px;border-radius:10px;
+    font-family:var(--serif);font-size:15.5px;font-style:italic;
+    color:#6b4a3a;line-height:1.7;
   }
-  .jamesline strong{font-style:normal;font-weight:700;color:var(--terracotta);}
+  .jamesline strong{font-family:"Raleway",sans-serif;font-style:normal;font-weight:700;color:var(--terracotta);}
   .send{
-    margin-top:20px;
-    background:var(--send-bg);
-    border-left:3px solid var(--send);
-    padding:18px 22px;
-    border-radius:0 10px 10px 0;
-    font-size:14.5px;
-    color:#33505f;
-    line-height:1.7;
+    margin-top:20px;background:var(--send-bg);border-left:3px solid var(--send);
+    padding:18px 22px;border-radius:0 10px 10px 0;
+    font-size:14.5px;color:#33505f;line-height:1.7;
   }
   .send strong{color:var(--send);font-weight:700;}
 
   .story{
-    margin:6px 0 26px;
-    background:var(--winered-bg);
-    border-left:3px solid var(--winered);
-    border-radius:0 12px 12px 0;
-    padding:22px 26px 24px;
+    margin:6px 0 26px;background:var(--winered-bg);border-left:3px solid var(--winered);
+    border-radius:0 12px 12px 0;padding:22px 26px 24px;
   }
   .story .story-tag{
-    font-size:10px;
-    font-weight:700;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-    color:var(--winered);
-    display:block;
-    margin-bottom:10px;
+    font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--winered);display:block;margin-bottom:10px;
   }
   .story p{
-    font-size:16px;
-    font-weight:500;
-    font-style:italic;
-    line-height:1.7;
-    color:var(--winered);
+    font-family:var(--serif);
+    font-size:16.5px;font-weight:400;font-style:italic;line-height:1.7;color:var(--winered);
   }
 
-  .toc{
-    background:#fff;
-    border-radius:16px;
-    padding:44px 48px 40px;
-    margin-bottom:36px;
-    border:1px solid var(--line);
-  }
-  .toc h3{
-    font-size:26px;
-    font-weight:800;
-    color:var(--green);
-    margin-bottom:6px;
-    letter-spacing:0.2px;
-    line-height:1.2;
-  }
-  .toc .toc-sub{
-    font-size:11.5px;
-    font-weight:600;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-    color:var(--terracotta);
-    margin-bottom:26px;
-  }
+  .toc{background:#fff;border-radius:16px;padding:44px 48px 40px;margin-bottom:36px;border:1px solid var(--line);}
+  .toc h3{font-family:var(--serif);font-size:29px;font-weight:600;color:var(--green);margin-bottom:6px;line-height:1.2;}
+  .toc .toc-sub{font-size:11.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--terracotta);margin-bottom:26px;}
   .toc ol{list-style:none;counter-reset:t;}
-  .toc li{
-    counter-increment:t;
-    font-size:15.5px;
-    font-weight:500;
-    border-bottom:1px solid var(--line);
-  }
+  .toc li{counter-increment:t;font-size:15.5px;font-weight:500;border-bottom:1px solid var(--line);}
   .toc li:last-child{border-bottom:none;}
-  .toc a{
-    color:var(--ink);
-    text-decoration:none;
-    display:flex;
-    align-items:center;
-    gap:16px;
-    padding:12px 2px;
-    transition:color 0.15s ease,padding 0.15s ease;
-  }
-  .toc a::before{
-    content:counter(t);
-    flex:0 0 28px;
-    height:28px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--sage);
-    border-radius:50%;
-    font-size:13px;
-    font-weight:700;
-    color:var(--green);
-    transition:background 0.15s ease,color 0.15s ease;
-  }
+  .toc a{color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:16px;padding:12px 2px;transition:color 0.15s ease,padding 0.15s ease;}
+  .toc a::before{content:counter(t);flex:0 0 28px;height:28px;display:flex;align-items:center;justify-content:center;background:var(--sage);border-radius:50%;font-size:13px;font-weight:700;color:var(--green);transition:background 0.15s ease,color 0.15s ease;}
   .toc a:hover{color:var(--terracotta);padding-left:8px;}
   .toc a:hover::before{background:var(--green);color:#fff;}
 
-  .ground-rules{
-    background:#fff;
-    border-radius:16px;
-    padding:38px 48px;
-    margin-bottom:36px;
-    border:1px solid var(--line);
-    border-top:4px solid var(--green);
-  }
-  .ground-rules h3{
-    font-size:20px;
-    color:var(--green);
-    margin-bottom:20px;
-    font-weight:700;
-  }
+  .ground-rules{background:#fff;border-radius:16px;padding:38px 48px;margin-bottom:36px;border:1px solid var(--line);border-top:4px solid var(--green);}
+  .ground-rules h3{font-family:var(--serif);font-size:22px;color:var(--green);margin-bottom:20px;font-weight:600;}
   .ground-rules ol{list-style:none;counter-reset:g;}
   .ground-rules li{counter-increment:g;font-size:15.5px;padding:12px 0;border-bottom:1px solid var(--line);line-height:1.75;}
   .ground-rules li:last-child{border-bottom:none;}
   .ground-rules li::before{content:counter(g)".  ";color:var(--green);font-weight:700;}
   .ground-rules strong{color:var(--green);}
-  footer{
-    text-align:center;
-    font-size:12.5px;
-    color:var(--muted);
-    padding:48px 24px 0;
-  }
-  footer .rule{
-    font-style:italic;
-    font-weight:500;
-    color:var(--green);
-    font-size:16px;
-    margin-bottom:8px;
-  }
 
-  .nav-btns{
-    position:fixed;right:20px;bottom:24px;
-    display:flex;flex-direction:column;gap:10px;z-index:50;
-    opacity:0;pointer-events:none;transition:opacity 0.25s ease;
-  }
+  footer{text-align:center;font-size:12.5px;color:var(--muted);padding:48px 24px 0;}
+  footer .rule{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--green);font-size:17px;margin-bottom:8px;}
+
+  .nav-btns{position:fixed;right:20px;bottom:24px;display:flex;flex-direction:column;gap:10px;z-index:50;opacity:0;pointer-events:none;transition:opacity 0.25s ease;}
   .nav-btns.show{opacity:1;pointer-events:auto;}
-  .nav-btns button{
-    width:46px;height:46px;border-radius:50%;border:none;
-    background:var(--green);color:var(--sage);font-size:20px;line-height:1;cursor:pointer;
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
-    display:flex;align-items:center;justify-content:center;
-    transition:background 0.2s ease,transform 0.15s ease;
-    -webkit-tap-highlight-color:transparent;
-  }
+  .nav-btns button{width:46px;height:46px;border-radius:50%;border:none;background:var(--green);color:var(--sage);font-size:20px;line-height:1;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;transition:background 0.2s ease,transform 0.15s ease;-webkit-tap-highlight-color:transparent;}
   .nav-btns button:hover{background:#39694a;}
   .nav-btns button:active{transform:scale(0.92);}
 
+  .jump-panel{
+    position:fixed;right:20px;bottom:82px;z-index:55;
+    width:272px;max-height:68vh;overflow-y:auto;
+    background:#fff;border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 10px 34px rgba(0,0,0,0.20);
+    padding:8px;
+    opacity:0;transform:translateY(10px) scale(0.98);pointer-events:none;
+    transition:opacity 0.2s ease,transform 0.2s ease;
+  }
+  .jump-panel.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+  .jump-panel .jump-head{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--terracotta);padding:8px 12px 10px;}
+  .jump-panel a{display:block;text-decoration:none;color:var(--ink);font-size:13.5px;font-weight:500;padding:8px 12px;border-radius:8px;line-height:1.4;}
+  .jump-panel a:hover{background:var(--sage);color:var(--green);}
+
   @media (max-width:600px){
     header{padding:40px 20px 32px;}
-    header h1{font-size:27px;}
+    header h1{font-size:29px;}
+    header::after{width:420px;height:420px;}
     .wrap{padding:26px 16px 0;}
-    .card{padding:32px 26px 34px;border-radius:14px;}
-    .card h2{font-size:24px;margin-bottom:24px;}
+    .card{padding:32px 26px 34px;border-radius:14px;scroll-margin-top:120px;}
+    .card::before{font-size:96px;top:-6px;right:14px;opacity:0.06;}
+    .card h2{font-size:25px;margin-bottom:22px;}
+    .say.lines{font-size:17px;}
     .story{padding:20px 22px;}
-    .story p{font-size:15px;}
+    .story p{font-size:15.5px;}
     .toc{padding:32px 26px 28px;}
-    .toc h3{font-size:23px;}
+    .toc h3{font-size:25px;}
     .toc li{font-size:15px;}
     .toc a{gap:13px;padding:11px 2px;}
     .toc a::before{flex:0 0 26px;height:26px;font-size:12px;}
     .ground-rules{padding:28px 26px;}
     .say{font-size:16px;}
+    .jump-panel{right:16px;bottom:74px;width:240px;}
     .nav-btns{right:16px;bottom:18px;}
     .nav-btns button{width:44px;height:44px;font-size:19px;}
   }
 </style>
 </head>
 <body>
+<div id="progress"></div>
+<span id="top"></span>
 
 <header>
   <h1>Barrel Sauna UK</h1>
@@ -330,11 +279,11 @@
     </ol>
   </div>
 
-  <div class="card" id="c1">
+  <div class="card" id="c1" data-n="1">
     <span class="num">One</span>
     <h2>Open — Who We Are</h2>
     <span class="label">What to say</span>
-    <div class="say">
+    <div class="say lines">
       <p>"So we're a Welsh family business — everything's hand-built in Wales, made to order. We don't mass produce. We're not the cheapest out there and we're not trying to be. We build bespoke projects that last, that you only ever have to buy once."</p>
       <p>"We've got a UK office, a team who answer the phone, aftercare's all there, and we're doing installs around the UK all the time. We actually quite often go to a client's house, strip out a sauna they had built less than a year ago, and replace it with ours."</p>
     </div>
@@ -347,11 +296,11 @@
     <div class="move"><strong>The move:</strong> Set the quality frame before price ever comes up. Everything after this defends it — made in Wales, come and see it, buy once.</div>
   </div>
 
-  <div class="card" id="c2">
+  <div class="card" id="c2" data-n="2">
     <span class="num">Two</span>
     <h2>Read the Customer</h2>
     <span class="label">What to say / listen for</span>
-    <div class="say">
+    <div class="say lines">
       <p>Gauge budget from how they phrase it. "I don't want anything massive, just something for two to four" — they're working to a budget, hold steady, don't push. "There's two of us but we'd love friends and family over" — budget's there, push the size up.</p>
       <p>Ask capacity straight out: "Roughly how many people are you thinking, at any one time?" That answer is your cue. If it's vague or small, that's when the icebreaker line lands — "are they bodybuilders or ballerinas? It's a hard one" — gets a laugh, gets you an honest answer. It's a response to their capacity answer, not a cold opener.</p>
       <p>For commercial, once capacity comes up, make the go-bigger case: picture a nice big sauna with only four people in it — spread out, loads of space, lying down both sides. Now picture six people inside and twenty being turned away outside. Which would you rather? There's no harm going bigger — fewer people just means more space, and it's also where you get a read on what they can actually afford.</p>
@@ -360,11 +309,11 @@
     <div class="move"><strong>The move:</strong> Diagnose before you pitch. You're not selling size — you're reading them and nudging toward the right fit.</div>
   </div>
 
-  <div class="card" id="c3">
+  <div class="card" id="c3" data-n="3">
     <span class="num">Three</span>
     <h2>Diameter — 2m vs 2.3m</h2>
     <span class="label">What to say</span>
-    <div class="say">
+    <div class="say lines">
       <p>"Standard diameter's 2 metres. But going up to 2.3, it's surprising how much more space you get." Talk from your own body if it fits, or a friend or family member's if you're not built for it — "my mate's six foot three and pretty broad, sat in the 2.3 he's got plenty of room, head's not touching the sides, he can lie flat on the bench without his arm dropping off the edge." Benches are wider, backrests thicker, more space between them.</p>
       <p>"Don't worry about heat-up time — you match the heater to the room, so a bigger room just gets a bigger heater. Same as a bigger radiator. Makes barely any difference."</p>
       <p>On value: "Look, we don't compete on price with the really cheap saunas — they're selling for less than ours cost us to make. But once you've got a larger sauna, we try to put a ceiling on what going wider actually costs you. We're not really making money on it, we just want to give good value to someone who's already investing and wants to use the space properly." Think of it as a loss leader — you're glad they're doing business with you, so you're not going to sting them for a bit more width. Widening is much cheaper than lengthening, so it's the better-value way to get more room.</p>
@@ -372,11 +321,11 @@
     <div class="move"><strong>The move:</strong> Your own body in the sauna is the whole pitch — or a friend or family member's if you're not the size for it. Genuine enthusiasm does the selling — lean into it.</div>
   </div>
 
-  <div class="card" id="c4">
+  <div class="card" id="c4" data-n="4">
     <span class="num">Four</span>
     <h2>Length &amp; Changing Room</h2>
     <span class="label">What to say</span>
-    <div class="say">
+    <div class="say lines">
       <p>"Three metres is a really nice size — you can lie down either side with space at the end for a bucket and ladle at your feet. And with a changing room it's more than just changing — you can chill between sessions, take a break."</p>
       <p>"Sat in a sauna with the door flying open every five minutes, gust of cold coming in — it's jarring. That changing room's an airlock, a heat trap. The second door's sandblasted glass so it opens silent. Far more relaxing for everyone inside."</p>
       <p>"We can build under-seat storage in there too — wood on the left, towels and water on the right. And with a wood burner on the left as you walk in, you grab a log from under the seat without even stepping into the hot sauna."</p>
@@ -388,11 +337,11 @@
     </div>
   </div>
 
-  <div class="card" id="c5">
+  <div class="card" id="c5" data-n="5">
     <span class="num">Five</span>
     <h2>Lighting</h2>
     <span class="label">What to say</span>
-    <div class="say">
+    <div class="say lines">
       <p>"The undersea warm LED lights give off a really nice ambience — nothing overpowering, it's all about the glow. We fit them under the seats, and we've started doing them behind the backrests too."</p>
       <p>Then talk them out of the wall lights: "Realistically you don't really need the wall lights in the main sauna. It's nice to sit with your back to that wall and your feet facing out, and a wall light there stops you doing that. The undersea LEDs give off plenty on their own."</p>
       <p>"And these aren't random LEDs stuck under a seat — heatproof, sauna-rated, proper trunking, a wooden frame round them, fixed securely. Designed for saunas."</p>
@@ -402,16 +351,16 @@
     <div class="move"><strong>The move:</strong> Sacrificing the wall lights buys trust for everything else. The blue-light story sells the changing room without asking for it.</div>
   </div>
 
-  <div class="card" id="c6">
+  <div class="card" id="c6" data-n="6">
     <span class="num">Six</span>
     <h2>Bench Layouts</h2>
     <span class="label">What to say — U-shaped</span>
-    <div class="say">
+    <div class="say lines">
       <p>"Personally I much prefer the heater on the side — it's a design we came up with, not traditional, but when you walk in all you see is the view, especially with a flat glass or globe window. You can lie right at the end looking out. With straight benches either side you've got the heater in the middle, and if it's a wood burner the chimney's up through your view and the safety rail eats your space."</p>
       <p>"We can fit grooves into the seats facing each other, so you can join the two sides into one interchangeable middle section, built from the same smooth aspen — great for stretching, hot yoga, or just sprawling out."</p>
     </div>
     <span class="label">What to say — L-shaped &amp; the rule</span>
-    <div class="say">
+    <div class="say lines">
       <p>"L-shape's for the compact — heater on the left as you walk in, makes the most of the space. Works nicely with a glass door front so you can sit in the middle looking straight out."</p>
       <p>"You can only do L-shape with an electric heater. A wood burner needs to go in the middle at the end with benches either side — not enough space otherwise."</p>
     </div>
@@ -422,11 +371,11 @@
     </div>
   </div>
 
-  <div class="card" id="c7">
+  <div class="card" id="c7" data-n="7">
     <span class="num">Seven</span>
     <h2>Windows</h2>
     <span class="label">What to say</span>
-    <div class="say">
+    <div class="say lines">
       <p>Always diagnose first: "Where's the sauna going — flush against a wall, or have you got some nice views looking out?" If it's against a wall, don't pitch a window at all. If there's a view, let them talk about it — ask about the view, the space, mention we've done something similar elsewhere, and let them enjoy talking about their own place for a bit before you pitch anything.</p>
       <p>Then bring in the globe: "Have you seen our panoramic dome windows? We get a timber ring cut at a specialist sawmill just for us, custom moulded, frames the whole inside, and we build the benches flush into the dome so you're basically sat inside it. Especially for commercial, it's a real wow factor — it's quirky enough that people take photos and videos and tag you in them, so it does a bit of organic promotion on its own. Nice mix of classic sauna and a modern twist."</p>
       <p>"If you want to keep costs down, the full flat glass is also really nice — we build a floating bench for it. And the half-moon's still lovely, gives you your view at a lower price point. If they can afford the globe, they'll go for the globe — no need to push it too hard."</p>
@@ -436,11 +385,11 @@
     <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
-  <div class="card" id="c8">
+  <div class="card" id="c8" data-n="8">
     <span class="num">Eight</span>
     <h2>Heaters</h2>
     <span class="label">What to say</span>
-    <div class="say">
+    <div class="say lines">
       <p>Start on the fence: "There's pros and cons to each." Wood burner: "It's lovely and ambient — the glow, seeing the fire, very natural and therapeutic. I'm a bit of a pyromaniac, I enjoy starting it." It also makes great content — a video of the fire going, zooming out to the sauna, is different to just another photo post.</p>
       <p>Electric WiFi: "Especially the WiFi model — connects to an app on your phone via Harvia, turn it on and off remotely, set timers. For a commercial with electric access it's less maintenance. But if you've got cleaners turning an Airbnb over daily, getting the fire going is one more easy job for them."</p>
       <p>"And it's not a microwavey infrared heat where you feel zapped and out of control of it — ours use volcanic stones, so you get the steam and a natural feel, not too electric-y."</p>
@@ -455,11 +404,11 @@
     </div>
   </div>
 
-  <div class="card" id="c9">
+  <div class="card" id="c9" data-n="9">
     <span class="num">Nine</span>
     <h2>Mobile Saunas</h2>
     <span class="label">What to say</span>
-    <div class="say">
+    <div class="say lines">
       <p>"These trailers are built bespoke to order in our fabrication workshop in Wales. You can buy off-the-shelf trailers cheap, but nothing off the shelf is designed to be part of a mobile sauna — the suspension, the wheels, the galvanised steel reinforcement, all built for purpose. It gets tested at DVSA and it's on record as a mobile sauna trailer — there are no other trailers in existence with that."</p>
       <p>"And we don't just plonk a sauna on a trailer — we fix it to buffalo boards, L-brackets under each leg, then box it in with a timber decking platform and build the steps from the same material. So it looks like a nice raised deck, not a sauna on a random trailer."</p>
       <p>"They're usually off-grid — we can fit a full solar system for all the lighting, plus plug sockets inside for charging your phone. We wire the whole lot so it arrives fully ready to go."</p>
@@ -467,7 +416,7 @@
       <p>If someone asks the price without the trailer, give it — but explain why it's not really the comparison they think it is: "It's not just a trailer. You'd buy a trailer for X, pay someone to lift the sauna onto it, then pay a carpenter — could easily be fifteen hundred quid — to box it in with decking. And at the end of it you've got a random trailer that was never designed to carry a sauna in the first place." That's usually when the penny drops.</p>
     </div>
     <span class="label">What to say — pushing toward mobile now</span>
-    <div class="say">
+    <div class="say lines">
       <p>For anyone who's ready to get going — land bought, just wants to move — it's worth the "ask forgiveness, not permission" angle: getting a mobile sauna means they don't have to wait out a long planning process to start using the space.</p>
       <p>On councils: they're generally on side with wellness — much easier sell than, say, a bar. What you're not in control of is how long they take to say yes, which is exactly the case for getting a mobile sauna now and starting straight away rather than waiting on planning.</p>
       <p>Once it's parked up, there's nothing stopping a bamboo wall and a bath going in around it either — quickly looks like a proper outdoor wellness space. But the fence comes down in a day, the ice bath goes in a van, and the sauna gets wheeled away, if they ever need to.</p>
@@ -480,11 +429,11 @@
     <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
-  <div class="card" id="c10">
+  <div class="card" id="c10" data-n="10">
     <span class="num">Ten</span>
     <h2>Hot Tubs</h2>
     <span class="label">What to say</span>
-    <div class="say">
+    <div class="say lines">
       <p>"We make them bespoke — different shapes and sizes — but personally I like a round tub, looks nice and authentic and classic, and it's cladded in the same material as the saunas so they sit beautifully side by side. Basic, or we add air jets, jacuzzi jets, massage jets, LED lights."</p>
       <p>"Bought together with a sauna there's a package deal — 5k plus VAT, and that includes the lot: hot tub, steps, thermocover, jets, all the accessories."</p>
       <p>Competitors like ScareGuards look cheaper on the surface, but once you stack up the extras they quote separately — underwater lights, steps, filtration, heater plates — it lands close to what we charge anyway, and ours already includes the lot from the start.</p>
@@ -493,11 +442,11 @@
     <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
-  <div class="card" id="c11">
+  <div class="card" id="c11" data-n="11">
     <span class="num">Eleven</span>
     <h2>Ice Baths — The Dippers</h2>
     <span class="label">What to say</span>
-    <div class="say">
+    <div class="say lines">
       <p>"So there's the single dipper and the double dipper. Both come with a chiller, cooler, filter and heater machine — heats to 40 degrees, cools to zero, so it's both an ice bath and a hot tub. It's not a flick-on-and-jump-in job — you'd decide, ice bath tomorrow or hot tub tomorrow, and switch it overnight. Comes complete with thin wood steps, lids, inserts, seats, the lot."</p>
       <p>"Single dipper's 3,995 plus VAT, double's 5,995 plus VAT."</p>
       <p>Hold the dual function back rather than leading with it — talk about it as a lovely cold tub first, have a proper chat, and only mention near the end that it doubles as a hot tub too. Landing it last makes it feel like a bonus rather than a sales point.</p>
@@ -508,17 +457,17 @@
     <div class="move"><strong>The move:</strong> The switching joke turns a technical limitation into something charming instead of a drawback. Holding the function back to the end makes it feel like a bonus, not a pitch.</div>
   </div>
 
-  <div class="card" id="c12">
+  <div class="card" id="c12" data-n="12">
     <span class="num">Twelve</span>
     <h2>The Barrel Shower</h2>
     <span class="label">What to say</span>
-    <div class="say">
+    <div class="say lines">
       <p>"It's a barrel shower — looks just like the sauna, same materials, same colour, so it sits right alongside it and matches everything else. Really it's just a nice little enclosure you pop into. No door needed, it still feels solid and authentic, and it adds to that whole outdoor wellness vibe."</p>
       <p>Uncomplicate it before they ask — people worry about heating and plumbing: "There's nothing complicated to it. No heating to think about — you come out the sauna, have a cold rinse, jump out. It's plumbed in exactly like a normal shower, that's it."</p>
       <p>There's a tempered glass roof option too — you're rinsing off looking straight up at the sky, quite pretty.</p>
     </div>
     <span class="label">What to say — commercial</span>
-    <div class="say">
+    <div class="say lines">
       <p>Push this harder on commercial jobs than we have been. It's the practical fix for a room full of people coming out the sauna and going straight into the ice bath before they've rinsed off — otherwise the ice bath ends up mostly sweat before you know it. Frame it almost as basic hygiene practice: "For a commercial setup I'd honestly make it a shower-before rule, and this is how you do it."</p>
       <p>Cost-wise it's roughly a tenth of a sauna, so against the main investment it's a low-cost way to add real volume and finish to the space — makes the whole setup look more complete.</p>
     </div>
@@ -527,26 +476,26 @@
     <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
-  <div class="card" id="c13">
+  <div class="card" id="c13" data-n="13">
     <span class="num">Thirteen</span>
     <h2>Delivery &amp; Lifting</h2>
     <span class="label">What to say — installation</span>
-    <div class="say">
+    <div class="say lines">
       <p>"We've seen it all — if you think your space is tight, send us photos and videos, but we can handball everything through. We bring our kit, a few of the lads come down from Wales, stay local a couple of days and build it on site. Eighty to ninety percent of the time we just come and build it there and then."</p>
     </div>
     <span class="label">What to say — delivery of built saunas</span>
-    <div class="say">
+    <div class="say lines">
       <p>"We used to include fully assembled deliveries — crane lifting it in, the works. But clients kept coming back saying they'd found a local lift cheaper, and we were never adding anything on top. So the best way we landed on: we bring it fully assembled on one of our trailers, and you get the cheapest local quote for the lift off the trailer onto site — most people find that works out cheaper than what we were charging for the crane anyway."</p>
       <p>"A lot of sites already have their own lifting kit, some farms too, and our guys are experienced, they'll help guide it on site."</p>
     </div>
     <div class="move"><strong>The move:</strong> Framing the no-crane change as a saving keeps it a benefit, not a fob-off. Keep it about the saving, not about what they'd be doing anyway — that reads as accusatory.</div>
   </div>
 
-  <div class="card" id="c14">
+  <div class="card" id="c14" data-n="14">
     <span class="num">Fourteen</span>
     <h2>Decking &amp; Ground Prep</h2>
     <span class="label">What to say</span>
-    <div class="say">
+    <div class="say lines">
       <p>"The cheapest way — we dig railway sleepers into the ground, sit the sauna's feet on them, done. Cost-effective and it works. We did one locally in Penarth about three years ago, haven't heard from him since — no news is good news, the weight of the sauna packs it right down onto the sleepers."</p>
       <p>"Honestly, any solid, level surface is fine — patio, concrete pad, gravel, as long as it's level you're good. No need to lift your patio."</p>
       <p>"But if you want a proper decking platform built around it — space in front for an ice bath or hot tub — it's there ready to add to. And doing it all in one means no second delivery charge later. We can bring the whole lot at once."</p>
@@ -559,26 +508,26 @@
     <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
-  <div class="card" id="c15">
+  <div class="card" id="c15" data-n="15">
     <span class="num">Fifteen</span>
     <h2>Ireland &amp; International</h2>
     <span class="label">What to say — Ireland</span>
-    <div class="say">
+    <div class="say lines">
       <p>"Yeah, Ireland's no problem. We've got an Irish team member — Ian, qualified carpenter, worked with us for ages. He comes over to the UK, helps with our installs here for a week or so at a time, then heads back and does the rounds on our Ireland installations. So he's based in Ireland but part of the team."</p>
     </div>
     <span class="label">What to say — international</span>
-    <div class="say">
+    <div class="say lines">
       <p>"International's no problem either — we've done it before. Just send us your address and we'll figure out a price and confirm it. And look, we appreciate you're not in the UK and can't come and see the quality in person, so we'll meet you in the middle on delivery — you pay half, we pay half."</p>
       <p>Then take the details and pass to James — don't quote on the spot.</p>
     </div>
     <div class="move"><strong>The move:</strong> "Ian's our Irish guy" beats "yes we deliver to Ireland." Makes the infrastructure real and personal. "We pay half" sounds like goodwill, even though they're the ones transferring the money — it reads better than "we'll offset some of the cost."</div>
   </div>
 
-  <div class="card" id="c16">
+  <div class="card" id="c16" data-n="16">
     <span class="num">Sixteen</span>
     <h2>Glamping — Hold &amp; Refer</h2>
     <span class="label">What to say</span>
-    <div class="say">
+    <div class="say lines">
       <p>"We're a team of fabricators and carpenters — we can build pretty much anything in the wellness space, an entire glamping site if you wanted. Shepherd's huts and glamping projects aren't quite my specialism, but let me send you a video and a link to have a look, I'll make a note and get James to call you back for a proper chat."</p>
       <p>Send the eco-pod expo video and the Shepherd's Hut page. That's the clean exit.</p>
     </div>
@@ -586,11 +535,11 @@
     <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
-  <div class="card" id="c17">
+  <div class="card" id="c17" data-n="17">
     <span class="num">Seventeen</span>
     <h2>Accessories</h2>
     <span class="label">What to say</span>
-    <div class="say">
+    <div class="say lines">
       <p>The shop's not live yet, but you can now say so rather than staying quiet on it: "We've actually got an online accessory shop in development — bits like sauna hats and more — and once it's live you'll get a discount code to use on it." No need to promise a live link today, just that it's coming and there'll be a code waiting for them.</p>
       <p>The voucher's worth £30 — enough to get one item outright, or heavily discount something bigger like a bucket and ladle, and enough to bring them back onto the shop where they'll likely end up buying something else too.</p>
       <p>For commercial jobs, mention branding: we can put a name or logo on the build itself — worth a quick mention for anyone doing a commercial space, since it makes the whole thing feel personal to them (think "the Smith's House" style naming).</p>
@@ -599,18 +548,18 @@
     <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
-  <div class="card" id="c18">
+  <div class="card" id="c18" data-n="18">
     <span class="num">Eighteen</span>
     <h2>Bundling — Buy It All From Us</h2>
     <span class="label">What to say</span>
-    <div class="say">
+    <div class="say lines">
       <p>"Everything we make — the saunas, the hot tubs, the ice baths, the barrel showers, the glamping pods — it's all built from the same material, so it's worth getting the lot from us. It all suits, it all merges together, it looks the part, it sits nicely side by side, and it all matches up."</p>
       <p>"And you save on delivery too — we bring it all in one go, rather than you paying a separate delivery cost every time. One trip, not three."</p>
     </div>
     <div class="move"><strong>The move:</strong> Raises order value by reframing add-ons as a smart bundle, not extra spend. The "same material, sits side by side" line sells the finished picture — their whole garden, not one product — so extra items feel like completing a set. The delivery saving hands them a rational reason to say yes, so trading up feels like saving. Bring it in the moment they mention a hot tub, ice bath, shower or pod alongside the sauna, and again in the Close. One caveat: glamping still routes to James (card 16) — pods sit in the same-material family for the pitch, but the pod itself stays a referral, not a live bundle item.</div>
   </div>
 
-  <div class="card" id="c19">
+  <div class="card" id="c19" data-n="19">
     <span class="num">Nineteen</span>
     <h2>The Close</h2>
     <span class="label">What it comes down to</span>
@@ -632,7 +581,31 @@
 
 </div>
 
+<div class="jump-panel" id="jumpPanel">
+  <div class="jump-head">Jump to</div>
+  <a href="#top">Top</a>
+  <a href="#c1">1 &middot; Open — Who We Are</a>
+  <a href="#c2">2 &middot; Read the Customer</a>
+  <a href="#c3">3 &middot; Diameter — 2m vs 2.3m</a>
+  <a href="#c4">4 &middot; Length &amp; Changing Room</a>
+  <a href="#c5">5 &middot; Lighting</a>
+  <a href="#c6">6 &middot; Bench Layouts</a>
+  <a href="#c7">7 &middot; Windows</a>
+  <a href="#c8">8 &middot; Heaters</a>
+  <a href="#c9">9 &middot; Mobile Saunas</a>
+  <a href="#c10">10 &middot; Hot Tubs</a>
+  <a href="#c11">11 &middot; Ice Baths — The Dippers</a>
+  <a href="#c12">12 &middot; The Barrel Shower</a>
+  <a href="#c13">13 &middot; Delivery &amp; Lifting</a>
+  <a href="#c14">14 &middot; Decking &amp; Ground Prep</a>
+  <a href="#c15">15 &middot; Ireland &amp; International</a>
+  <a href="#c16">16 &middot; Glamping — Hold &amp; Refer</a>
+  <a href="#c17">17 &middot; Accessories</a>
+  <a href="#c18">18 &middot; Bundling — Buy It All From Us</a>
+  <a href="#c19">19 &middot; The Close</a>
+</div>
 <div class="nav-btns" id="navBtns">
+  <button id="toMenu" aria-label="Jump to card">&#9776;</button>
   <button id="toTop" aria-label="Scroll to top">&#8593;</button>
   <button id="toBottom" aria-label="Scroll to bottom">&#8595;</button>
 </div>
@@ -641,12 +614,32 @@
   var navBtns = document.getElementById('navBtns');
   var toTop = document.getElementById('toTop');
   var toBottom = document.getElementById('toBottom');
-  window.addEventListener('scroll', function(){
-    if (window.scrollY > 300) { navBtns.classList.add('show'); }
-    else { navBtns.classList.remove('show'); }
+  var toMenu = document.getElementById('toMenu');
+  var jumpPanel = document.getElementById('jumpPanel');
+  var progress = document.getElementById('progress');
+
+  function updateOnScroll(){
+    var st = window.scrollY || document.documentElement.scrollTop;
+    if (st > 300) { navBtns.classList.add('show'); }
+    else { navBtns.classList.remove('show'); jumpPanel.classList.remove('show'); }
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = h > 0 ? (st / h) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateOnScroll);
+  window.addEventListener('resize', updateOnScroll);
+  updateOnScroll();
+
+  toTop.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); jumpPanel.classList.remove('show'); });
+  toBottom.addEventListener('click', function(){ window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}); jumpPanel.classList.remove('show'); });
+  toMenu.addEventListener('click', function(e){ e.stopPropagation(); jumpPanel.classList.toggle('show'); });
+
+  jumpPanel.addEventListener('click', function(e){
+    if (e.target.tagName === 'A') { jumpPanel.classList.remove('show'); }
   });
-  toTop.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
-  toBottom.addEventListener('click', function(){ window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}); });
+  document.addEventListener('click', function(e){
+    if (!jumpPanel.contains(e.target) && e.target !== toMenu) { jumpPanel.classList.remove('show'); }
+  });
 </script>
 
 </body>
