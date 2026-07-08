@@ -20,15 +20,13 @@
     --ink:#33352f;
     --muted:#6a6f64;
     --line:#dcdfd4;
-    --body:"Raleway",Helvetica,Arial,sans-serif;
-    --head:"Raleway",Helvetica,Arial,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
   body{
     background:var(--sage);
     color:var(--ink);
-    font-family:var(--body);
+    font-family:"Raleway",Helvetica,Arial,sans-serif;
     line-height:1.85;
     -webkit-font-smoothing:antialiased;
     padding:0 0 100px;
@@ -44,7 +42,6 @@
     box-shadow:0 2px 12px rgba(0,0,0,0.12);
   }
   header h1{
-    font-family:var(--head);
     font-weight:800;
     font-size:34px;
     letter-spacing:0.5px;
@@ -80,7 +77,6 @@
     margin-bottom:12px;
   }
   .card h2{
-    font-family:var(--head);
     font-weight:700;
     font-size:28px;
     color:var(--green);
@@ -115,18 +111,6 @@
     line-height:1.75;
   }
   .move strong{color:var(--green);font-weight:700;}
-  .jamesline{
-    margin-top:20px;
-    background:#fbf3ee;
-    border:1px dashed var(--terracotta);
-    padding:18px 22px;
-    border-radius:10px;
-    font-size:14.5px;
-    font-style:italic;
-    color:#6b4a3a;
-    line-height:1.7;
-  }
-  .jamesline strong{font-style:normal;font-weight:700;color:var(--terracotta);}
   .send{
     margin-top:20px;
     background:var(--send-bg);
@@ -171,7 +155,6 @@
     border:1px solid var(--line);
   }
   .toc h3{
-    font-family:var(--head);
     font-size:26px;
     font-weight:800;
     color:var(--green);
@@ -230,7 +213,6 @@
     border-top:4px solid var(--green);
   }
   .ground-rules h3{
-    font-family:var(--head);
     font-size:20px;
     color:var(--green);
     margin-bottom:20px;
@@ -290,27 +272,6 @@
     .nav-btns{right:16px;bottom:18px;}
     .nav-btns button{width:44px;height:44px;font-size:19px;}
   }
-
-  /* --- subtle accentuations --- */
-  header{border-bottom:3px solid var(--terracotta);}
-  .card{scroll-margin-top:175px;}
-  .toc,.ground-rules{scroll-margin-top:175px;}
-  .card:target{border-color:var(--terracotta);box-shadow:0 1px 3px rgba(0,0,0,0.06),0 0 0 2px var(--terracotta);}
-  @media (hover:hover){
-    .card{transition:box-shadow 0.2s ease;}
-    .card:hover{box-shadow:0 6px 20px rgba(0,0,0,0.08);}
-  }
-  @media (max-width:600px){
-    .card,.toc,.ground-rules{scroll-margin-top:135px;}
-  }
-  @media print{
-    body{background:#fff;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-    header{position:static;box-shadow:none;}
-    .nav-btns{display:none !important;}
-    .wrap{max-width:100%;padding:0;}
-    .card,.toc,.ground-rules,.story,.move,.send,.jamesline{break-inside:avoid;page-break-inside:avoid;}
-    a{color:inherit;text-decoration:none;}
-  }
 </style>
 </head>
 <body>
@@ -324,7 +285,7 @@
 
   <div class="toc">
     <h3>The Call, Start to Finish</h3>
-    <p class="toc-sub">Twenty cards &middot; open to close</p>
+    <p class="toc-sub">Nineteen cards &middot; open to close</p>
     <ol>
       <li><a href="#c1">Open — Who We Are</a></li>
       <li><a href="#c2">Read the Customer</a></li>
@@ -345,7 +306,6 @@
       <li><a href="#c17">Accessories</a></li>
       <li><a href="#c18">Bundling — Buy It All From Us</a></li>
       <li><a href="#c19">The Close</a></li>
-      <li><a href="#c20">Getting the Sale Over the Line</a></li>
     </ol>
   </div>
 
@@ -354,17 +314,13 @@
     <ol>
       <li><strong>The call won't always go in order.</strong> Random questions, tangents, whatever — roll with it. Not being in control is usually a good sign, it means they're eager. The system won't let you submit an incomplete estimate, so nothing gets missed just because the order did.</li>
       <li><strong>Sell as if you own one.</strong> Talk from your own experience — everyone selling should speak like they've genuinely got a sauna in their life. Film your own content at the unit or at James's place if you need something to point to.</li>
-      <li><strong>Always find a way to mention mobile.</strong> It builds trust — shows we're building all over, all the time — and it opens the door to the mobile-business investment angle, which more people are sitting on money for than you'd think. It also shows we're diverse and bespoke: we manufacture the trailers ourselves in our own fabrication, similar to the shepherd's huts we're doing, and that opens up conversations for glamping pods and other customs. The natural way in is when they ask "do you actually make your saunas?" — we make everything, right down to our own trailers.</li>
+      <li><strong>Always find a way to mention mobile.</strong> It builds trust — shows we're building all over, all the time — and it opens the door to the mobile-business investment angle, which more people are sitting on money for than you'd think.</li>
     </ol>
   </div>
 
   <div class="card" id="c1">
     <span class="num">One</span>
     <h2>Open — Who We Are</h2>
-    <span class="label">Tagline — drop it early</span>
-    <div class="say">
-      <p>"People are selling saunas for less than ours cost us to make, so it's not going to be the same thing. These are the type we often strip out and replace with ours. We're not necessarily the cheapest out there — but you only ever have to buy it once."</p>
-    </div>
     <span class="label">What to say</span>
     <div class="say">
       <p>"So we're a Welsh family business — everything's hand-built in Wales, made to order. We don't mass produce. We're not the cheapest out there and we're not trying to be. We build bespoke projects that last, that you only ever have to buy once."</p>
@@ -372,7 +328,7 @@
     </div>
     <span class="label">How to open</span>
     <div class="say">
-      <p>Answer with something simple — "Hi, it's [your name] calling back from Barrel Sauna UK" — then pause for a second. Most of the time they'll jump straight in and start talking about their project. Let them; that's rapport building itself. If they don't, come in with the reason for the call: "We've got a call booked in today, still a good time to chat? Ask me anything, pick my brains, and by the end of the call you'll have a fully itemised estimate sent through to your email." That gives the call a clear purpose.</p>
+      <p>Answer with something simple — "Hi, it's James calling back from Barrel Sauna UK" — then pause for a second. Most of the time they'll jump straight in and start talking about their project. Let them; that's rapport building itself. If they don't, come in with the reason for the call: "We've got a call booked in today, still a good time to chat? Ask me anything, pick my brains, and by the end of the call you'll have a fully itemised estimate sent through to your email." That gives the call a clear purpose.</p>
       <p>Get them talking about themselves early — their land, their plans, the neighbour's farm, whatever it is. People warm up fast when you're genuinely interested, and it tells you where they are in the process.</p>
       <p>The Welsh spiel — hand-built in Wales, not the cheapest, buy it once — has to land somewhere: start, middle, end, or twice over in different ways. The one place it can't land is straight after the price. Say it before, never after, or it sounds like you're making excuses for the number.</p>
     </div>
@@ -400,8 +356,6 @@
       <p>"Standard diameter's 2 metres. But going up to 2.3, it's surprising how much more space you get." Talk from your own body if it fits, or a friend or family member's if you're not built for it — "my mate's six foot three and pretty broad, sat in the 2.3 he's got plenty of room, head's not touching the sides, he can lie flat on the bench without his arm dropping off the edge." Benches are wider, backrests thicker, more space between them.</p>
       <p>"Don't worry about heat-up time — you match the heater to the room, so a bigger room just gets a bigger heater. Same as a bigger radiator. Makes barely any difference."</p>
       <p>On value: "Look, we don't compete on price with the really cheap saunas — they're selling for less than ours cost us to make. But once you've got a larger sauna, we try to put a ceiling on what going wider actually costs you. We're not really making money on it, we just want to give good value to someone who's already investing and wants to use the space properly." Think of it as a loss leader — you're glad they're doing business with you, so you're not going to sting them for a bit more width. Widening is much cheaper than lengthening, so it's the better-value way to get more room.</p>
-      <p><strong>The compact, when it's a budget:</strong> someone can have a compact sauna — 1.8 by 2 metres — and still lie down. With the interchangeable middle planks a compact still lets them lie down widthways, saves them money, and it's great for hot yoga, stretching, sprawling out. When friends come over they pull the plank out and sit side by side. It comes across as you finding them a cheaper way, not pushing them bigger — so only for someone who can't stretch to the 2.5m, never for someone who clearly can.</p>
-      <p><strong>Reading it for two to four:</strong> besides capacity you can usually gauge it — "do you want to be able to really lie down either side, parallel to each other?" When it's "just two of us, but we want the space to lie down", that's your 2.4m (or 3.5m).</p>
     </div>
     <div class="move"><strong>The move:</strong> Your own body in the sauna is the whole pitch — or a friend or family member's if you're not the size for it. Genuine enthusiasm does the selling — lean into it.</div>
   </div>
@@ -414,9 +368,6 @@
       <p>"Three metres is a really nice size — you can lie down either side with space at the end for a bucket and ladle at your feet. And with a changing room it's more than just changing — you can chill between sessions, take a break."</p>
       <p>"Sat in a sauna with the door flying open every five minutes, gust of cold coming in — it's jarring. That changing room's an airlock, a heat trap. The second door's sandblasted glass so it opens silent. Far more relaxing for everyone inside."</p>
       <p>"We can build under-seat storage in there too — wood on the left, towels and water on the right. And with a wood burner on the left as you walk in, you grab a log from under the seat without even stepping into the hot sauna."</p>
-      <p><strong>Commercial framing:</strong> for commercial, always recommend the changing room — it comes into the total size — but specifically say "you only really need a one metre space." That downplays the fact they're going bigger and adding a room; it reads as underselling, so it feels like they're being sold to less. Mixed with the light-on-the-wall bit and the rest, the whole thing lands softer.</p>
-      <p><strong>NB — get this right or you'll misquote by thousands:</strong> the changing room comes out of the selected sauna length — it eats into the total, it's not added on top. A 4m sauna with a changing room isn't 4m plus the room; the room takes from the 4m. (This changed from the old model, where the price was packed and the changing room also made the sauna bigger.) The closer has to know this and say it, or the estimate's out by a few thousand — not a small mistake.</p>
-      <p><strong>Porch — £450:</strong> for building the porch seating and the area it's £450 — it sounds cheap, so say "we try not to charge too much." (We're technically charging more because they've gone from a compact up to a 2.5m sauna, but at £450 the porch itself lands as a bargain.)</p>
     </div>
     <div class="move"><strong>The move:</strong> Turn "I'll get changed elsewhere" into "actually that makes sense." Storage plus heat trap stacks reasons to go bigger.</div>
     <div class="story">
@@ -434,11 +385,7 @@
       <p>Then talk them out of the wall lights: "Realistically you don't really need the wall lights in the main sauna. It's nice to sit with your back to that wall and your feet facing out, and a wall light there stops you doing that. The undersea LEDs give off plenty on their own."</p>
       <p>"And these aren't random LEDs stuck under a seat — heatproof, sauna-rated, proper trunking, a wooden frame round them, fixed securely. Designed for saunas."</p>
       <p>"We recently did cool blue lights in the changing room and warm undersea LEDs in the sauna — lovely hot-and-cool vibe. You step into the changing room, open the second door, and you really feel yourself cooling off before going back in. Therapeutic in itself."</p>
-      <p>On the electrics — three scenarios, keep them straight:</p>
-      <p><strong>On-site build:</strong> they'll need their own qualified electrician for the final connection to the mains — standard for any hardwired install. We wire everything up to that point. The better way to put it: "we can hook it all up and run it into a caravan-style plug-and-play socket, so it's all there ready to go — it's only the final connection into the mains we can't touch, that's your sparky's bit."</p>
-      <p><strong>Fully-assembled delivery:</strong> because it's built and wired in our workshop, we can do the full hook-up here. Frame it as "we've got an electrician who works with us in the workshop, so he can get it all ready for you here" — small add-on, £250.</p>
-      <p><strong>Mobile:</strong> fully turnkey — professionally tested, wired, battery and solar already fitted, ready to go.</p>
-      <p><strong>Paint the picture on the handover, say it off the bat:</strong> the sauna arrives built, heater fresh out the box in position, the manual fresh out the box on the seats next to it. So their electrician turns up to everything already there, with all the instructions — they do not need to phone the office weeks in advance to ask what he'll need. It's like building a house then getting your electrician and plumber in at the end; if the boiler's sat there with its leaflet, they just crack on. Say this early or you'll get electricians ringing the office with basic questions.</p>
+      <p>On the electrics: residential builds need your own qualified electrician for the final connection to the mains — that's standard for any hardwired install, we wire everything up to that point. Mobile saunas are different — fully turnkey, professionally tested, wired, with the battery and solar already fitted and ready to go.</p>
     </div>
     <div class="move"><strong>The move:</strong> Sacrificing the wall lights buys trust for everything else. The blue-light story sells the changing room without asking for it.</div>
   </div>
@@ -488,8 +435,6 @@
       <p>If someone's got their heart set on infrared off the back of a TikTok video, don't argue with it directly — reframe: "Look, we make everything bespoke and can pretty much do anything you want, but we've shortlisted the heaters we've never had an issue with. At the end of the day: a cheaper heater with a switch, a nice-looking one you control with an app, a wood burner you can watch the flames in, or one with an external chute so you feed logs from outside — we've shortlisted one of each, so there's no need to pick from a hundred options." That kills choice paralysis and almost always lands on one of the four.</p>
       <p>Heater on the side, as you walk in, is worth mentioning too — nobody's walking past a row of sweaty bodies to feed logs at the far end, you're stood right by the changing room, and it gives you a natural reason to check in on everyone as you pass.</p>
       <p>Then back them the moment they lean: "Sounds like the wood burner's the best fit for you, honestly."</p>
-      <p><strong>Single vs three phase — know the basics:</strong> clients throw electrical questions out of nowhere, so you need this. Heaters can be single phase or three phase — but not all of them are both. The bigger-output ones (the cylindrical heaters draw more) tend to be three phase, and some properties only have one type of supply. So never blanket-say "it's single or three phase" without checking — that's the one that's caused problems we've had to fix.</p>
-      <p><strong>On Harvia:</strong> we've shortlisted Harvia for reliability — never had an issue with them. They come in both single and three phase. The smaller heaters run single phase off a standard home supply; the bigger outputs (roughly 6kW up, for larger or commercial rooms) usually need three phase, and not every property has three phase — so always ask what supply they've got before committing to anything.</p>
     </div>
     <div class="move"><strong>The move:</strong> Stay on the fence until they choose — then it's always their decision. The volcanic-stones line rescues electric from feeling second-rate, and the four-way shortlist turns endless choice into an easy one.</div>
     <div class="story">
@@ -533,6 +478,7 @@
       <p>Competitors like ScareGuards look cheaper on the surface, but once you stack up the extras they quote separately — underwater lights, steps, filtration, heater plates — it lands close to what we charge anyway, and ours already includes the lot from the start.</p>
     </div>
     <div class="move"><strong>The move:</strong> Picking a favourite for them cuts through choice paralysis. The package price feels like real value against a big sauna spend.</div>
+    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
   <div class="card" id="c11">
@@ -548,7 +494,6 @@
       <p>For commercial, the switching time is a promotable feature, not a limitation: run a hot-and-cold day once a week or so, at set times, and let people know. Gives the calendar something to promote alongside anything else going on — group yoga session, hot-and-cold day — and gives you something fresh to post about.</p>
     </div>
     <div class="move"><strong>The move:</strong> The switching joke turns a technical limitation into something charming instead of a drawback. Holding the function back to the end makes it feel like a bonus, not a pitch.</div>
-    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
   <div class="card" id="c12">
@@ -566,7 +511,11 @@
       <p>Cost-wise it's roughly a tenth of a sauna, so against the main investment it's a low-cost way to add real volume and finish to the space — makes the whole setup look more complete.</p>
     </div>
     <div class="move"><strong>The move:</strong> Sell the finished look, not just the function — it's decorative as much as practical. On commercial, the hygiene angle turns it from a nice-to-have into something that feels necessary. It's an add-on, but a high-value, easy-yes one.</div>
-    <div class="jamesline"><strong>James's line:</strong> "The glass roof's lovely — though maybe don't have it in your own back garden. If you're having a proper naked shower out there, no real need for a glass roof over the top, is there."</div>
+    <div class="story">
+      <span class="story-tag">Example anecdote — the joke to throw in</span>
+      <p>The glass roof's lovely — though maybe don't have it in your own back garden. If you're having a proper naked shower out there, no real need for a glass roof over the top, is there.</p>
+    </div>
+    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
   <div class="card" id="c13">
@@ -598,6 +547,7 @@
       <span class="story-tag">Example anecdote — proof it works anywhere</span>
       <p>There was a double-dipper and sauna job in London recently — really difficult access, small house, long narrow scary garden. It all got carried through, decked round tree roots, the deck cut around a tree stump, ending with the dipper and sauna side by side in matching wood. Looked brilliant once it was in.</p>
     </div>
+    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
   <div class="card" id="c15">
@@ -624,6 +574,7 @@
       <p>Send the eco-pod expo video and the Shepherd's Hut page. That's the clean exit.</p>
     </div>
     <div class="move"><strong>The move:</strong> Keeps you credible without over-promising on something not yet productised. The James call-back is a warm hand-off, not a dead end. Phase one is saunas — don't let glamping pull focus.</div>
+    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
   <div class="card" id="c17">
@@ -636,6 +587,7 @@
       <p>For commercial jobs, mention branding: we can put a name or logo on the build itself — worth a quick mention for anyone doing a commercial space, since it makes the whole thing feel personal to them (think "the Smith's House" style naming).</p>
     </div>
     <div class="move"><strong>The move:</strong> Give, don't sell. A voucher lands warmer than an add-on list.</div>
+    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
   </div>
 
   <div class="card" id="c18">
@@ -662,19 +614,6 @@
       <p>Always ask for photos and videos of the space, even if you don't strictly need them — of the layout, the spot it's going, whatever they've got. Two things happen: it helps everyone avoid guessing at a space from a description, and when they actually send something after the call, that's a good sign they're still engaged. It should feel like their idea to send it, not a form they're filling in for you.</p>
     </div>
     <div class="move"><strong>The move:</strong> Rapport, made-in-Wales, buy-once, and a story. That's the close. Photos and videos coming back from them after the call is the real sign they're still on the hook.</div>
-  </div>
-
-  <div class="card" id="c20">
-    <span class="num">Twenty</span>
-    <h2>Getting the Sale Over the Line</h2>
-    <span class="label">The levers — use them at the end</span>
-    <div class="say">
-      <p><strong>Urgency, when they're in no rush:</strong> if they're planning a few months out with no sense of urgency, use the truth — "our lead time's a couple of months right now, and it only goes up towards the end of summer, because everyone orders at once when the heatwaves come. So if you want it in a few months' time, you really need to get the order in now, or it'll end up landing a good bit after you actually wanted it."</p>
-      <p><strong>Urgency, when they're keen:</strong> flip it — "our lead time's actually a bit quicker than usual right now. I'd get the order in before the end of summer, because that's when everyone comes out the woodwork and it goes up. Worth squeezing it in before then."</p>
-      <p><strong>Free storage, when they're building or landscaping first:</strong> for anyone sorting a patio, a garden, a whole house before the sauna — "there's no harm getting the order in now. We've increased our workshop space, so we wouldn't charge you for storage — we can have it all fully made up, factor it around your dates, and when everything comes together your side, just give us a week or two's notice and we'll come up and get it built." It reads as us doing them a favour — and for us it's another unit to film and to show people who come down to visit.</p>
-      <p><strong>The £500, explain it properly at the end:</strong> "attached to your estimate you'll have a link to pay £500." Then the why: a husband and wife might be arguing over what colour they want, and while that's going on a big holiday park gets in front of them in the build schedule — when they could have committed to the order, reserved their spot, and taken a few days to settle the final details. The estimate's a general ballpark, it doesn't have to be perfect — you've got your rough idea and can tweak from there. Once the £500's in, the finance team are in touch to check the order. And the invoice, when it's paid, is the only thing that goes to production — it's built exactly as it reads on there, so all the final tweaks and adjustments happen in that phase.</p>
-    </div>
-    <div class="move"><strong>The move:</strong> Reserve the spot, not the spec. The £500 gets them in the queue while the details are still soft — the truth about lead times does the pushing, and free storage turns "not ready yet" into "order now anyway."</div>
   </div>
 
   <footer>
