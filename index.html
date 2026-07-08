@@ -223,6 +223,92 @@
   .ground-rules li:last-child{border-bottom:none;}
   .ground-rules li::before{content:counter(g)".  ";color:var(--green);font-weight:700;}
   .ground-rules strong{color:var(--green);}
+
+  .examples-banner{
+    background:var(--green);
+    color:var(--sage);
+    border-radius:16px;
+    padding:40px 48px;
+    margin:56px 0 32px;
+    text-align:center;
+  }
+  .examples-banner h2{
+    font-size:27px;
+    font-weight:800;
+    color:#fff;
+    margin-bottom:8px;
+    letter-spacing:0.3px;
+  }
+  .examples-banner p{
+    font-size:14px;
+    font-weight:500;
+    opacity:0.85;
+    line-height:1.6;
+    max-width:620px;
+    margin:0 auto;
+  }
+  .example-card{
+    background:#fff;
+    border-radius:16px;
+    padding:44px 50px 46px;
+    margin-bottom:32px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.06);
+    border:1px solid var(--line);
+    border-top:4px solid var(--terracotta);
+  }
+  .example-card h3{
+    font-size:23px;
+    font-weight:700;
+    color:var(--green);
+    margin-bottom:6px;
+  }
+  .example-meta{
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    margin-bottom:24px;
+  }
+  .embed-slot{
+    background:var(--sage);
+    border:1px dashed var(--muted);
+    border-radius:12px;
+    padding:28px 24px;
+    text-align:center;
+    font-size:14px;
+    font-weight:600;
+    color:var(--muted);
+    margin-bottom:30px;
+  }
+  .annotate{
+    margin-top:24px;
+    border-radius:0 10px 10px 0;
+    padding:20px 24px;
+    font-size:15px;
+    line-height:1.75;
+  }
+  .annotate.good{
+    background:rgba(43,83,54,0.05);
+    border-left:3px solid var(--green);
+  }
+  .annotate.better{
+    background:rgba(160,82,45,0.06);
+    border-left:3px solid var(--terracotta);
+  }
+  .annotate h4{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    margin-bottom:12px;
+  }
+  .annotate.good h4{color:var(--green);}
+  .annotate.better h4{color:var(--terracotta);}
+  .annotate ul{margin:0;padding-left:20px;}
+  .annotate li{margin-bottom:10px;}
+  .annotate li:last-child{margin-bottom:0;}
+
   footer{
     text-align:center;
     font-size:12.5px;
@@ -269,6 +355,10 @@
     .toc a::before{flex:0 0 26px;height:26px;font-size:12px;}
     .ground-rules{padding:28px 26px;}
     .say{font-size:16px;}
+    .examples-banner{padding:30px 24px;margin:40px 0 24px;}
+    .examples-banner h2{font-size:22px;}
+    .example-card{padding:32px 26px 34px;}
+    .example-card h3{font-size:20px;}
     .nav-btns{right:16px;bottom:18px;}
     .nav-btns button{width:44px;height:44px;font-size:19px;}
   }
@@ -424,7 +514,7 @@
       <p>Always diagnose first: "Where's the sauna going — flush against a wall, or have you got some nice views looking out?" If it's against a wall, don't pitch a window at all. If there's a view, let them talk about it — ask about the view, the space, mention we've done something similar elsewhere, and let them enjoy talking about their own place for a bit before you pitch anything.</p>
       <p>Then bring in the globe: "Have you seen our panoramic dome windows? We get a timber ring cut at a specialist sawmill just for us, custom moulded, frames the whole inside, and we build the benches flush into the dome so you're basically sat inside it. Especially for commercial, it's a real wow factor — it's quirky enough that people take photos and videos and tag you in them, so it does a bit of organic promotion on its own. Nice mix of classic sauna and a modern twist."</p>
       <p>"If you want to keep costs down, the full flat glass is also really nice — we build a floating bench for it. And the half-moon's still lovely, gives you your view at a lower price point. If they can afford the globe, they'll go for the globe — no need to push it too hard."</p>
-      <p><strong>Spec note:</strong> big flat glass and the external-feed wood burner don't pair — the external feed needs the half-moon instead. Worth knowing before you land on a combination (see Card 8 for the external-feed viewing window itself).</p>
+      <p><strong>Spec note:</strong> big flat glass and the external-feed wood burner don't pair — the external feed needs the half-moon instead, with the chute running through the wooden bottom half and the top half as the window. Worth knowing before you land on a combination (see Card 8 for the external-feed viewing window itself).</p>
     </div>
     <div class="move"><strong>The move:</strong> The diagnostic question stops you selling a window to a blank wall — and gets them talking about their view, which they love. Not pushing the globe is the trust move.</div>
     <div class="send"><strong>Send:</strong> Send relevant video here.</div>
@@ -436,6 +526,7 @@
     <span class="label">What to say</span>
     <div class="say">
       <p>Start on the fence: "There's pros and cons to each." Wood burner: "It's lovely and ambient — the glow, seeing the fire, very natural and therapeutic. I'm a bit of a pyromaniac, I enjoy starting it." It also makes great content — a video of the fire going, zooming out to the sauna, is different to just another photo post.</p>
+      <p>With any wood burner, we include all the safety accessories as standard — base plate, heat shields, guardrail/safety rail, shields on top and around the flue. Worth saying out loud so they know it's all covered, not extra.</p>
       <p>Electric WiFi: "Especially the WiFi model — connects to an app on your phone via Harvia, turn it on and off remotely, set timers. For a commercial with electric access it's less maintenance. But if you've got cleaners turning an Airbnb over daily, getting the fire going is one more easy job for them."</p>
       <p>"And it's not a microwavey infrared heat where you feel zapped and out of control of it — ours use volcanic stones, so you get the steam and a natural feel, not too electric-y."</p>
       <p>If someone's got their heart set on infrared off the back of a TikTok video, don't argue with it directly — reframe: "Look, we make everything bespoke and can pretty much do anything you want, but we've shortlisted the heaters we've never had an issue with. At the end of the day: a cheaper heater with a switch, a nice-looking one you control with an app, a wood burner you can watch the flames in, or one with an external chute so you feed logs from outside — we've shortlisted one of each, so there's no need to pick from a hundred options." That kills choice paralysis and almost always lands on one of the four.</p>
@@ -446,6 +537,10 @@
     <div class="story">
       <span class="story-tag">Example anecdote — tell it fresh</span>
       <p>On a recent Zoom call, a client asked if you can see the flames from inside on an external-feed burner. The answer landed well: we'd been talking about fitting a viewing window into the external feed itself — get the light and the ambience without losing the outside access. He thought it was brilliant. Works best framed like it happened this week.</p>
+    </div>
+    <div class="story">
+      <span class="story-tag">Example anecdote — the ritual</span>
+      <p>What I love with the burner is one bucket of water with essential oils in, one bucket of clear. Within about half an hour the stones are hot, you ladle the oil water on, and three seconds later you've got a wall of heat right to your bones. Good one to paint the picture with — it sells the experience, not the spec.</p>
     </div>
   </div>
 
@@ -514,6 +609,7 @@
       <p>"It's a barrel shower — looks just like the sauna, same materials, same colour, so it sits right alongside it and matches everything else. Really it's just a nice little enclosure you pop into. No door needed, it still feels solid and authentic, and it adds to that whole outdoor wellness vibe."</p>
       <p>Uncomplicate it before they ask — people worry about heating and plumbing: "There's nothing complicated to it. No heating to think about — you come out the sauna, have a cold rinse, jump out. It's plumbed in exactly like a normal shower, that's it."</p>
       <p>There's a tempered glass roof option too — you're rinsing off looking straight up at the sky, quite pretty.</p>
+      <p>It can also be built into the unit itself — dropped in round the back of the sauna, with the shower in the indent of the box and seats out front to rest on. When a customer's vision is built around the shower (some lead with exactly that), slow down and sell it properly rather than glossing over it — it's often the thing they're most excited about.</p>
     </div>
     <span class="label">What to say — commercial</span>
     <div class="say">
@@ -534,6 +630,7 @@
     <span class="label">What to say — installation</span>
     <div class="say">
       <p>"We've seen it all — if you think your space is tight, send us photos and videos, but we can handball everything through. We bring our kit, a few of the lads come down from Wales, stay local a couple of days and build it on site. Eighty to ninety percent of the time we just come and build it there and then."</p>
+      <p>Always ask what the access is like — gate widths, hardstanding, that sort of thing. If it's easy access and hardstanding, we can bring a fully built order and just lift it into place, no build on site needed. Worth confirming early because it changes how the job runs.</p>
     </div>
     <span class="label">What to say — delivery of built saunas</span>
     <div class="say">
@@ -549,7 +646,7 @@
     <span class="label">What to say</span>
     <div class="say">
       <p>"The cheapest way — we dig railway sleepers into the ground, sit the sauna's feet on them, done. Cost-effective and it works. We did one locally in Penarth about three years ago, haven't heard from him since — no news is good news, the weight of the sauna packs it right down onto the sleepers."</p>
-      <p>"Honestly, any solid, level surface is fine — patio, concrete pad, gravel, as long as it's level you're good. No need to lift your patio."</p>
+      <p>"Honestly, any solid, level surface is fine — patio, concrete pad, gravel, hardstanding, as long as it's level you're good. No need to lift your patio."</p>
       <p>"But if you want a proper decking platform built around it — space in front for an ice bath or hot tub — it's there ready to add to. And doing it all in one means no second delivery charge later. We can bring the whole lot at once."</p>
     </div>
     <div class="move"><strong>The move:</strong> Offering the cheapest option first is the trust move. Then the deck naturally teases the hot-tub/ice-bath upsell and the one-delivery saving.</div>
@@ -649,6 +746,44 @@
       <p>Always ask for photos and videos of the space, even if you don't strictly need them — of the layout, the spot it's going, whatever they've got. Two things happen: it helps everyone avoid guessing at a space from a description, and when they actually send something after the call, that's a good sign they're still engaged. It should feel like their idea to send it, not a form they're filling in for you.</p>
     </div>
     <div class="move"><strong>The move:</strong> Rapport, made-in-Wales, buy-once, and a story. That's the close. Photos and videos coming back from them after the call is the real sign they're still on the hook.</div>
+  </div>
+
+  <div class="examples-banner">
+    <h2>Live Call Examples</h2>
+    <p>Real calls from the team, with notes underneath on what landed and what could've been sharper. Listen for the rhythm, not a script to copy — every call goes its own way.</p>
+  </div>
+
+  <div class="example-card">
+    <h3>The Cold-Shower Sauna</h3>
+    <p class="example-meta">Client: Luke &middot; Log burner, porch, half-moon window</p>
+
+    <div class="embed-slot">🎧 Call recording — to be embedded here</div>
+
+    <span class="label">What the call was about</span>
+    <div class="say">
+      <p>Luke had a clear vision: a sauna on his storage-yard hardstanding, two seats out front to rest on, and a cold shower dropped in round the back. He'd bought a cheap electric sauna before that arrived flat-packed and shoddy, and he's got an abundance of wood — so he was set on a log burner. James pitched 3 metres with a 0.6m porch, external-feed burner, half-moon window with the chute running through the wooden bottom half, premium LED lights. Landed the price at around £11,585 plus VAT including the summer discount, itemised estimate to follow by email.</p>
+    </div>
+
+    <div class="annotate good">
+      <h4>What worked</h4>
+      <ul>
+        <li>Read the brief early and pitched a size fast — 2.5m for two lying down, then 3m once the porch and shower came in. Confident, specific, no waffle.</li>
+        <li>Handled the "my last sauna was cheap and rubbish" moment perfectly — didn't jump on it, let Luke talk himself into why quality matters, then quietly backed it with the 48mm thermo-wood, commercial-grade line and "people sell them for less than ours cost us to make."</li>
+        <li>The half-moon window and external-feed burner combo came up naturally and correctly — top half glass for the view, chute through the wooden bottom. That's the spec rule from the Windows card, used live and right.</li>
+        <li>Slipped the come-and-see-us-in-Wales line in near the close without making it a hard sell.</li>
+        <li>Closed with a real reason to act now — the £500 summer/low-season discount — rather than leaving it open-ended.</li>
+      </ul>
+    </div>
+
+    <div class="annotate better">
+      <h4>What could've been sharper</h4>
+      <ul>
+        <li>Luke asked to be sent pictures and an email four or five times — the follow-up could've been locked down harder and sooner, so he's not the one chasing it.</li>
+        <li>Push for videos of his space, not just receive his photos. He offered pictures of the entrance and yard — that's the moment to say "actually, send us a quick video walking the spot too," which builds engagement and stops him going cold after the call.</li>
+        <li>The barrel shower was Luke's whole vision — the cold shower round the back was the thing he led with — and it got a quick "have you seen our barrel showers" rather than the full picture. Worth slowing down and selling the thing the customer's most excited about.</li>
+        <li>The porch armrest/drinks-holder chat was good, but the "sometimes less is more, sit with your back to the sauna" point half-landed — worth being clearer so he can actually picture it.</li>
+      </ul>
+    </div>
   </div>
 
   <footer>
