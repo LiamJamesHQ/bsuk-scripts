@@ -27,6 +27,7 @@
     background:var(--sage);
     color:var(--ink);
     font-family:"Raleway",Helvetica,Arial,sans-serif;
+    font-weight:400;
     line-height:1.85;
     -webkit-font-smoothing:antialiased;
     padding:0 0 100px;
@@ -36,9 +37,7 @@
     color:var(--sage);
     padding:56px 24px 48px;
     text-align:center;
-    position:sticky;
-    top:0;
-    z-index:10;
+    position:relative;
     box-shadow:0 2px 12px rgba(0,0,0,0.12);
   }
   header h1{
