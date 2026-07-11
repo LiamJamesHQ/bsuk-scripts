@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BSUK — Follow-Up Answer Bank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#2B5336;
+    --green-deep:#22422b;
+    --sage:#f1f2ec;
+    --terracotta:#A0522D;
+    --winered:#8A1A2C;
+    --winered-bg:rgba(138,26,44,0.05);
+    --send:#3B6E8F;
+    --send-bg:#eef4f7;
+    --ink:#33352f;
+    --muted:#6a6f64;
+    --line:#dcdfd4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--sage);
+    color:var(--ink);
+    font-family:"Raleway",Helvetica,Arial,sans-serif;
+    font-weight:400;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    padding:0 0 100px;
+  }
+  header{
+    background:var(--green);
+    color:var(--sage);
+    padding:56px 24px 48px;
+    text-align:center;
+    position:relative;
+    box-shadow:0 2px 12px rgba(0,0,0,0.12);
+  }
+  header h1{
+    font-weight:800;
+    font-size:34px;
+    letter-spacing:0.5px;
+    margin-bottom:10px;
+  }
+  header p{
+    font-size:12.5px;
+    font-weight:500;
+    opacity:0.82;
+    letter-spacing:2px;
+    text-transform:uppercase;
+  }
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:40px 24px 0;
+  }
+  .card{
+    background:#fff;
+    border-radius:16px;
+    padding:48px 52px 50px;
+    margin-bottom:32px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.06);
+    border:1px solid var(--line);
+  }
+  .num{
+    display:inline-block;
+    font-style:italic;
+    font-weight:500;
+    font-size:15px;
+    letter-spacing:0.5px;
+    color:var(--terracotta);
+    margin-bottom:12px;
+  }
+  .card h2{
+    font-weight:700;
+    font-size:28px;
+    color:var(--green);
+    margin-bottom:32px;
+    line-height:1.35;
+    letter-spacing:0.2px;
+  }
+  .label{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    display:block;
+    margin:0 0 14px;
+  }
+  .say{
+    font-size:16.5px;
+    font-weight:400;
+    color:var(--ink);
+    margin-bottom:32px;
+  }
+  .say p{margin-bottom:20px;}
+  .say p:last-child{margin-bottom:0;}
+  .move{
+    background:var(--sage);
+    border-left:3px solid var(--green);
+    padding:20px 24px;
+    border-radius:0 10px 10px 0;
+    font-size:15px;
+    color:var(--muted);
+    line-height:1.75;
+  }
+  .move strong{color:var(--green);font-weight:700;}
+  .send{
+    margin-top:20px;
+    background:var(--send-bg);
+    border-left:3px solid var(--send);
+    padding:18px 22px;
+    border-radius:0 10px 10px 0;
+    font-size:14.5px;
+    color:#33505f;
+    line-height:1.7;
+  }
+  .send strong{color:var(--send);font-weight:700;}
+
+  .story{
+    margin:6px 0 26px;
+    background:var(--winered-bg);
+    border-left:3px solid var(--winered);
+    border-radius:0 12px 12px 0;
+    padding:22px 26px 24px;
+  }
+  .story .story-tag{
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--winered);
+    display:block;
+    margin-bottom:10px;
+  }
+  .story p{
+    font-size:16px;
+    font-weight:500;
+    font-style:italic;
+    line-height:1.7;
+    color:var(--winered);
+  }
+
+  /* price table */
+  .ptable{
+    width:100%;
+    border-collapse:collapse;
+    margin:6px 0 30px;
+    font-size:15.5px;
+  }
+  .ptable th{
+    text-align:left;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    padding:0 16px 12px 0;
+    border-bottom:2px solid var(--line);
+  }
+  .ptable td{
+    padding:11px 16px 11px 0;
+    border-bottom:1px solid var(--line);
+    color:var(--ink);
+    font-weight:400;
+  }
+  .ptable td:last-child{
+    font-weight:600;
+    color:var(--green);
+    white-space:nowrap;
+  }
+  .ptable tr:last-child td{border-bottom:none;}
+
+  /* confirm flag */
+  .confirm{
+    margin:6px 0 26px;
+    background:rgba(160,82,45,0.06);
+    border-left:3px solid var(--terracotta);
+    border-radius:0 10px 10px 0;
+    padding:18px 24px;
+    font-size:14.5px;
+    color:#7a4a2e;
+    line-height:1.7;
+  }
+  .confirm .confirm-tag{
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    display:block;
+    margin-bottom:8px;
+  }
+  .confirm strong{color:var(--terracotta);font-weight:700;}
+
+  .xref{
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    color:var(--send);
+    background:var(--send-bg);
+    padding:2px 10px;
+    border-radius:999px;
+    letter-spacing:0.5px;
+    text-decoration:none;
+  }
+  .xref:hover{background:var(--send);color:#fff;}
+
+  .toc{
+    background:#fff;
+    border-radius:16px;
+    padding:44px 48px 40px;
+    margin-bottom:36px;
+    border:1px solid var(--line);
+  }
+  .toc h3{
+    font-size:26px;
+    font-weight:800;
+    color:var(--green);
+    margin-bottom:6px;
+    letter-spacing:0.2px;
+    line-height:1.2;
+  }
+  .toc .toc-sub{
+    font-size:11.5px;
+    font-weight:600;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    margin-bottom:26px;
+  }
+  .toc ol{list-style:none;counter-reset:t;}
+  .toc li{
+    counter-increment:t;
+    font-size:15.5px;
+    font-weight:500;
+    border-bottom:1px solid var(--line);
+  }
+  .toc li:last-child{border-bottom:none;}
+  .toc a{
+    color:var(--ink);
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:12px 2px;
+    transition:color 0.15s ease,padding 0.15s ease;
+  }
+  .toc a::before{
+    content:counter(t);
+    flex:0 0 28px;
+    height:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--sage);
+    border-radius:50%;
+    font-size:13px;
+    font-weight:700;
+    color:var(--green);
+    transition:background 0.15s ease,color 0.15s ease;
+  }
+  .toc a:hover{color:var(--terracotta);padding-left:8px;}
+  .toc a:hover::before{background:var(--green);color:#fff;}
+
+  .ground-rules{
+    background:#fff;
+    border-radius:16px;
+    padding:38px 48px;
+    margin-bottom:36px;
+    border:1px solid var(--line);
+    border-top:4px solid var(--green);
+  }
+  .ground-rules h3{
+    font-size:20px;
+    color:var(--green);
+    margin-bottom:20px;
+    font-weight:700;
+  }
+  .ground-rules ol{list-style:none;counter-reset:g;}
+  .ground-rules li{counter-increment:g;font-size:15.5px;padding:12px 0;border-bottom:1px solid var(--line);line-height:1.75;}
+  .ground-rules li:last-child{border-bottom:none;}
+  .ground-rules li::before{content:counter(g)".  ";color:var(--green);font-weight:700;}
+  .ground-rules strong{color:var(--green);}
+
+  footer{
+    text-align:center;
+    font-size:12.5px;
+    color:var(--muted);
+    padding:48px 24px 0;
+  }
+  footer .rule{
+    font-style:italic;
+    font-weight:500;
+    color:var(--green);
+    font-size:16px;
+    margin-bottom:8px;
+  }
+
+  .nav-btns{
+    position:fixed;right:20px;bottom:24px;
+    display:flex;flex-direction:column;gap:10px;z-index:50;
+    opacity:0;pointer-events:none;transition:opacity 0.25s ease;
+  }
+  .nav-btns.show{opacity:1;pointer-events:auto;}
+  .nav-btns button{
+    width:46px;height:46px;border-radius:50%;border:none;
+    background:var(--green);color:var(--sage);font-size:20px;line-height:1;cursor:pointer;
+    box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    display:flex;align-items:center;justify-content:center;
+    transition:background 0.2s ease,transform 0.15s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .nav-btns button:hover{background:#39694a;}
+  .nav-btns button:active{transform:scale(0.92);}
+
+  @media (max-width:600px){
+    header{padding:40px 20px 32px;}
+    header h1{font-size:27px;}
+    .wrap{padding:26px 16px 0;}
+    .card{padding:32px 26px 34px;border-radius:14px;}
+    .card h2{font-size:24px;margin-bottom:24px;}
+    .story{padding:20px 22px;}
+    .story p{font-size:15px;}
+    .toc{padding:32px 26px 28px;}
+    .toc h3{font-size:23px;}
+    .toc li{font-size:15px;}
+    .toc a{gap:13px;padding:11px 2px;}
+    .toc a::before{flex:0 0 26px;height:26px;font-size:12px;}
+    .ground-rules{padding:28px 26px;}
+    .say{font-size:16px;}
+    .ptable{font-size:14.5px;}
+    .nav-btns{right:16px;bottom:18px;}
+    .nav-btns button{width:44px;height:44px;font-size:19px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Barrel Sauna UK</h1>
+  <p>Follow-Up Answer Bank &middot; The Facts, Fast</p>
+</header>
+
+<div class="wrap">
+
+  <div class="toc">
+    <h3>The Questions Every Buyer Asks</h3>
+    <p class="toc-sub">Twelve cards &middot; look it up, answer it, move on</p>
+    <ol>
+      <li><a href="#c1">Electrics — "Do I Need Power?"</a></li>
+      <li><a href="#c2">Dimensions &amp; Sizing</a></li>
+      <li><a href="#c3">Base, Siting &amp; Groundworks</a></li>
+      <li><a href="#c4">Delivery &amp; Install — The Prices</a></li>
+      <li><a href="#c5">On-Site Build vs Delivery</a></li>
+      <li><a href="#c6">Ireland &amp; International</a></li>
+      <li><a href="#c7">Hot Tubs &amp; Ice Baths — The Prices</a></li>
+      <li><a href="#c8">Base Sauna Price List</a></li>
+      <li><a href="#c9">Heaters — Wood vs Electric</a></li>
+      <li><a href="#c10">"If We Move, Can We Take It?"</a></li>
+      <li><a href="#c11">Planning Permission</a></li>
+      <li><a href="#c12">The Excuse Bank</a></li>
+    </ol>
+  </div>
+
+  <div class="ground-rules" id="ground-rules">
+    <h3>How to Use This</h3>
+    <ol>
+      <li><strong>This is the facts sheet, not the pitch.</strong> The Closer Scripts tell you <em>how</em> to sell each thing — this tells you the hard numbers and answers when a customer asks on a follow-up. Cross-references to the script cards are marked in blue.</li>
+      <li><strong>Send native files, never Instagram links.</strong> Half our buyers aren't on social and a reel link is dead on arrival. Every held-back deliverable lives as a proper video or image in the content library — send the file.</li>
+      <li><strong>Anything flagged CONFIRM WITH LIAM is a genuine gap</strong> — don't quote it to a customer until it's confirmed. Prices below are starting points; everything's made to order.</li>
+    </ol>
+  </div>
+
+  <div class="card" id="c1">
+    <span class="num">One</span>
+    <h2>Electrics — "Do I Need Power for It?"</h2>
+    <span class="label">The answer</span>
+    <div class="say">
+      <p>Comes up on nearly every call. Keep it simple:</p>
+      <p><strong>Wood-burning heater:</strong> electric draw is very low. A standard 240V plug socket covers it — and that only runs the lights and jets, nothing heavy.</p>
+      <p><strong>No jets, no lights:</strong> no electric required at all. Fully off-grid capable.</p>
+      <p><strong>Solar lighting option:</strong> powers the whole lighting system — porch, changing room, sauna — off-grid, no mains, zero running cost.</p>
+      <p><strong>Electric WiFi heater</strong> (Harvia, app control) does need mains access. Better fit for commercial/Airbnb where lighting a fire daily is a chore.</p>
+    </div>
+    <span class="label">Word for word</span>
+    <div class="say">
+      <p>"Say you've got a woodburning heater — the electric's very low, standard plug socket, and that just handles the lights and jets. Build it without those and there's no electric needed at all."</p>
+    </div>
+    <div class="move"><strong>Cross-ref:</strong> <a class="xref" href="#">Scripts Card 5 (Lighting/electrics)</a> for the fully-built vs on-site wiring pitch, and <a class="xref" href="#">Card 8 (Heaters)</a>.</div>
+  </div>
+
+  <div class="card" id="c2">
+    <span class="num">Two</span>
+    <h2>Dimensions &amp; Sizing</h2>
+    <span class="label">Length tiers — made to order</span>
+    <table class="ptable">
+      <tr><th>Length</th><th>Tier</th><th>Suits</th></tr>
+      <tr><td>1.8m</td><td>Compact</td><td>Sauna only, smaller gardens, 2–3 people</td></tr>
+      <tr><td>2.4m</td><td>Standard</td><td>Sauna + integrated porch capacity</td></tr>
+      <tr><td>3.2m</td><td>Spacious</td><td>Porch or changing room capacity</td></tr>
+      <tr><td>3.7m</td><td>Popular</td><td>Porch &amp; changing room compatible</td></tr>
+      <tr><td>4.2m</td><td>Spacious</td><td>Porch or changing room</td></tr>
+      <tr><td>4.7m</td><td>XL</td><td>Larger groups. Side entrance available from here up</td></tr>
+      <tr><td>6m</td><td>Grand</td><td>Full changing room, porch &amp; large sauna. Side entrance option</td></tr>
+    </table>
+    <div class="say">
+      <p>Diameter, windows, heaters and layout are all chosen separately. Standard diameter is 2m; 2.3m gains surprising space.</p>
+      <p><strong>Spec rule:</strong> the changing room comes <em>out of</em> the total length, not on top. A 3m sauna with a 1m changing room is a 2m hot room. Quote it that way from the start.</p>
+    </div>
+    <div class="confirm">
+      <span class="confirm-tag">Confirm with Liam</span>
+      Exact external diameter per length, and internal usable length once a changing room's added. Buyers (Jamie, Tania) asked for precise cm figures — worth a definitive spec sheet.
+    </div>
+    <div class="move"><strong>Cross-ref:</strong> <a class="xref" href="#">Card 3 (Diameter)</a> and <a class="xref" href="#">Card 4 (Length &amp; Changing Room)</a> for the pitch.</div>
+  </div>
+
+  <div class="card" id="c3">
+    <span class="num">Three</span>
+    <h2>Base, Siting &amp; Groundworks</h2>
+    <span class="label">"What do I stand it on? Do I need to prep?"</span>
+    <div class="say">
+      <p>Any solid, <strong>level</strong> surface works — patio, concrete pad, gravel, hardstanding. As long as it's level, they're good. No need to lift an existing patio.</p>
+      <p>The sauna sits on <strong>horizontal legs/feet</strong> with deep grooves the barrel shape starts from — cut precise to form the barrel. The weight packs it right down onto the base.</p>
+      <p><strong>Railway sleepers</strong> are the cheapest leveller — dig them in where the feet sit, done. On an existing slab: build straight on it if level, sleepers under the feet if any levelling's needed.</p>
+    </div>
+    <div class="confirm">
+      <span class="confirm-tag">Confirm with Liam</span>
+      (1) Whether free sleepers are standard or case-by-case before promising them — James had a large batch in and included them free on a recent job. (2) Exact feet-spacing measurements per length — James was sketching these for a live client with sleepers; grab those sketches for the content library.
+    </div>
+    <div class="move"><strong>Cross-ref:</strong> <a class="xref" href="#">Card 14 (Decking &amp; Ground Prep)</a>. This unlocks two follow-up excuses — sleeper-base pics and the feet-spacing sketch (see Card 12).</div>
+  </div>
+
+  <div class="card" id="c4">
+    <span class="num">Four</span>
+    <h2>Delivery &amp; Install — The Prices</h2>
+    <table class="ptable">
+      <tr><th>Option</th><th>Price</th></tr>
+      <tr><td>Fully assembled — England/Wales</td><td>+£495</td></tr>
+      <tr><td>Full onsite build</td><td>+£1,250</td></tr>
+      <tr><td>Large sauna onsite build</td><td>+£1,500</td></tr>
+      <tr><td>Ireland / Scotland / Isle of Wight</td><td>+£300</td></tr>
+      <tr><td>EU delivery</td><td>+£500</td></tr>
+      <tr><td>Crane (HIAB) delivery</td><td>+£1,200 est.</td></tr>
+      <tr><td>Collection</td><td>Included</td></tr>
+      <tr><td>Custom / remote access</td><td>Quote required</td></tr>
+    </table>
+    <div class="say">
+      <p><strong>HIAB crane</strong> for local — lifts over drives, walls, obstacles. <strong>Delivery trailer</strong> for further afield, ready for a lift on the client's side. Client can use their own crane/local company — farms, estates, commercial all fine.</p>
+      <p><strong>Always get an access-route video.</strong> It determines the delivery method (HIAB vs trailer vs handball) and it's the standard "what we need from them" ask. Difficult access is a selling point, not a problem — narrow lanes, tight gardens, elevated plots all done before.</p>
+    </div>
+    <div class="move"><strong>Cross-ref:</strong> <a class="xref" href="#">Card 13 (Delivery &amp; Lifting)</a> for the no-crane framing.</div>
+  </div>
+
+  <div class="card" id="c5">
+    <span class="num">Five</span>
+    <h2>On-Site Build vs Delivery</h2>
+    <span class="label">The cost difference (Tania asked this directly)</span>
+    <div class="say">
+      <p>Delivered fully assembled is <strong>+£495</strong>. Full on-site build is <strong>+£1,250</strong> (£1,500 for large). So on-site build runs roughly <strong>£755–£1,005 more</strong> than assembled delivery, depending on size.</p>
+      <p>Frame it right: on-site build is for when access won't allow a pre-built unit in — not the default. If access is easy and there's hardstanding, we bring it fully built and lift it into place. 80–90% of the time the team just builds it on site anyway.</p>
+    </div>
+    <div class="move"><strong>Cross-ref:</strong> <a class="xref" href="#">Card 13 (Delivery &amp; Lifting)</a> — ask access early, it changes how the job runs.</div>
+  </div>
+
+  <div class="card" id="c6">
+    <span class="num">Six</span>
+    <h2>Ireland &amp; International</h2>
+    <span class="label">The answer</span>
+    <div class="say">
+      <p><strong>Ireland:</strong> no problem — +£300 delivery. Ian, qualified carpenter and long-standing team member, is Ireland-based; comes to the UK for install stints, then does the rounds on Ireland installs.</p>
+      <p><strong>International/EU:</strong> +£500 EU, custom beyond. Take details and pass to <strong>Marta</strong> — don't quote on the spot, and don't route it to James.</p>
+    </div>
+    <div class="confirm">
+      <span class="confirm-tag">Confirm with Liam</span>
+      US routing gap: WhatsApp templates and UK→US SMS are both non-functional, so US leads (+1) need email-first sequences. This is a system fix, not a closer answer yet.
+    </div>
+    <div class="move"><strong>Cross-ref:</strong> <a class="xref" href="#">Card 15 (Ireland &amp; International)</a>. Ireland routes to Ian, international routes to Marta — don't mix them up.</div>
+  </div>
+
+  <div class="card" id="c7">
+    <span class="num">Seven</span>
+    <h2>Hot Tubs &amp; Ice Baths — The Prices</h2>
+    <span class="label">The most-asked-for numbers</span>
+    <table class="ptable">
+      <tr><th>Item</th><th>Price</th></tr>
+      <tr><td>Single dipper ice bath (chiller/filter)</td><td>£3,995 + VAT</td></tr>
+      <tr><td>Double dipper ice bath (chiller/filter)</td><td>£5,995 + VAT</td></tr>
+      <tr><td>Thermowood hot tub</td><td>£5,495</td></tr>
+      <tr><td>Barrel shower</td><td>£2,495</td></tr>
+      <tr><td>Heated water tank (wood burner)</td><td>+£375</td></tr>
+    </table>
+    <div class="say">
+      <p><strong>The dipper explained:</strong> both single and double come with chiller, cooler, filter and heater — heats to 40°, cools to zero. Both ice bath <em>and</em> hot tub, but not instant-switch: decide the night before and switch overnight. Comes complete — thin wood steps, lids, inserts, seats.</p>
+      <p>Traditional wood-fired hot tub can be <strong>woodburn or electric</strong> heated. Free delivery when brought <strong>with the sauna</strong> — one trip, no second delivery charge.</p>
+    </div>
+    <div class="confirm">
+      <span class="confirm-tag">Confirm with Liam — three gaps</span>
+      (1) Thermowood hot tub shows <strong>£5,495</strong> in the brochure extras but <strong>£7,995</strong> in a premium deal example — which is standard? (2) Double-dipper <strong>wood-burner option at +£1,000</strong> came out of a meeting — live to sell? Single too? (3) A proper hot-tub price guide is the <strong>#1 missing customer-facing asset</strong> — three live buyers (Jamie, Sarah, Tania) blocked on it. Needs its own one-pager once these are confirmed.
+    </div>
+    <div class="move"><strong>Cross-ref:</strong> <a class="xref" href="#">Card 10 (Hot Tubs)</a> and <a class="xref" href="#">Card 11 (The Dippers)</a> for the pitch and the custody-war line.</div>
+  </div>
+
+  <div class="card" id="c8">
+    <span class="num">Eight</span>
+    <h2>Base Sauna Price List (Thermowood)</h2>
+    <span class="label">Starting prices — made to order, before upgrades</span>
+    <table class="ptable">
+      <tr><th>Length</th><th>Price</th></tr>
+      <tr><td>1.8m</td><td>£5,250</td></tr>
+      <tr><td>2.5m</td><td>£7,995</td></tr>
+      <tr><td>3.2m</td><td>£8,795</td></tr>
+      <tr><td>3.6m</td><td>£10,250</td></tr>
+      <tr><td>4.1m</td><td>£10,995</td></tr>
+      <tr><td>4.6m</td><td>£11,795</td></tr>
+      <tr><td>5m</td><td>£12,745</td></tr>
+      <tr><td>6m</td><td>£13,495</td></tr>
+    </table>
+    <div class="say">
+      <p>Diameter, windows, heaters, lighting and delivery all priced separately. Common upgrades from live deals: globe window £2,995 · full glass front £1,200 · changing room £725 · porch £495 · solar system £1,995 · lighting package £650 · underseat LEDs £325 · heaters £895–£1,695.</p>
+    </div>
+    <div class="confirm">
+      <span class="confirm-tag">Confirm with Liam</span>
+      Deal examples show slightly different base figures (e.g. 3m at £8,495, 5m at £12,995) than the table above. Confirm which price list is current before closers quote from it — a wrong number is worse than no number.
+    </div>
+  </div>
+
+  <div class="card" id="c9">
+    <span class="num">Nine</span>
+    <h2>Heaters — Wood vs Electric</h2>
+    <span class="label">The quick facts</span>
+    <div class="say">
+      <p><strong>Wood burner:</strong> ambient, the glow, natural and therapeutic. All safety accessories included as standard — base plate, heat shields, guardrail, flue shields.</p>
+      <p><strong>Electric WiFi (Harvia):</strong> app control, remote on/off, timers. Less maintenance for commercial/Airbnb. Volcanic stones — real steam, not a zappy infrared feel. Single- or three-phase depending on supply.</p>
+      <p><strong>Spec rule:</strong> external-feed wood burner ONLY pairs with the two double-glazed windows or the half-moon — <em>never</em> the big flat glass. You're not feeding logs through a sheet of glass.</p>
+    </div>
+    <div class="confirm">
+      <span class="confirm-tag">Confirm with Liam</span>
+      The price gap between wood burner and electric.
+    </div>
+    <div class="move"><strong>Cross-ref:</strong> <a class="xref" href="#">Card 8 (Heaters)</a> for the four-way shortlist and the "flames vs external feed" honesty line.</div>
+  </div>
+
+  <div class="card" id="c10">
+    <span class="num">Ten</span>
+    <h2>"If We Move House, Can We Take It?"</h2>
+    <span class="label">The answer — handled live in the Jamie thread, reusable as-is</span>
+    <div class="say">
+      <p>Yes. One sauna went to three expos before landing at a client's house.</p>
+      <p><strong>Local move:</strong> HIAB is best — lift and go. <strong>Further:</strong> lift into a trailer and drive it. <strong>Worst case:</strong> disassemble and reassemble. Can be moved as a full unit too.</p>
+    </div>
+    <div class="story">
+      <span class="story-tag">The reframe — this is a sales asset, not just an answer</span>
+      <p>"It adds value to the house sale — a mate of mine bought a house the other day, was between two, went with the one that had a hot tub."</p>
+    </div>
+    <div class="move"><strong>Cross-ref:</strong> works alongside <a class="xref" href="#">Card 9 (Mobile Saunas)</a> — portability is a trust-builder, not just a get-out.</div>
+  </div>
+
+  <div class="card" id="c11">
+    <span class="num">Eleven</span>
+    <h2>Planning Permission</h2>
+    <span class="label">The answer</span>
+    <div class="say">
+      <p><strong>Eco glamping pods:</strong> no planning permission required — permitted development in most cases. Saunas and tubs generally sit under permitted development too, but it's site-dependent.</p>
+      <p>For big projects already in planning, the follow-up should be <strong>specific</strong>: where it's at, tips to help get it through — not a generic chase.</p>
+    </div>
+    <div class="confirm">
+      <span class="confirm-tag">Confirm with Liam — advisor pitch, write up separately</span>
+      The planning-permission partnership: Liam's met a specialist in person and partnered. BSUK can handle planning for the client, deposit comes off their build total, priced slightly under a standalone planning admin. Needs the specialist tracked down, terms confirmed, and a section built onto the site.
+    </div>
+    <div class="move"><strong>Cross-ref:</strong> <a class="xref" href="#">Card 9 (Mobile)</a> for the "ask forgiveness, not permission" angle — mobile sidesteps the planning wait entirely.</div>
+  </div>
+
+  <div class="card" id="c12">
+    <span class="num">Twelve</span>
+    <h2>The Excuse Bank</h2>
+    <span class="label">Deliberate hold-backs that earn a follow-up</span>
+    <div class="say">
+      <p>Park a real deliverable on the first call so there's a genuine reason to come back. Not fake — real things held on purpose. Every one lives in the content library as a native file, ready to send.</p>
+      <p><strong>1. Shingle pricing</strong> — "I'll check what those shingles cost and come back with the pricing to add that." (The Scottish 5* castle example. <span style="color:var(--terracotta);font-weight:600;">CONFIRM: get the shingle video into the library.</span>)</p>
+      <p><strong>2. Feet-spacing sketch</strong> — "I'll send a sketch of how far apart the feet sit." James is drawing these.</p>
+      <p><strong>3. Sleeper-base pics</strong> — "I'll dig out example pics of the base." Frame it as specific to them.</p>
+      <p><strong>4. Access-route / delivery method</strong> — after they send the access video, come back with the delivery plan.</p>
+      <p><strong>5. Multi-item stall</strong> — if you owe several things, make the wait the excuse: "James is sketching the spacing, I'll send it all together in a couple of days."</p>
+    </div>
+    <div class="move"><strong>The move:</strong> The follow-up flows both ways — you owe them a thing, they owe you a thing (video of the space, dimensions, groundworks). Holding a deliverable back on purpose means you always have a legitimate next touch, not a limp "just checking in."</div>
+  </div>
+
+  <div class="card" id="c-confirm" style="border-top:4px solid var(--terracotta);">
+    <span class="num">The gaps</span>
+    <h2>Confirm-With-Liam Checklist</h2>
+    <div class="say">
+      <p>Every open number and decision in one place — close these and the answer bank is airtight:</p>
+      <p>1. Exact diameters + internal length after changing room (spec sheet)<br>
+      2. Feet-spacing measurements per length (grab James's sketches)<br>
+      3. Free sleepers — standard or case-by-case?<br>
+      4. Thermowood hot tub — £5,495 or £7,995 standard?<br>
+      5. Double-dipper wood-burner +£1,000 — live to sell? Single too?<br>
+      6. <strong>Hot-tub price guide — the #1 missing customer-facing asset</strong><br>
+      7. Current base-sauna price list — table vs deal-example figures<br>
+      8. Wood burner vs electric price gap<br>
+      9. Planning partnership — terms + site section<br>
+      10. Shingle example video into the content library</p>
+    </div>
+  </div>
+
+  <footer>
+    <p class="rule">Hand-built in Wales. Built to last.</p>
+    <p>Barrel Sauna UK &middot; Internal follow-up reference &middot; Private — contains pricing</p>
+  </footer>
+
+</div>
+
+<div class="nav-btns" id="navBtns">
+  <button id="toTop" aria-label="Scroll to top">&#8593;</button>
+  <button id="toBottom" aria-label="Scroll to bottom">&#8595;</button>
+</div>
+
+<script>
+  var navBtns = document.getElementById('navBtns');
+  var toTop = document.getElementById('toTop');
+  var toBottom = document.getElementById('toBottom');
+  window.addEventListener('scroll', function(){
+    if (window.scrollY > 300) { navBtns.classList.add('show'); }
+    else { navBtns.classList.remove('show'); }
+  });
+  toTop.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+  toBottom.addEventListener('click', function(){ window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}); });
+</script>
+
+</body>
+</html>
