@@ -3,25 +3,37 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BSUK Live Estimate Configurator</title>
+<title>BSUK — Live Estimate</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<script src="deposit-copy.js"></script>
+
 <style>
 /* ============================================================
    BSUK LIVE ESTIMATE CONFIGURATOR
    Static. No backend. Works offline once loaded.
    ALL PRICES MARKED /* CONFIRM */ ARE PLACEHOLDERS.
+   Deposit wording lives in deposit-copy.js — not here.
    ============================================================ */
 
 :root{
   --forest:#2B5336;
+  --forest-d:#20402A;
   --sage:#50795F;
+  --sage-l:#A8C4A0;
   --bone:#F1F2EC;
   --terracotta:#C08B41;
   --ink:#1C2A20;
   --mute:#7A8880;
-  --line:#DDE0D8;
-  --warn:#C0562F;
-  --warn-bg:#FDF2EC;
+  --line:#DFE2DA;
+  --line-s:#EDEFE8;
   --white:#FFFFFF;
+  --warn:#B4551F;
+  --warn-bg:#FBF1E6;
+  --shadow:0 1px 2px rgba(28,42,32,.04), 0 4px 16px rgba(28,42,32,.06);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -31,401 +43,527 @@ body{
   background:var(--bone);
   color:var(--ink);
   font-size:15px;
-  line-height:1.45;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
   -webkit-text-size-adjust:100%;
 }
 
-/* ---------- HEADER ---------- */
-header{
+/* ---------- MASTHEAD ---------- */
+.mast{
   background:var(--forest);
   color:var(--bone);
-  padding:14px 20px;
+  padding:26px 32px;
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  gap:16px;
+  align-items:flex-end;
+  gap:24px;
   flex-wrap:wrap;
   position:sticky;
   top:0;
-  z-index:50;
+  z-index:60;
+  box-shadow:0 2px 20px rgba(28,42,32,.18);
 }
-header h1{
-  font-family:'Raleway','Helvetica Neue',sans-serif;
-  font-size:16px;
-  font-weight:700;
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
-header .sub{
-  font-size:12px;
-  color:#A8C4A0;
-  letter-spacing:.5px;
-}
-.hdr-total{
+.mast .brand h1{
   font-family:'Raleway',sans-serif;
-  font-size:24px;
-  font-weight:700;
-  color:var(--white);
-  white-space:nowrap;
+  font-size:26px;
+  font-weight:800;
+  letter-spacing:-.4px;
+  line-height:1.1;
 }
-.hdr-total small{
-  display:block;
+.mast .brand .eyebrow{
+  font-family:'Raleway',sans-serif;
   font-size:10px;
-  letter-spacing:1.5px;
-  color:#A8C4A0;
-  font-weight:400;
-  text-align:right;
+  font-weight:700;
+  letter-spacing:2.6px;
+  text-transform:uppercase;
+  color:var(--sage-l);
+  margin-top:7px;
 }
+.mast .brand .eyebrow a{
+  color:var(--sage-l);
+  text-decoration:none;
+  border-bottom:1px solid rgba(168,196,160,.35);
+  padding-bottom:1px;
+}
+.mast .brand .eyebrow a:hover{color:var(--white);border-color:var(--white)}
 
-/* ---------- WARNING BANNER ---------- */
+.tot{text-align:right}
+.tot .lbl{
+  font-family:'Raleway',sans-serif;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:2.4px;
+  text-transform:uppercase;
+  color:var(--sage-l);
+}
+.tot .amt{
+  font-family:'Raleway',sans-serif;
+  font-size:38px;
+  font-weight:800;
+  letter-spacing:-1px;
+  line-height:1.05;
+  font-variant-numeric:tabular-nums;
+  color:var(--white);
+}
+.tot .amt.pulse{animation:pop .28s ease}
+@keyframes pop{50%{transform:scale(1.045)}}
+
+/* ---------- BANNER ---------- */
 .banner{
   background:var(--warn-bg);
-  border-bottom:2px solid var(--warn);
+  border-bottom:1px solid rgba(180,85,31,.28);
   color:var(--warn);
-  padding:8px 20px;
-  font-size:12px;
+  padding:10px 32px;
+  font-family:'Raleway',sans-serif;
+  font-size:11px;
   font-weight:700;
-  letter-spacing:.5px;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
   text-align:center;
 }
 
 /* ---------- LAYOUT ---------- */
 .wrap{
   display:grid;
-  grid-template-columns:1fr 400px;
-  gap:0;
-  min-height:calc(100vh - 90px);
+  grid-template-columns:1fr 430px;
+  align-items:start;
+  max-width:1600px;
+  margin:0 auto;
 }
-.pane-config{padding:20px;overflow-y:auto}
+.pane-config{padding:28px 32px 60px}
 .pane-estimate{
-  background:var(--white);
-  border-left:1px solid var(--line);
-  padding:20px;
+  padding:28px 32px 60px 0;
   position:sticky;
-  top:90px;
-  height:calc(100vh - 90px);
-  overflow-y:auto;
+  top:104px;
 }
 
-/* ---------- CONFIG BLOCKS ---------- */
-.block{
+/* ---------- CARDS ---------- */
+.card{
   background:var(--white);
   border:1px solid var(--line);
-  border-radius:6px;
-  margin-bottom:14px;
+  border-radius:10px;
+  margin-bottom:16px;
   overflow:hidden;
+  box-shadow:var(--shadow);
 }
-.block > h2{
+.card > h2{
   font-family:'Raleway',sans-serif;
   font-size:11px;
   font-weight:700;
-  letter-spacing:2px;
+  letter-spacing:2.2px;
   text-transform:uppercase;
   color:var(--forest);
-  background:#F7F8F4;
-  padding:10px 14px;
-  border-bottom:1px solid var(--line);
+  padding:14px 20px;
+  border-bottom:1px solid var(--line-s);
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:12px;
 }
-.block > h2 .noncom{
+.card > h2 .num{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:20px;height:20px;
+  border-radius:50%;
+  background:var(--bone);
+  color:var(--sage);
+  font-size:10px;
+  font-weight:700;
+  margin-right:10px;
+  letter-spacing:0;
+  flex-shrink:0;
+}
+.card > h2 .ttl{flex:1;display:flex;align-items:center}
+.tag-nc{
+  font-family:'Raleway',sans-serif;
   font-size:9px;
-  letter-spacing:1px;
+  font-weight:700;
+  letter-spacing:1.2px;
   color:var(--mute);
   background:var(--bone);
   border:1px solid var(--line);
-  border-radius:3px;
-  padding:2px 6px;
-  font-weight:700;
+  border-radius:20px;
+  padding:3px 9px;
+  white-space:nowrap;
+  text-transform:uppercase;
 }
-.block-body{padding:14px}
+.card-body{padding:20px}
 
-.field{margin-bottom:14px}
+/* ---------- FIELDS ---------- */
+.field{margin-bottom:16px}
 .field:last-child{margin-bottom:0}
 .field label{
   display:block;
-  font-size:11px;
+  font-family:'Raleway',sans-serif;
+  font-size:10px;
   font-weight:700;
-  letter-spacing:1px;
+  letter-spacing:1.6px;
   text-transform:uppercase;
   color:var(--mute);
-  margin-bottom:5px;
+  margin-bottom:7px;
 }
 select,input[type=number],input[type=text],input[type=email],textarea{
   width:100%;
-  padding:9px 10px;
+  padding:11px 13px;
   border:1px solid var(--line);
-  border-radius:4px;
+  border-radius:7px;
   font-family:inherit;
   font-size:15px;
   background:var(--white);
   color:var(--ink);
+  transition:border-color .12s,box-shadow .12s;
 }
+select{
+  appearance:none;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%2350795F' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 13px center;
+  padding-right:36px;
+  cursor:pointer;
+}
+select:hover{border-color:var(--sage)}
 select:focus,input:focus,textarea:focus{
-  outline:2px solid var(--sage);
-  outline-offset:-1px;
+  outline:none;
   border-color:var(--sage);
+  box-shadow:0 0 0 3px rgba(80,121,95,.14);
 }
-textarea{min-height:60px;resize:vertical}
+textarea{min-height:70px;resize:vertical;line-height:1.5}
+::placeholder{color:#B4BCB4}
 
-/* placeholder-priced controls glow orange */
 select.placeholder,input.placeholder{
-  border-color:var(--terracotta);
-  background:#FDF8F0;
+  border-color:rgba(192,139,65,.55);
+  background-color:#FDF9F3;
 }
 
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 
-/* ---------- TOGGLE LIST ---------- */
+/* ---------- TICK ROWS ---------- */
 .tog{
   display:flex;
   align-items:center;
-  gap:10px;
-  padding:8px 0;
-  border-bottom:1px solid #F0F1EC;
+  gap:12px;
+  padding:11px 12px;
+  margin:0 -12px;
+  border-radius:7px;
   cursor:pointer;
+  transition:background .1s;
 }
-.tog:last-child{border-bottom:none}
-.tog input{
-  width:18px;height:18px;
-  accent-color:var(--forest);
+.tog:hover{background:#F7F9F5}
+.tog + .tog{border-top:1px solid var(--line-s)}
+.tog input[type=checkbox]{
+  appearance:none;
+  width:19px;height:19px;
+  border:1.5px solid var(--line);
+  border-radius:5px;
   flex-shrink:0;
   cursor:pointer;
+  position:relative;
+  transition:all .12s;
+  background:var(--white);
 }
-.tog .name{flex:1;font-size:14px}
+.tog input[type=checkbox]:hover{border-color:var(--sage)}
+.tog input[type=checkbox]:checked{
+  background:var(--forest);
+  border-color:var(--forest);
+}
+.tog input[type=checkbox]:checked::after{
+  content:'';
+  position:absolute;
+  left:6px;top:2px;
+  width:5px;height:10px;
+  border:solid var(--white);
+  border-width:0 2px 2px 0;
+  transform:rotate(42deg);
+}
+.tog input[type=checkbox]:focus-visible{
+  outline:2px solid var(--terracotta);
+  outline-offset:2px;
+}
+.tog .name{flex:1;font-size:14.5px}
 .tog .price{
+  font-family:'Raleway',sans-serif;
   font-variant-numeric:tabular-nums;
   font-weight:700;
-  font-size:13px;
+  font-size:13.5px;
   color:var(--sage);
   white-space:nowrap;
 }
 .tog .price.ph{color:var(--terracotta)}
-.tog .qty{
-  width:56px;
-  padding:4px 6px;
-  font-size:13px;
-  text-align:center;
+.tog .price input{
+  width:96px;
+  padding:6px 9px;
+  font-size:13.5px;
+  text-align:right;
+  border-radius:6px;
 }
 
-/* ---------- ESTIMATE PANE ---------- */
-.est-brand{
+/* ---------- ESTIMATE ---------- */
+.est{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:10px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  max-height:calc(100vh - 136px);
+  display:flex;
+  flex-direction:column;
+}
+.est-scroll{overflow-y:auto;padding:26px}
+
+.est-head{
   border-bottom:2px solid var(--forest);
-  padding-bottom:10px;
-  margin-bottom:14px;
+  padding-bottom:14px;
+  margin-bottom:16px;
 }
-.est-brand .logo{
+.est-head .logo{
   font-family:'Raleway',sans-serif;
-  font-size:15px;
-  font-weight:700;
-  letter-spacing:3px;
+  font-size:19px;
+  font-weight:800;
+  letter-spacing:-.3px;
   color:var(--forest);
-  text-transform:uppercase;
 }
-.est-brand .tag{
-  font-size:10px;
-  letter-spacing:1.5px;
-  color:var(--mute);
+.est-head .kind{
+  font-family:'Raleway',sans-serif;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:2.4px;
   text-transform:uppercase;
-  margin-top:2px;
+  color:var(--terracotta);
+  margin-top:4px;
 }
+
 .est-meta{
-  font-size:11px;
+  font-size:12px;
   color:var(--mute);
-  margin-bottom:14px;
-  line-height:1.7;
+  line-height:1.85;
+  margin-bottom:18px;
 }
-.est-meta strong{color:var(--ink);font-weight:700}
+.est-meta .who{
+  font-family:'Raleway',sans-serif;
+  font-size:16px;
+  font-weight:700;
+  color:var(--ink);
+  display:block;
+  margin-bottom:3px;
+  letter-spacing:-.1px;
+}
 
 .est-sect{
   font-family:'Raleway',sans-serif;
-  font-size:10px;
+  font-size:9.5px;
   font-weight:700;
-  letter-spacing:2px;
+  letter-spacing:2.2px;
   text-transform:uppercase;
-  color:var(--forest);
-  border-bottom:1px solid var(--line);
-  padding-bottom:4px;
-  margin:16px 0 8px;
+  color:var(--sage);
+  border-bottom:1px solid var(--line-s);
+  padding-bottom:6px;
+  margin:22px 0 4px;
 }
-.est-sect:first-of-type{margin-top:0}
+.est-sect:first-child{margin-top:0}
 
 .li{
   display:flex;
   justify-content:space-between;
-  gap:12px;
-  padding:5px 0;
-  font-size:13px;
-  border-bottom:1px dotted #E8EAE3;
+  align-items:baseline;
+  gap:14px;
+  padding:8px 0;
+  font-size:13.5px;
+  border-bottom:1px solid #F4F6F1;
 }
 .li:last-child{border-bottom:none}
-.li .l{flex:1}
+.li .l{flex:1;line-height:1.4}
 .li .l em{
   display:block;
   font-style:normal;
   font-size:11px;
   color:var(--mute);
+  margin-top:2px;
 }
 .li .v{
+  font-family:'Raleway',sans-serif;
   font-variant-numeric:tabular-nums;
   font-weight:700;
   white-space:nowrap;
 }
 .li .v.ph{color:var(--terracotta)}
 
-.est-sum{
-  border-top:2px solid var(--forest);
-  margin-top:16px;
-  padding-top:10px;
-}
-.est-sum .li{border:none;font-size:14px}
-.est-sum .grand{
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  background:var(--forest);
-  color:var(--bone);
-  padding:12px 14px;
-  border-radius:5px;
-  margin-top:8px;
-}
-.est-sum .grand .lbl{
-  font-size:10px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  color:#A8C4A0;
-}
-.est-sum .grand .amt{
-  font-family:'Raleway',sans-serif;
-  font-size:26px;
-  font-weight:700;
-  font-variant-numeric:tabular-nums;
-}
-.dep-box{
-  background:#F7F8F4;
-  border:1px solid var(--sage);
-  border-left:4px solid var(--terracotta);
-  border-radius:4px;
-  padding:11px 13px;
-  margin-top:10px;
-  font-size:12px;
-  line-height:1.55;
-}
-.dep-box strong{
-  display:block;
-  font-family:'Raleway',sans-serif;
-  color:var(--forest);
-  font-size:11px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  margin-bottom:4px;
-}
-
 .empty{
   color:var(--mute);
   font-size:13px;
   font-style:italic;
-  padding:8px 0;
+  padding:12px 0;
 }
 
-/* ---------- ACTIONS ---------- */
-.actions{
-  margin-top:18px;
-  display:grid;
-  gap:8px;
+.est-sum{
+  border-top:1px solid var(--line);
+  margin-top:20px;
+  padding-top:12px;
 }
-button.act{
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:5px;
-  font-family:'Raleway',sans-serif;
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  cursor:pointer;
+.est-sum .li{border-bottom:none;padding:6px 0}
+
+.grand{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   background:var(--forest);
   color:var(--bone);
-  transition:background .12s;
+  padding:16px 20px;
+  border-radius:8px;
+  margin-top:12px;
 }
-button.act:hover{background:var(--sage)}
-button.act.alt{
+.grand .lbl{
+  font-family:'Raleway',sans-serif;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:2.2px;
+  text-transform:uppercase;
+  color:var(--sage-l);
+  line-height:1.6;
+}
+.grand .amt{
+  font-family:'Raleway',sans-serif;
+  font-size:32px;
+  font-weight:800;
+  letter-spacing:-1px;
+  font-variant-numeric:tabular-nums;
+}
+
+.dep{
+  background:#F8FAF6;
+  border:1px solid var(--line-s);
+  border-left:3px solid var(--terracotta);
+  border-radius:7px;
+  padding:14px 16px;
+  margin-top:14px;
+  font-size:12.5px;
+  line-height:1.6;
+  color:var(--mute);
+}
+.dep .hd{
+  font-family:'Raleway',sans-serif;
+  font-size:9.5px;
+  font-weight:700;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+  color:var(--forest);
+  margin-bottom:6px;
+}
+.dep b{color:var(--ink);font-weight:700}
+
+/* ---------- ACTIONS ---------- */
+.acts{
+  border-top:1px solid var(--line);
+  background:#FAFBF8;
+  padding:16px;
+  display:grid;
+  gap:8px;
+  grid-template-columns:1fr 1fr;
+}
+button.act{
+  padding:13px 10px;
+  border:1px solid var(--forest);
+  border-radius:7px;
+  font-family:'Raleway',sans-serif;
+  font-size:10.5px;
+  font-weight:700;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+  cursor:pointer;
   background:var(--white);
   color:var(--forest);
-  border:1px solid var(--forest);
+  transition:all .12s;
 }
-button.act.alt:hover{background:var(--bone)}
-button.act:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
+button.act:hover{background:var(--bone);transform:translateY(-1px)}
+button.act:active{transform:translateY(0)}
+button.act.primary{
+  grid-column:1/-1;
+  background:var(--forest);
+  color:var(--bone);
+  padding:15px;
+  font-size:11.5px;
+}
+button.act.primary:hover{background:var(--forest-d)}
+button.act.quiet{
+  grid-column:1/-1;
+  border-color:transparent;
+  background:transparent;
+  color:var(--mute);
+  font-size:10px;
+  padding:8px;
+}
+button.act.quiet:hover{color:var(--warn);background:transparent;transform:none}
+button.act:focus-visible{outline:2px solid var(--terracotta);outline-offset:2px}
 
+/* ---------- TOAST ---------- */
 .toast{
   position:fixed;
-  bottom:20px;left:50%;
-  transform:translateX(-50%) translateY(80px);
-  background:var(--ink);
+  bottom:26px;left:50%;
+  transform:translateX(-50%) translateY(90px);
+  background:var(--forest);
   color:var(--bone);
-  padding:11px 20px;
-  border-radius:5px;
-  font-size:13px;
+  padding:13px 24px;
+  border-radius:30px;
+  font-family:'Raleway',sans-serif;
+  font-size:12.5px;
   font-weight:700;
+  letter-spacing:.5px;
   z-index:200;
   opacity:0;
-  transition:all .22s;
+  transition:all .25s cubic-bezier(.2,.8,.3,1);
   pointer-events:none;
+  box-shadow:0 8px 30px rgba(28,42,32,.28);
 }
 .toast.on{transform:translateX(-50%) translateY(0);opacity:1}
 
 /* ---------- MOBILE ---------- */
-@media(max-width:900px){
+@media(max-width:980px){
   .wrap{grid-template-columns:1fr}
-  .pane-estimate{
-    position:static;
-    height:auto;
-    border-left:none;
-    border-top:3px solid var(--forest);
-  }
-  .row,.row-3{grid-template-columns:1fr}
-  .hdr-total{font-size:20px}
+  .mast{padding:18px 20px}
+  .mast .brand h1{font-size:21px}
+  .tot .amt{font-size:30px}
+  .banner{padding:9px 20px;font-size:10px;letter-spacing:1px}
+  .pane-config{padding:20px 16px 0}
+  .pane-estimate{position:static;padding:20px 16px 50px}
+  .est{max-height:none}
+  .row{grid-template-columns:1fr}
 }
 
 @media(prefers-reduced-motion:reduce){
-  *{transition:none!important}
+  *{transition:none!important;animation:none!important}
 }
 
 /* ---------- PRINT ---------- */
 @media print{
-  header,.banner,.pane-config,.actions{display:none!important}
-  body{background:var(--white)}
-  .wrap{display:block}
-  .pane-estimate{
-    position:static;
-    height:auto;
-    border:none;
-    padding:0;
-    overflow:visible;
-  }
+  .mast,.banner,.pane-config,.acts,.toast{display:none!important}
+  body{background:var(--white);font-size:12pt}
+  .wrap{display:block;max-width:none}
+  .pane-estimate{position:static;padding:0}
+  .est{border:none;box-shadow:none;max-height:none;border-radius:0}
+  .est-scroll{padding:0;overflow:visible}
   .li .v.ph{color:var(--ink)}
+  .grand{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   @page{margin:18mm}
 }
 </style>
 </head>
 <body>
 
-<header>
-  <div>
+<div class="mast">
+  <div class="brand">
     <h1>Barrel Sauna UK</h1>
-    <div class="sub">Live Estimate Configurator</div>
+    <div class="eyebrow">
+      Live Estimate &middot; <a href="./">Closer Scripts</a> &middot; <a href="./deposit-gate.html">Deposit Gate</a>
+    </div>
   </div>
-  <div class="hdr-total">
-    <small>Running total</small>
-    <span id="hdrTotal">£0</span>
+  <div class="tot">
+    <div class="lbl">Running total</div>
+    <div class="amt" id="hdrTotal">£0</div>
   </div>
-</header>
+</div>
 
 <div class="banner" id="banner">
-  ⚠ PRICES SHOWN IN ORANGE ARE PLACEHOLDERS — NOT CONFIRMED. DO NOT SEND TO A CUSTOMER UNTIL SIGNED OFF.
+  Prices in orange are placeholders — not confirmed. Do not send until signed off.
 </div>
 
 <div class="wrap">
@@ -433,27 +571,27 @@ button.act:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
 <!-- ==================== CONFIGURATOR ==================== -->
 <div class="pane-config">
 
-  <div class="block">
-    <h2>Customer</h2>
-    <div class="block-body">
+  <div class="card">
+    <h2><span class="ttl"><span class="num">1</span>Customer</span></h2>
+    <div class="card-body">
       <div class="row">
         <div class="field">
           <label for="cName">Name</label>
-          <input type="text" id="cName" data-est placeholder="Jane Smith">
+          <input type="text" id="cName" placeholder="Jane Smith">
         </div>
         <div class="field">
           <label for="cEmail">Email</label>
-          <input type="email" id="cEmail" data-est placeholder="jane@example.com">
+          <input type="email" id="cEmail" placeholder="jane@example.com">
         </div>
       </div>
       <div class="row">
         <div class="field">
           <label for="cPhone">Phone</label>
-          <input type="text" id="cPhone" data-est placeholder="07…">
+          <input type="text" id="cPhone" placeholder="07…">
         </div>
         <div class="field">
           <label for="cCloser">Closer</label>
-          <select id="cCloser" data-est>
+          <select id="cCloser">
             <option>James</option>
             <option>Ollie</option>
             <option>Giles</option>
@@ -463,28 +601,30 @@ button.act:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
       </div>
       <div class="field">
         <label for="cPostcode">Delivery postcode</label>
-        <input type="text" id="cPostcode" data-est placeholder="SA1 1AA">
+        <input type="text" id="cPostcode" placeholder="SA1 1AA">
       </div>
     </div>
   </div>
 
-  <div class="block">
-    <h2>Product line</h2>
-    <div class="block-body">
-      <div class="field">
-        <label for="pLine">Build type</label>
-        <select id="pLine"></select>
-      </div>
-      <div class="field" id="baseWrap">
-        <label for="pBase" id="baseLabel">Size</label>
-        <select id="pBase" class="placeholder"></select>
+  <div class="card">
+    <h2><span class="ttl"><span class="num">2</span>The Build</span></h2>
+    <div class="card-body">
+      <div class="row">
+        <div class="field">
+          <label for="pLine">Build type</label>
+          <select id="pLine"></select>
+        </div>
+        <div class="field">
+          <label for="pBase" id="baseLabel">Size</label>
+          <select id="pBase" class="placeholder"></select>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="block" id="grpTimber">
-    <h2>Timber &amp; finish</h2>
-    <div class="block-body">
+  <div class="card" id="grpTimber">
+    <h2><span class="ttl"><span class="num">3</span>Timber &amp; Finish</span></h2>
+    <div class="card-body">
       <div class="field">
         <label for="oTimber">Timber</label>
         <select id="oTimber" class="placeholder"></select>
@@ -496,9 +636,9 @@ button.act:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
     </div>
   </div>
 
-  <div class="block" id="grpLayout">
-    <h2>Layout &amp; glazing</h2>
-    <div class="block-body">
+  <div class="card" id="grpLayout">
+    <h2><span class="ttl"><span class="num">4</span>Layout &amp; Glazing</span></h2>
+    <div class="card-body">
       <div class="field">
         <label for="oEntrance">Entrance / door</label>
         <select id="oEntrance" class="placeholder"></select>
@@ -514,9 +654,9 @@ button.act:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
     </div>
   </div>
 
-  <div class="block" id="grpHeater">
-    <h2>Heater</h2>
-    <div class="block-body">
+  <div class="card" id="grpHeater">
+    <h2><span class="ttl"><span class="num">5</span>Heater</span></h2>
+    <div class="card-body">
       <div class="field">
         <label for="oHeater">Heater type</label>
         <select id="oHeater" class="placeholder"></select>
@@ -524,35 +664,41 @@ button.act:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
     </div>
   </div>
 
-  <div class="block" id="grpStruct">
-    <h2>Structural additions</h2>
-    <div class="block-body" id="structList"></div>
+  <div class="card" id="grpStruct">
+    <h2><span class="ttl"><span class="num">6</span>Structural Additions</span></h2>
+    <div class="card-body" id="structList"></div>
   </div>
 
-  <div class="block" id="grpUpgrade">
-    <h2>Upgrades &amp; extras</h2>
-    <div class="block-body" id="upgradeList"></div>
+  <div class="card" id="grpUpgrade">
+    <h2><span class="ttl"><span class="num">7</span>Upgrades &amp; Extras</span></h2>
+    <div class="card-body" id="upgradeList"></div>
   </div>
 
-  <div class="block">
-    <h2>Decking &amp; groundwork <span class="noncom">Groundwork non-comm.</span></h2>
-    <div class="block-body">
+  <div class="card">
+    <h2>
+      <span class="ttl"><span class="num">8</span>Decking &amp; Groundwork</span>
+      <span class="tag-nc">Groundwork non-comm.</span>
+    </h2>
+    <div class="card-body">
       <div class="field">
-        <label for="oDeckSqm">Standard decking (sqm) — commissionable</label>
+        <label for="oDeckSqm">Standard decking — sqm (commissionable)</label>
         <input type="number" id="oDeckSqm" class="placeholder" min="0" step="0.5" value="0">
       </div>
       <div id="groundList"></div>
     </div>
   </div>
 
-  <div class="block">
-    <h2>Delivery &amp; install <span class="noncom">Non-commissionable</span></h2>
-    <div class="block-body" id="logiList"></div>
+  <div class="card">
+    <h2>
+      <span class="ttl"><span class="num">9</span>Delivery &amp; Install</span>
+      <span class="tag-nc">Non-commissionable</span>
+    </h2>
+    <div class="card-body" id="logiList"></div>
   </div>
 
-  <div class="block">
-    <h2>Adjustments</h2>
-    <div class="block-body">
+  <div class="card">
+    <h2><span class="ttl"><span class="num">10</span>Adjustments &amp; Notes</span></h2>
+    <div class="card-body">
       <div class="row">
         <div class="field">
           <label for="adjLabel">Line label</label>
@@ -565,7 +711,7 @@ button.act:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
       </div>
       <div class="field">
         <label for="cNotes">Notes for the customer</label>
-        <textarea id="cNotes" data-est placeholder="Anything agreed on the call…"></textarea>
+        <textarea id="cNotes" placeholder="Anything agreed on the call…"></textarea>
       </div>
     </div>
   </div>
@@ -573,44 +719,58 @@ button.act:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
 </div>
 
 <!-- ==================== ESTIMATE ==================== -->
-<div class="pane-estimate" id="estimatePane">
+<div class="pane-estimate">
+  <div class="est">
+    <div class="est-scroll">
 
-  <div class="est-brand">
-    <div class="logo">Barrel Sauna UK</div>
-    <div class="tag">Itemised Estimate</div>
-  </div>
+      <div class="est-head">
+        <div class="logo">Barrel Sauna UK</div>
+        <div class="kind">Itemised Estimate</div>
+      </div>
 
-  <div class="est-meta" id="estMeta"></div>
+      <div class="est-meta" id="estMeta"></div>
+      <div id="estBody"></div>
 
-  <div id="estBody"></div>
+      <div class="est-sum">
+        <div class="li">
+          <div class="l">Build &amp; options</div>
+          <div class="v" id="sumBuild">£0</div>
+        </div>
+        <div class="li">
+          <div class="l">Delivery, install &amp; groundwork<em>Operational cost, not a profit centre</em></div>
+          <div class="v" id="sumLogi">£0</div>
+        </div>
+        <div class="li" id="sumAdjRow" style="display:none">
+          <div class="l" id="sumAdjLabel">Adjustment</div>
+          <div class="v" id="sumAdj">£0</div>
+        </div>
+        <div class="li">
+          <div class="l">VAT <span id="vatRateLbl">(20%)</span></div>
+          <div class="v" id="sumVat">£0</div>
+        </div>
 
-  <div class="est-sum">
-    <div class="li"><div class="l">Subtotal — build &amp; options</div><div class="v" id="sumBuild">£0</div></div>
-    <div class="li"><div class="l">Subtotal — delivery, install &amp; groundwork<em>Operational cost, not a profit centre</em></div><div class="v" id="sumLogi">£0</div></div>
-    <div class="li" id="sumAdjRow" style="display:none"><div class="l" id="sumAdjLabel">Adjustment</div><div class="v" id="sumAdj">£0</div></div>
-    <div class="li"><div class="l">VAT <span id="vatRateLbl">(20%)</span></div><div class="v" id="sumVat">£0</div></div>
+        <div class="grand">
+          <div class="lbl">Total<br>inc. VAT</div>
+          <div class="amt" id="sumGrand">£0</div>
+        </div>
 
-    <div class="grand">
-      <div class="lbl">Total<br>inc. VAT</div>
-      <div class="amt" id="sumGrand">£0</div>
+        <div class="dep">
+          <div class="hd" id="depHd"></div>
+          <span id="depBody"></span>
+        </div>
+      </div>
+
     </div>
 
-    <div class="dep-box">
-      <strong>To secure your place in the queue</strong>
-      A £500 deposit reserves your build slot in the production queue. It comes off your total, so the balance due is
-      <strong style="display:inline;font-size:13px;letter-spacing:0" id="depBalance">£0</strong>.
-      The final specification can still be adjusted at invoice stage — materials are only ordered once the final invoice is paid.
+    <div class="acts">
+      <button class="act primary" id="btnWa">Copy for WhatsApp</button>
+      <button class="act" id="btnPrint">Save as PDF</button>
+      <button class="act" id="btnGhl">Copy for GHL</button>
+      <button class="act quiet" id="btnReset">Clear and start again</button>
     </div>
   </div>
-
-  <div class="actions">
-    <button class="act" id="btnPrint">Save as PDF</button>
-    <button class="act alt" id="btnWa">Copy for WhatsApp</button>
-    <button class="act alt" id="btnGhl">Copy for GHL notes</button>
-    <button class="act alt" id="btnReset">Clear and start again</button>
-  </div>
-
 </div>
+
 </div>
 
 <div class="toast" id="toast"></div>
@@ -624,9 +784,8 @@ button.act:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
    nc:true  = non-commissionable line.
    ============================================================ */
 
-const VAT = 0.20;              /* CONFIRM — are prices quoted ex-VAT? */
-const DEPOSIT = 500;
-const PRICES_ARE_EX_VAT = true; /* CONFIRM */
+const VAT = 0.20;               /* CONFIRM */
+const PRICES_ARE_EX_VAT = true; /* CONFIRM — are brochure prices ex or inc VAT? */
 
 const PRICING = {
 
@@ -636,12 +795,12 @@ const PRICING = {
       baseLabel:'Sauna length',
       groups:['timber','layout','heater','struct','upgrade'],
       base:[
-        {id:'s-2m',  name:'2.0m barrel',        price:6500,  ph:true},  /* CONFIRM */
-        {id:'s-2_4m',name:'2.4m barrel',        price:7500,  ph:true},  /* CONFIRM */
-        {id:'s-3m',  name:'3.0m barrel',        price:8900,  ph:true},  /* CONFIRM */
-        {id:'s-3_6m',name:'3.6m barrel',        price:10500, ph:true},  /* CONFIRM */
-        {id:'s-4_2m',name:'4.2m barrel',        price:12000, ph:true},  /* CONFIRM */
-        {id:'s-4_8m',name:'4.8m barrel',        price:13800, ph:true}   /* CONFIRM */
+        {id:'s-2m',  name:'2.0m barrel', price:6500,  ph:true},  /* CONFIRM */
+        {id:'s-2_4m',name:'2.4m barrel', price:7500,  ph:true},  /* CONFIRM */
+        {id:'s-3m',  name:'3.0m barrel', price:8900,  ph:true},  /* CONFIRM */
+        {id:'s-3_6m',name:'3.6m barrel', price:10500, ph:true},  /* CONFIRM */
+        {id:'s-4_2m',name:'4.2m barrel', price:12000, ph:true},  /* CONFIRM */
+        {id:'s-4_8m',name:'4.8m barrel', price:13800, ph:true}   /* CONFIRM */
       ]
     },
     hottub:{
@@ -649,9 +808,9 @@ const PRICING = {
       baseLabel:'Tub size',
       groups:['timber','upgrade'],
       base:[
-        {id:'h-4',name:'4 person',  price:5500, ph:true},  /* CONFIRM */
-        {id:'h-6',name:'6 person',  price:6800, ph:true},  /* CONFIRM */
-        {id:'h-8',name:'8 person',  price:8200, ph:true}   /* CONFIRM */
+        {id:'h-4',name:'4 person', price:5500, ph:true},  /* CONFIRM */
+        {id:'h-6',name:'6 person', price:6800, ph:true},  /* CONFIRM */
+        {id:'h-8',name:'8 person', price:8200, ph:true}   /* CONFIRM */
       ]
     },
     icebath:{
@@ -659,8 +818,8 @@ const PRICING = {
       baseLabel:'Model',
       groups:['timber','upgrade'],
       base:[
-        {id:'i-solo',name:'Single',      price:2800, ph:true}, /* CONFIRM */
-        {id:'i-duo', name:'Two person',  price:3900, ph:true}  /* CONFIRM */
+        {id:'i-solo',name:'Single',     price:2800, ph:true}, /* CONFIRM */
+        {id:'i-duo', name:'Two person', price:3900, ph:true}  /* CONFIRM */
       ]
     },
     trailer:{
@@ -668,8 +827,8 @@ const PRICING = {
       baseLabel:'Trailer build',
       groups:['timber','layout','heater','upgrade'],
       base:[
-        {id:'t-std', name:'Standard trailer',  price:18000, ph:true}, /* CONFIRM */
-        {id:'t-prem',name:'Premium trailer',   price:24000, ph:true}  /* CONFIRM */
+        {id:'t-std', name:'Standard trailer', price:18000, ph:true}, /* CONFIRM */
+        {id:'t-prem',name:'Premium trailer',  price:24000, ph:true}  /* CONFIRM */
       ]
     },
     hut:{
@@ -677,8 +836,8 @@ const PRICING = {
       baseLabel:'Hut size',
       groups:['timber','layout','struct','upgrade'],
       base:[
-        {id:'sh-std', name:'Standard hut',                price:26000, ph:true}, /* CONFIRM */
-        {id:'sh-5924',name:"5900 × 2400mm hut",           price:32000, ph:true}  /* CONFIRM */
+        {id:'sh-std', name:'Standard hut',      price:26000, ph:true}, /* CONFIRM */
+        {id:'sh-5924',name:'5900 × 2400mm hut', price:32000, ph:true}  /* CONFIRM */
       ]
     },
     glamping:{
@@ -692,75 +851,75 @@ const PRICING = {
   },
 
   timber:[
-    {id:'tm-spruce',  name:'Nordic spruce (standard)', price:0,    ph:false},
-    {id:'tm-thermo',  name:'Thermowood',               price:1200, ph:true}, /* CONFIRM */
-    {id:'tm-cedar',   name:'Western red cedar',        price:2400, ph:true}  /* CONFIRM */
+    {id:'tm-spruce', name:'Nordic spruce (standard)', price:0,    ph:false},
+    {id:'tm-thermo', name:'Thermowood',               price:1200, ph:true}, /* CONFIRM */
+    {id:'tm-cedar',  name:'Western red cedar',        price:2400, ph:true}  /* CONFIRM */
   ],
 
   finish:[
-    {id:'fn-natural', name:'Natural / untreated', price:0,   ph:false},
-    {id:'fn-oiled',   name:'Oiled',               price:350, ph:true},  /* CONFIRM */
-    {id:'fn-charred', name:'Charred (shou sugi ban)', price:900, ph:true} /* CONFIRM */
+    {id:'fn-natural', name:'Natural / untreated',     price:0,   ph:false},
+    {id:'fn-oiled',   name:'Oiled',                   price:350, ph:true}, /* CONFIRM */
+    {id:'fn-charred', name:'Charred (shou sugi ban)', price:900, ph:true}  /* CONFIRM */
   ],
 
   entrance:[
     {id:'en-front', name:'Front entrance (standard)', price:0,   ph:false},
-    {id:'en-side',  name:'Side entrance',             price:450, ph:true},  /* CONFIRM */
-    {id:'en-corner',name:'Corner entrance',           price:650, ph:true}   /* CONFIRM */
+    {id:'en-side',  name:'Side entrance',             price:450, ph:true}, /* CONFIRM */
+    {id:'en-corner',name:'Corner entrance',           price:650, ph:true}  /* CONFIRM */
   ],
 
   glazing:[
-    {id:'gl-half',  name:'Half-glass door',        price:0,    ph:false},
-    {id:'gl-full',  name:'Full-glass door',        price:600,  ph:true},  /* CONFIRM */
-    {id:'gl-rear',  name:'Full-glass door + rear panoramic window', price:1800, ph:true}, /* CONFIRM */
-    {id:'gl-pano',  name:'Full panoramic rear wall', price:2900, ph:true}  /* CONFIRM */
+    {id:'gl-half', name:'Half-glass door',          price:0,    ph:false},
+    {id:'gl-full', name:'Full-glass door',          price:600,  ph:true}, /* CONFIRM */
+    {id:'gl-rear', name:'Full-glass door + rear panoramic window', price:1800, ph:true}, /* CONFIRM */
+    {id:'gl-pano', name:'Full panoramic rear wall', price:2900, ph:true}  /* CONFIRM */
   ],
 
   bench:[
-    {id:'bn-2t', name:'Two-tier benching (standard)', price:0,   ph:false},
-    {id:'bn-l',  name:'L-shaped benching',            price:550, ph:true}, /* CONFIRM */
-    {id:'bn-cust',name:'Bespoke bench layout',        price:950, ph:true}  /* CONFIRM */
+    {id:'bn-2t',  name:'Two-tier benching (standard)', price:0,   ph:false},
+    {id:'bn-l',   name:'L-shaped benching',            price:550, ph:true}, /* CONFIRM */
+    {id:'bn-cust',name:'Bespoke bench layout',         price:950, ph:true}  /* CONFIRM */
   ],
 
   heater:[
-    {id:'ht-elec6', name:'Electric heater 6kW',      price:900,  ph:true}, /* CONFIRM */
-    {id:'ht-elec9', name:'Electric heater 9kW',      price:1150, ph:true}, /* CONFIRM */
-    {id:'ht-wood',  name:'Wood-burning stove',       price:1400, ph:true}, /* CONFIRM */
-    {id:'ht-woodx', name:'Wood-burning stove — external feed', price:1750, ph:true}, /* CONFIRM */
-    {id:'ht-harv',  name:'Harvia premium electric',  price:2200, ph:true}  /* CONFIRM */
+    {id:'ht-elec6',name:'Electric heater 6kW',       price:900,  ph:true}, /* CONFIRM */
+    {id:'ht-elec9',name:'Electric heater 9kW',       price:1150, ph:true}, /* CONFIRM */
+    {id:'ht-wood', name:'Wood-burning stove',        price:1400, ph:true}, /* CONFIRM */
+    {id:'ht-woodx',name:'Wood-burning stove — external feed', price:1750, ph:true}, /* CONFIRM */
+    {id:'ht-harv', name:'Harvia premium electric',   price:2200, ph:true}  /* CONFIRM */
   ],
 
   struct:[
-    {id:'st-porch',   name:'Front porch',                 price:1600, ph:true, qty:false}, /* CONFIRM */
-    {id:'st-change',  name:'Changing room section',       price:2400, ph:true, qty:false}, /* CONFIRM */
-    {id:'st-canopy',  name:'Extended canopy / overhang',  price:900,  ph:true, qty:false}, /* CONFIRM */
-    {id:'st-shingle', name:'Cedar shingle roof',          price:1500, ph:true, qty:false}  /* CONFIRM */
+    {id:'st-porch',  name:'Front porch',                price:1600, ph:true}, /* CONFIRM */
+    {id:'st-change', name:'Changing room section',      price:2400, ph:true}, /* CONFIRM */
+    {id:'st-canopy', name:'Extended canopy / overhang', price:900,  ph:true}, /* CONFIRM */
+    {id:'st-shingle',name:'Cedar shingle roof',         price:1500, ph:true}  /* CONFIRM */
   ],
 
   upgrade:[
-    {id:'up-led',    name:'LED mood lighting',            price:350,  ph:true, qty:false}, /* CONFIRM */
-    {id:'up-sound',  name:'Bluetooth sound system',       price:450,  ph:true, qty:false}, /* CONFIRM */
-    {id:'up-backrest',name:'Ergonomic backrests',         price:250,  ph:true, qty:false}, /* CONFIRM */
-    {id:'up-bucket', name:'Bucket, ladle & thermometer set', price:120, ph:true, qty:false}, /* CONFIRM */
-    {id:'up-stones', name:'Premium sauna stones',         price:90,   ph:true, qty:false}, /* CONFIRM */
-    {id:'up-cover',  name:'Weather cover',                price:280,  ph:true, qty:false}, /* CONFIRM */
-    {id:'up-step',   name:'Entry step / threshold',       price:180,  ph:true, qty:false}  /* CONFIRM */
+    {id:'up-led',     name:'LED mood lighting',               price:350, ph:true}, /* CONFIRM */
+    {id:'up-sound',   name:'Bluetooth sound system',          price:450, ph:true}, /* CONFIRM */
+    {id:'up-backrest',name:'Ergonomic backrests',             price:250, ph:true}, /* CONFIRM */
+    {id:'up-bucket',  name:'Bucket, ladle & thermometer set', price:120, ph:true}, /* CONFIRM */
+    {id:'up-stones',  name:'Premium sauna stones',            price:90,  ph:true}, /* CONFIRM */
+    {id:'up-cover',   name:'Weather cover',                   price:280, ph:true}, /* CONFIRM */
+    {id:'up-step',    name:'Entry step / threshold',          price:180, ph:true}  /* CONFIRM */
   ],
 
   deckPerSqm:{price:120, ph:true},   /* CONFIRM — commissionable */
 
   ground:[
-    {id:'gr-excav',   name:'Excavation',            price:0, ph:true, nc:true, qty:false, custom:true}, /* CONFIRM — quoted per job */
-    {id:'gr-machine', name:'Machinery hire',        price:0, ph:true, nc:true, qty:false, custom:true}, /* CONFIRM — quoted per job */
-    {id:'gr-special', name:'Specialist groundwork', price:0, ph:true, nc:true, qty:false, custom:true}  /* CONFIRM — quoted per job */
+    {id:'gr-excav',   name:'Excavation',            price:0, ph:true, nc:true, custom:true}, /* CONFIRM — per job */
+    {id:'gr-machine', name:'Machinery hire',        price:0, ph:true, nc:true, custom:true}, /* CONFIRM — per job */
+    {id:'gr-special', name:'Specialist groundwork', price:0, ph:true, nc:true, custom:true}  /* CONFIRM — per job */
   ],
 
   logi:[
-    {id:'lg-del',    name:'Delivery & offload',      price:750,  ph:true, nc:true, qty:false}, /* CONFIRM */
-    {id:'lg-install',name:'Installation labour',     price:1200, ph:true, nc:true, qty:false}, /* CONFIRM */
-    {id:'lg-crane',  name:'Crane / HIAB offload',    price:600,  ph:true, nc:true, qty:false}, /* CONFIRM */
-    {id:'lg-accom',  name:'Accommodation & travel',  price:0,    ph:true, nc:true, qty:false, custom:true}, /* CONFIRM — per job */
-    {id:'lg-elec',   name:'Electrical connection',   price:450,  ph:true, nc:true, qty:false}  /* CONFIRM */
+    {id:'lg-del',    name:'Delivery & offload',     price:750,  ph:true, nc:true}, /* CONFIRM */
+    {id:'lg-install',name:'Installation labour',    price:1200, ph:true, nc:true}, /* CONFIRM */
+    {id:'lg-crane',  name:'Crane / HIAB offload',   price:600,  ph:true, nc:true}, /* CONFIRM */
+    {id:'lg-accom',  name:'Accommodation & travel', price:0,    ph:true, nc:true, custom:true}, /* CONFIRM — per job */
+    {id:'lg-elec',   name:'Electrical connection',  price:450,  ph:true, nc:true}  /* CONFIRM */
   ]
 
 };
@@ -770,8 +929,9 @@ const PRICING = {
 const $=id=>document.getElementById(id);
 const money=n=>'£'+Math.round(n).toLocaleString('en-GB');
 const state={ticks:{},custom:{}};
+let lastTotal=0;
 
-/* ---------- BUILD THE FORM ---------- */
+/* ---------- BUILD FORM ---------- */
 
 function fillSelect(el,arr,showPrice){
   el.innerHTML='';
@@ -780,7 +940,7 @@ function fillSelect(el,arr,showPrice){
     const op=document.createElement('option');
     op.value=o.id;
     let t=o.name;
-    if(showPrice) t+= o.price>0 ? ' — +'+money(o.price)+(o.ph?' (TBC)':'') : ' — included';
+    if(showPrice) t+= o.price>0 ? '  ·  +'+money(o.price)+(o.ph?' TBC':'') : '  ·  included';
     op.textContent=t;
     if(o.ph&&o.price>0) anyPh=true;
     el.appendChild(op);
@@ -791,27 +951,32 @@ function fillSelect(el,arr,showPrice){
 function tickRow(o,listId){
   const row=document.createElement('label');
   row.className='tog';
+
   const cb=document.createElement('input');
-  cb.type='checkbox'; cb.dataset.id=o.id; cb.dataset.list=listId;
+  cb.type='checkbox';
+
   const nm=document.createElement('span');
-  nm.className='name'; nm.textContent=o.name+(o.nc?' — non-comm.':'');
+  nm.className='name';
+  nm.textContent=o.name;
+
   const pr=document.createElement('span');
   pr.className='price'+(o.ph?' ph':'');
 
   if(o.custom){
     const inp=document.createElement('input');
-    inp.type='number'; inp.className='qty placeholder'; inp.style.width='84px';
-    inp.min=0; inp.step=50; inp.value=0; inp.placeholder='£';
-    inp.dataset.custom=o.id;
+    inp.type='number';
+    inp.className='placeholder';
+    inp.min=0; inp.step=50; inp.value=''; inp.placeholder='£  —';
     inp.addEventListener('input',e=>{
       state.custom[o.id]=parseFloat(e.target.value)||0;
-      if(state.custom[o.id]>0) cb.checked=true;
+      cb.checked = state.custom[o.id]>0;
+      state.ticks[o.id]=cb.checked;
       render();
     });
     inp.addEventListener('click',e=>e.preventDefault());
     pr.appendChild(inp);
   }else{
-    pr.textContent=money(o.price)+(o.ph?' (TBC)':'');
+    pr.textContent=money(o.price)+(o.ph?' TBC':'');
   }
 
   cb.addEventListener('change',e=>{
@@ -845,9 +1010,9 @@ function applyLine(){
   const line=PRICING.lines[$('pLine').value];
   $('baseLabel').textContent=line.baseLabel;
   fillSelect($('pBase'),line.base,false);
-  ['timber','layout','heater','struct','upgrade'].forEach(g=>{
-    const el=$('grp'+g.charAt(0).toUpperCase()+g.slice(1));
-    if(el) el.style.display=line.groups.includes(g)?'':'none';
+  [['timber','grpTimber'],['layout','grpLayout'],['heater','grpHeater'],
+   ['struct','grpStruct'],['upgrade','grpUpgrade']].forEach(([g,el])=>{
+    $(el).style.display=line.groups.includes(g)?'':'none';
   });
   render();
 }
@@ -866,7 +1031,7 @@ function init(){
 
 /* ---------- CALCULATE ---------- */
 
-function pick(arr,id){return arr.find(o=>o.id===id)}
+const pick=(arr,id)=>arr.find(o=>o.id===id);
 
 function collect(){
   const line=PRICING.lines[$('pLine').value];
@@ -876,8 +1041,8 @@ function collect(){
   if(base) build.push({name:line.label+' — '+base.name,price:base.price,ph:base.ph});
 
   const g=line.groups;
-  const add=(cond,arr,selId)=>{
-    if(!cond) return;
+  const add=(on,arr,selId)=>{
+    if(!on) return;
     const o=pick(arr,$(selId).value);
     if(o && o.price>0) build.push({name:o.name,price:o.price,ph:o.ph});
   };
@@ -896,15 +1061,10 @@ function collect(){
   const sqm=parseFloat($('oDeckSqm').value)||0;
   if(sqm>0){
     const d=PRICING.deckPerSqm;
-    build.push({name:'Decking — '+sqm+' sqm @ '+money(d.price)+'/sqm',price:sqm*d.price,ph:d.ph});
+    build.push({name:'Decking — '+sqm+' sqm at '+money(d.price)+'/sqm',price:sqm*d.price,ph:d.ph});
   }
 
-  PRICING.ground.forEach(o=>{
-    if(!state.ticks[o.id]) return;
-    const p=o.custom?(state.custom[o.id]||0):o.price;
-    logi.push({name:o.name,price:p,ph:o.ph});
-  });
-  PRICING.logi.forEach(o=>{
+  [...PRICING.ground,...PRICING.logi].forEach(o=>{
     if(!state.ticks[o.id]) return;
     const p=o.custom?(state.custom[o.id]||0):o.price;
     logi.push({name:o.name,price:p,ph:o.ph});
@@ -919,16 +1079,16 @@ function collect(){
   const vat=PRICES_ARE_EX_VAT ? net*VAT : 0;
   const grand=net+vat;
 
-  return {build,logi,adj,adjLabel,bSub,lSub,net,vat,grand,
-          balance:Math.max(0,grand-DEPOSIT)};
+  return {build,logi,adj,adjLabel,bSub,lSub,vat,grand,
+          balance:Math.max(0,grand-BSUK_DEPOSIT.amount)};
 }
 
 /* ---------- RENDER ---------- */
 
-function liHtml(i){
-  return '<div class="li"><div class="l">'+i.name+'</div>'+
-         '<div class="v'+(i.ph?' ph':'')+'">'+money(i.price)+'</div></div>';
-}
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+
+const liHtml=i=>'<div class="li"><div class="l">'+esc(i.name)+'</div>'+
+  '<div class="v'+(i.ph?' ph':'')+'">'+money(i.price)+'</div></div>';
 
 function render(){
   const d=collect();
@@ -940,15 +1100,17 @@ function render(){
   const cl=$('cCloser').value;
   const dt=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
   const ref='BSUK-'+new Date().toISOString().slice(2,10).replace(/-/g,'')+'-'+
-            (nm?nm.replace(/[^A-Za-z]/g,'').slice(0,3).toUpperCase():'XXX');
+            (nm?nm.replace(/[^A-Za-z]/g,'').slice(0,3).toUpperCase().padEnd(3,'X'):'XXX');
 
   $('estMeta').innerHTML=
-    '<strong>'+(nm||'Customer name')+'</strong><br>'+
-    (em?em+'<br>':'')+(ph?ph+'<br>':'')+(pc?'Delivery: '+pc+'<br>':'')+
-    'Prepared by '+cl+' · '+dt+'<br>Ref '+ref+' · Valid 30 days';
+    '<span class="who">'+esc(nm||'Customer name')+'</span>'+
+    (em?esc(em)+'<br>':'')+
+    (ph?esc(ph)+'<br>':'')+
+    (pc?'Delivery to '+esc(pc)+'<br>':'')+
+    'Prepared by '+cl+' &middot; '+dt+'<br>'+
+    'Ref '+ref+' &middot; Valid 30 days';
 
-  let html='';
-  html+='<div class="est-sect">Your build</div>';
+  let html='<div class="est-sect">Your build</div>';
   html+= d.build.length ? d.build.map(liHtml).join('')
        : '<div class="empty">Nothing selected yet.</div>';
 
@@ -960,8 +1122,7 @@ function render(){
   const notes=$('cNotes').value.trim();
   if(notes){
     html+='<div class="est-sect">Notes</div>';
-    html+='<div style="font-size:13px;padding:4px 0;white-space:pre-wrap">'+
-          notes.replace(/</g,'&lt;')+'</div>';
+    html+='<div style="font-size:13px;padding:8px 0;white-space:pre-wrap;line-height:1.55">'+esc(notes)+'</div>';
   }
 
   $('estBody').innerHTML=html;
@@ -971,8 +1132,18 @@ function render(){
   $('sumVat').textContent=money(d.vat);
   $('vatRateLbl').textContent=PRICES_ARE_EX_VAT?'(20%)':'(included)';
   $('sumGrand').textContent=money(d.grand);
-  $('hdrTotal').textContent=money(d.grand);
-  $('depBalance').textContent=money(d.balance);
+
+  /* Deposit wording comes from deposit-copy.js — never typed here */
+  $('depHd').textContent=BSUK_DEPOSIT.heading;
+  $('depBody').innerHTML=esc(BSUK_DEPOSIT.body)
+    .replace('{balance}','<b>'+money(d.balance)+'</b>');
+
+  const h=$('hdrTotal');
+  h.textContent=money(d.grand);
+  if(Math.round(d.grand)!==lastTotal){
+    h.classList.remove('pulse'); void h.offsetWidth; h.classList.add('pulse');
+    lastTotal=Math.round(d.grand);
+  }
 
   if(d.adj!==0){
     $('sumAdjRow').style.display='';
@@ -992,19 +1163,17 @@ function toast(m){
   const t=$('toast');
   t.textContent=m; t.classList.add('on');
   clearTimeout(t._x);
-  t._x=setTimeout(()=>t.classList.remove('on'),1800);
+  t._x=setTimeout(()=>t.classList.remove('on'),1900);
 }
 
 function copy(txt,msg){
-  navigator.clipboard.writeText(txt)
-    .then(()=>toast(msg))
-    .catch(()=>{
-      const ta=document.createElement('textarea');
-      ta.value=txt; ta.style.position='fixed'; ta.style.opacity=0;
-      document.body.appendChild(ta); ta.select();
-      document.execCommand('copy'); ta.remove();
-      toast(msg);
-    });
+  navigator.clipboard.writeText(txt).then(()=>toast(msg)).catch(()=>{
+    const ta=document.createElement('textarea');
+    ta.value=txt; ta.style.position='fixed'; ta.style.opacity=0;
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); ta.remove();
+    toast(msg);
+  });
 }
 
 function waText(){
@@ -1022,16 +1191,25 @@ function waText(){
     L.push('*DELIVERY, INSTALL & GROUNDWORK*');
     d.logi.forEach(i=>L.push('• '+i.name+' — '+money(i.price)));
   }
-  if(d.adj!==0) L.push('\n'+d.adjLabel+': '+(d.adj<0?'−':'')+money(Math.abs(d.adj)));
+  if(d.adj!==0){
+    L.push('');
+    L.push(d.adjLabel+': '+(d.adj<0?'−':'')+money(Math.abs(d.adj)));
+  }
   L.push('');
   if(PRICES_ARE_EX_VAT) L.push('VAT (20%): '+money(d.vat));
   L.push('*TOTAL INC. VAT: '+money(d.grand)+'*');
   L.push('');
-  L.push('*Securing your slot*');
-  L.push('A £500 deposit reserves your place in the production queue. It comes off your total, so the balance would be '+money(d.balance)+'.');
-  L.push('The spec can still be adjusted at invoice stage — materials are only ordered once the final invoice is paid.');
+
+  /* Deposit wording comes from deposit-copy.js */
+  L.push('*'+BSUK_DEPOSIT.waHeading+'*');
+  L.push(BSUK_DEPOSIT.waBody.replace('{balance}',money(d.balance)));
+  if(BSUK_DEPOSIT.payLink){
+    L.push('');
+    L.push('Pay your deposit here: '+BSUK_DEPOSIT.payLink);
+  }
+
   const n=$('cNotes').value.trim();
-  if(n) L.push('\n*Notes*\n'+n);
+  if(n){L.push('');L.push('*Notes*');L.push(n)}
   L.push('');
   L.push('Valid 30 days. Any questions, just reply here.');
   return L.join('\n');
@@ -1055,13 +1233,13 @@ function ghlText(){
   L.push('');
   L.push('Build subtotal (commissionable): '+money(d.bSub));
   L.push('Logistics subtotal (non-comm):   '+money(d.lSub));
-  if(d.adj!==0) L.push('Adjustment ('+d.adjLabel+'):     '+money(d.adj));
-  L.push('VAT:                              '+money(d.vat));
-  L.push('TOTAL INC VAT:                    '+money(d.grand));
-  L.push('Deposit:                          '+money(DEPOSIT));
-  L.push('Balance after deposit:            '+money(d.balance));
+  if(d.adj!==0) L.push('Adjustment ('+d.adjLabel+'): '+money(d.adj));
+  L.push('VAT:                             '+money(d.vat));
+  L.push('TOTAL INC VAT:                   '+money(d.grand));
+  L.push('Deposit:                         '+money(BSUK_DEPOSIT.amount));
+  L.push('Balance after deposit:           '+money(d.balance));
   const n=$('cNotes').value.trim();
-  if(n) L.push('\nNOTES: '+n);
+  if(n){L.push('');L.push('NOTES: '+n)}
   return L.join('\n');
 }
 
@@ -1079,11 +1257,14 @@ $('btnReset').addEventListener('click',()=>{
   if(!confirm('Clear everything and start again?')) return;
   document.querySelectorAll('.pane-config input[type=text],.pane-config input[type=email],.pane-config textarea')
     .forEach(i=>i.value='');
-  document.querySelectorAll('.pane-config input[type=number]').forEach(i=>i.value=0);
+  document.querySelectorAll('.pane-config input[type=number]').forEach(i=>{
+    i.value = (i.id==='oDeckSqm'||i.id==='adjAmount') ? 0 : '';
+  });
   document.querySelectorAll('.pane-config input[type=checkbox]').forEach(i=>i.checked=false);
   document.querySelectorAll('.pane-config select').forEach(s=>s.selectedIndex=0);
   state.ticks={}; state.custom={};
   applyLine();
+  window.scrollTo({top:0,behavior:'smooth'});
 });
 
 init();
