@@ -3,28 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BSUK — Closer Scripts</title>
+<title>BSUK — The Closer's Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --green:#2B5336;
-    --green-deep:#22422b;
-    --sage:#f1f2ec;
-    --terracotta:#A0522D;
-    --winered:#8A1A2C;
-    --winered-bg:rgba(138,26,44,0.05);
+    /* ---- CORE PALETTE ---- */
+    --green:#2B5336;        /* forest */
+    --green-deep:#1f3927;   /* hero vignette deep */
+    --green-l:#35633F;
+    --sage:#50795F;         /* sage — mid-green */
+    --sage-l:#A8C4A0;
+    --bone:#F1F2EC;         /* bone — page background */
+    --bone-warm:#EFEDE4;    /* faintly warmer inset */
+
+    /* ---- CHARCOAL ANCHOR (sauna-roof black) ---- */
+    --char:#1C1B19;         /* charcoal — the backbone / anchor */
+    --char-l:#2a2825;       /* lifted charcoal for gradients */
+    --char-line:rgba(28,27,25,0.10);
+
+    /* ---- WARM WOOD ACCENTS (the mix) ---- */
+    --honey:#C08B41;        /* honey / terracotta — primary bright accent */
+    --honey-d:#b07d38;
+    --thermo:#96502B;       /* thermowood brown — deep micro-accent */
+    --thermo-l:#a95f36;
+
+    /* ---- REDS ---- */
+    --flag:#DB2C3D;         /* Welsh flag red — ONE tiny pop only */
+    --maroon:#5E1F28;       /* deep dusty maroon — Deposit Gate signature */
+    --maroon-bg:rgba(94,31,40,0.05);
+
     --send:#3B6E8F;
     --send-bg:#eef4f7;
     --ink:#33352f;
     --muted:#6a6f64;
     --line:#dcdfd4;
+    --line-s:#EDEFE8;
+
+    /* legacy alias so existing panel markup keeps working */
+    --terracotta:var(--honey);
+    --terracotta-d:var(--honey-d);
+    --winered:var(--maroon);
+    --winered-bg:var(--maroon-bg);
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    background:var(--sage);
+    background:var(--bone);
     color:var(--ink);
     font-family:"Raleway",Helvetica,Arial,sans-serif;
     font-weight:400;
@@ -32,348 +58,385 @@
     -webkit-font-smoothing:antialiased;
     padding:0 0 100px;
   }
-  header{
-    background:var(--green);
-    color:var(--sage);
-    padding:56px 24px 48px;
-    text-align:center;
+
+  /* ============ HERO (matches proposal styling) ============ */
+  .hero{
     position:relative;
-    box-shadow:0 2px 12px rgba(0,0,0,0.12);
+    background:var(--green);
+    background-image:
+      radial-gradient(120% 140% at 88% 65%, var(--green-deep) 0%, rgba(31,57,39,0) 55%),
+      linear-gradient(105deg, var(--green-l) 0%, var(--green) 42%, var(--green-deep) 100%);
+    color:#fff;
+    overflow:hidden;
+    padding:76px 40px 40px;
   }
-  header h1{
-    font-weight:800;
-    font-size:34px;
-    letter-spacing:0.5px;
-    margin-bottom:10px;
-  }
-  header p{
-    font-size:12.5px;
-    font-weight:500;
-    opacity:0.82;
-    letter-spacing:2px;
-    text-transform:uppercase;
-  }
-  .wrap{
-    max-width:920px;
-    margin:0 auto;
-    padding:40px 24px 0;
-  }
-  .card{
-    background:#fff;
-    border-radius:16px;
-    padding:48px 52px 50px;
-    margin-bottom:32px;
-    box-shadow:0 1px 3px rgba(0,0,0,0.06);
-    border:1px solid var(--line);
-  }
-  .num{
+  /* vertical stripes removed — clean green field, type carries the hero */
+  .hero-inner{max-width:920px;margin:0 auto;position:relative;z-index:2;}
+  .hero-eyebrow{
     display:inline-block;
-    font-style:italic;
-    font-weight:500;
-    font-size:15px;
-    letter-spacing:0.5px;
-    color:var(--terracotta);
-    margin-bottom:12px;
-  }
-  .card h2{
+    border:1px solid rgba(192,139,65,0.55);
+    color:var(--honey);
+    font-size:12.5px;
     font-weight:700;
-    font-size:28px;
-    color:var(--green);
-    margin-bottom:32px;
-    line-height:1.35;
-    letter-spacing:0.2px;
-  }
-  .label{
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:1.5px;
+    letter-spacing:3px;
     text-transform:uppercase;
-    color:var(--terracotta);
-    display:block;
-    margin:0 0 14px;
+    padding:11px 20px;
+    margin-bottom:34px;
+    border-radius:2px;
   }
-  .say{
-    font-size:16.5px;
+  .hero h1{
+    font-weight:800;
+    font-size:74px;
+    line-height:0.98;
+    letter-spacing:-1.5px;
+    margin-bottom:22px;
+  }
+  .hero h1 .accent{color:var(--honey);}
+  .hero .hero-sub{
+    font-size:17px;
     font-weight:400;
-    color:var(--ink);
-    margin-bottom:32px;
+    line-height:1.6;
+    max-width:560px;
+    color:rgba(255,255,255,0.82);
+    margin-bottom:8px;
   }
+  .hero .hero-sub strong{color:#fff;font-weight:700;}
+
+  /* hero rule: clean honey line, no red */
+  .hero-rule{height:3px;width:100%;background:var(--honey);opacity:0.9;}
+
+  /* ============ TAB BAR — deep green, flows out of hero ============ */
+  .tab-wrap{background:var(--green-deep);position:sticky;top:0;z-index:40;box-shadow:0 2px 16px rgba(0,0,0,0.20);}
+  .tab-bar{
+    display:flex;justify-content:center;gap:4px;flex-wrap:wrap;
+    max-width:920px;margin:0 auto;padding:0 16px;
+  }
+  .tab-btn{
+    background:transparent;color:rgba(255,255,255,0.72);
+    border:none;border-radius:0;
+    padding:18px 22px 16px;
+    font-family:inherit;font-size:12.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+    cursor:pointer;position:relative;
+    transition:color 0.2s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .tab-btn::after{ /* sliding underline */
+    content:"";position:absolute;left:50%;right:50%;bottom:0;height:3px;
+    background:var(--honey);transition:left 0.25s ease,right 0.25s ease;
+  }
+  .tab-btn:hover{color:#fff;}
+  .tab-btn.active{color:#fff;}
+  .tab-btn.active::after{left:14px;right:14px;}
+  /* Deposit tab gets the maroon underline to foreshadow its theme */
+  .tab-btn[data-tab="tab-deposit"].active::after{background:var(--maroon);}
+  .tab-btn[data-tab="tab-deposit"].active{color:#fff;}
+
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+
+  .wrap{max-width:920px;margin:0 auto;padding:44px 24px 0;}
+
+  /* ============ MOTION: staggered card fade-up ============ */
+  @keyframes rise{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+  .tab-panel.active .card,
+  .tab-panel.active .toc,
+  .tab-panel.active .ground-rules,
+  .tab-panel.active .example-card,
+  .tab-panel.active .ff-intro,
+  .tab-panel.active .spec,
+  .tab-panel.active .oneliner,
+  .tab-panel.active .rulebox,
+  .tab-panel.active .examples-banner{
+    animation:rise 0.5s cubic-bezier(0.16,0.84,0.44,1) backwards;
+  }
+  .tab-panel.active > *:nth-child(1){animation-delay:0.02s;}
+  .tab-panel.active > *:nth-child(2){animation-delay:0.08s;}
+  .tab-panel.active > *:nth-child(3){animation-delay:0.14s;}
+  .tab-panel.active > *:nth-child(4){animation-delay:0.20s;}
+  .tab-panel.active > *:nth-child(5){animation-delay:0.26s;}
+  .tab-panel.active > *:nth-child(n+6){animation-delay:0.30s;}
+
+  /* ============ SHARED CARD SYSTEM ============ */
+  .card{
+    position:relative;
+    background:#fff;border-radius:16px;
+    padding:48px 52px 50px;margin-bottom:32px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.06);border:1px solid var(--line);
+    overflow:hidden;
+  }
+  /* GHOST NUMERAL — set via data-ghost on Scripts + Q&As cards */
+  .card[data-ghost]::before{
+    content:attr(data-ghost);
+    position:absolute;top:-28px;right:14px;
+    font-size:150px;font-weight:900;line-height:1;
+    color:var(--thermo);opacity:0.07;
+    letter-spacing:-4px;pointer-events:none;user-select:none;z-index:0;
+  }
+  .card > *{position:relative;z-index:1;}
+  .num{
+    display:inline-block;font-style:italic;font-weight:500;font-size:15px;letter-spacing:0.5px;
+    color:var(--honey);margin-bottom:12px;
+  }
+  .card h2{font-weight:700;font-size:28px;color:var(--char);margin-bottom:32px;line-height:1.35;letter-spacing:0.2px;}
+  .label{
+    font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--honey);display:block;margin:0 0 14px;
+  }
+
+  /* ===== CHIP-ICONS (Option C) — on Say / Move / Send only ===== */
+  .label.label-ic,.move-head,.send-head{display:flex;align-items:center;gap:9px;}
+  .chip{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;flex:0 0 auto;}
+  .chip.say-chip{background:rgba(192,139,65,0.14);}
+  .chip.move-chip{background:rgba(150,80,43,0.14);}
+  .chip.send-chip{background:rgba(59,110,143,0.12);}
+  .move-head .mtag{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--thermo);}
+  .send-head .stag{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--send);}
+  .move.hasic{padding-top:20px;}
+  .move.hasic .move-head{margin-bottom:10px;}
+  .send.hasic{padding-top:16px;}
+  .send.hasic .send-head{margin-bottom:10px;}
+  /* when a chip label leads, the inline "Say:"/"The move:"/"Send:" bold prefix is redundant — hide it */
+  .move.hasic > strong:first-of-type,.send.hasic > strong:first-of-type{display:none;}
+
+  /* sub-tab little icons */
+  .subtab{display:inline-flex;align-items:center;gap:7px;}
+  .subtab svg{flex:0 0 auto;opacity:0.85;}
+  .subtab.active svg{opacity:1;}
+
+  .say{font-size:16.5px;font-weight:400;color:var(--ink);margin-bottom:32px;}
   .say p{margin-bottom:20px;}
   .say p:last-child{margin-bottom:0;}
+  /* B-policy + surgical bold: inline emphasis is calm green 600 by default */
+  .say strong,.beat strong,.wa strong,.script strong{color:var(--green);font-weight:600;}
+
+  /* SURGICAL BOLD — the one focal line per card gets weight 800 */
   .move{
-    background:var(--sage);
-    border-left:3px solid var(--green);
-    padding:20px 24px;
-    border-radius:0 10px 10px 0;
-    font-size:15px;
-    color:var(--muted);
-    line-height:1.75;
+    background:var(--bone-warm);
+    border-left:4px solid var(--thermo);
+    padding:22px 26px;border-radius:0 10px 10px 0;
+    font-size:15.5px;color:var(--ink);line-height:1.75;font-weight:500;
   }
-  .move strong{color:var(--green);font-weight:700;}
+  .move strong{color:var(--thermo);font-weight:800;}
   .send{
-    margin-top:20px;
-    background:var(--send-bg);
-    border-left:3px solid var(--send);
-    padding:18px 22px;
-    border-radius:0 10px 10px 0;
-    font-size:14.5px;
-    color:#33505f;
-    line-height:1.7;
+    margin-top:20px;background:var(--send-bg);border-left:3px solid var(--send);
+    padding:18px 22px;border-radius:0 10px 10px 0;font-size:14.5px;color:#33505f;line-height:1.7;
   }
   .send strong{color:var(--send);font-weight:700;}
+  .send a{color:var(--send);}
 
   .story{
-    margin:6px 0 26px;
-    background:var(--winered-bg);
-    border-left:3px solid var(--winered);
-    border-radius:0 12px 12px 0;
-    padding:22px 26px 24px;
+    margin:6px 0 26px;background:var(--maroon-bg);border-left:3px solid var(--maroon);
+    border-radius:0 12px 12px 0;padding:22px 26px 24px;
   }
-  .story .story-tag{
-    font-size:10px;
-    font-weight:700;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-    color:var(--winered);
-    display:block;
-    margin-bottom:10px;
-  }
-  .story p{
-    font-size:16px;
-    font-weight:500;
-    font-style:italic;
-    line-height:1.7;
-    color:var(--winered);
-  }
+  .story .story-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--maroon);display:block;margin-bottom:10px;}
+  .story p{font-size:16px;font-weight:500;font-style:italic;line-height:1.7;color:var(--maroon);margin-bottom:14px;}
+  .story p:last-child{margin-bottom:0;}
 
-  .toc{
-    background:#fff;
-    border-radius:16px;
-    padding:44px 48px 40px;
-    margin-bottom:36px;
-    border:1px solid var(--line);
-  }
-  .toc h3{
-    font-size:26px;
-    font-weight:800;
-    color:var(--green);
-    margin-bottom:6px;
-    letter-spacing:0.2px;
-    line-height:1.2;
-  }
-  .toc .toc-sub{
-    font-size:11.5px;
-    font-weight:600;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-    color:var(--terracotta);
-    margin-bottom:26px;
-  }
+  /* ============ TOC / GROUND RULES ============ */
+  .toc{background:#fff;border-radius:16px;padding:44px 48px 40px;margin-bottom:36px;border:1px solid var(--line);}
+  .toc h3{font-size:26px;font-weight:800;color:var(--green);margin-bottom:6px;letter-spacing:0.2px;line-height:1.2;}
+  .toc .toc-sub{font-size:11.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--honey);margin-bottom:26px;}
   .toc ol{list-style:none;counter-reset:t;}
-  .toc li{
-    counter-increment:t;
-    font-size:15.5px;
-    font-weight:500;
-    border-bottom:1px solid var(--line);
-  }
+  .toc li{counter-increment:t;font-size:15.5px;font-weight:500;border-bottom:1px solid var(--line);}
   .toc li:last-child{border-bottom:none;}
-  .toc a{
-    color:var(--ink);
-    text-decoration:none;
-    display:flex;
-    align-items:center;
-    gap:16px;
-    padding:12px 2px;
-    transition:color 0.15s ease,padding 0.15s ease;
-  }
+  .toc a{color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:16px;padding:12px 2px;transition:color 0.15s ease,padding 0.15s ease;}
   .toc a::before{
-    content:counter(t);
-    flex:0 0 28px;
-    height:28px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--sage);
-    border-radius:50%;
-    font-size:13px;
-    font-weight:700;
-    color:var(--green);
+    content:counter(t);flex:0 0 28px;height:28px;display:flex;align-items:center;justify-content:center;
+    background:var(--bone-warm);border-radius:50%;font-size:13px;font-weight:700;color:var(--thermo);
     transition:background 0.15s ease,color 0.15s ease;
   }
-  .toc a:hover{color:var(--terracotta);padding-left:8px;}
-  .toc a:hover::before{background:var(--green);color:#fff;}
+  .toc a:hover{color:var(--thermo);padding-left:8px;}
+  .toc a:hover::before{background:var(--thermo);color:#fff;}
 
-  .ground-rules{
-    background:#fff;
-    border-radius:16px;
-    padding:38px 48px;
-    margin-bottom:36px;
-    border:1px solid var(--line);
-    border-top:4px solid var(--green);
-  }
-  .ground-rules h3{
-    font-size:20px;
-    color:var(--green);
-    margin-bottom:20px;
-    font-weight:700;
-  }
+  .ground-rules{background:#fff;border-radius:16px;padding:38px 48px;margin-bottom:36px;border:1px solid var(--line);border-top:4px solid var(--green);}
+  .ground-rules h3{font-size:20px;color:var(--green);margin-bottom:20px;font-weight:700;}
   .ground-rules ol{list-style:none;counter-reset:g;}
   .ground-rules li{counter-increment:g;font-size:15.5px;padding:12px 0;border-bottom:1px solid var(--line);line-height:1.75;}
   .ground-rules li:last-child{border-bottom:none;}
-  .ground-rules li::before{content:counter(g)".  ";color:var(--green);font-weight:700;}
-  .ground-rules strong{color:var(--green);}
+  .ground-rules li::before{content:counter(g)".  ";color:var(--thermo);font-weight:800;}
+  .ground-rules strong{color:var(--green);font-weight:700;}
 
-  .examples-banner{
-    background:var(--green);
-    color:var(--sage);
-    border-radius:16px;
-    padding:40px 48px;
-    margin:56px 0 32px;
-    text-align:center;
-  }
-  .examples-banner h2{
-    font-size:27px;
-    font-weight:800;
-    color:#fff;
-    margin-bottom:8px;
-    letter-spacing:0.3px;
-  }
-  .examples-banner p{
-    font-size:14px;
-    font-weight:500;
-    opacity:0.85;
-    line-height:1.6;
-    max-width:620px;
-    margin:0 auto;
-  }
-  .example-card{
-    background:#fff;
-    border-radius:16px;
-    padding:44px 50px 46px;
-    margin-bottom:32px;
-    box-shadow:0 1px 3px rgba(0,0,0,0.06);
-    border:1px solid var(--line);
-    border-top:4px solid var(--terracotta);
-  }
-  .example-card h3{
-    font-size:23px;
-    font-weight:700;
-    color:var(--green);
-    margin-bottom:6px;
-  }
-  .example-meta{
-    font-size:12px;
-    font-weight:600;
-    letter-spacing:1px;
-    text-transform:uppercase;
-    color:var(--terracotta);
-    margin-bottom:24px;
-  }
-  .embed-slot{
-    background:var(--sage);
-    border:1px dashed var(--muted);
-    border-radius:12px;
-    padding:28px 24px;
-    text-align:center;
-    font-size:14px;
-    font-weight:600;
-    color:var(--muted);
-    margin-bottom:30px;
-  }
-  .annotate{
-    margin-top:24px;
-    border-radius:0 10px 10px 0;
-    padding:20px 24px;
-    font-size:15px;
-    line-height:1.75;
-  }
-  .annotate.good{
-    background:rgba(43,83,54,0.05);
-    border-left:3px solid var(--green);
-  }
-  .annotate.better{
-    background:rgba(160,82,45,0.06);
-    border-left:3px solid var(--terracotta);
-  }
-  .annotate h4{
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-    margin-bottom:12px;
-  }
+  /* ============ LIVE CALLS ============ */
+  .examples-banner{background:var(--green);color:#fff;border-radius:16px;padding:40px 48px;margin:0 0 32px;text-align:center;position:relative;overflow:hidden;}
+  .examples-banner::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--honey);}
+  .examples-banner h2{font-size:27px;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:0.3px;}
+  .examples-banner p{font-size:14px;font-weight:500;opacity:0.85;line-height:1.6;max-width:620px;margin:0 auto;}
+  .example-card{background:#fff;border-radius:16px;padding:44px 50px 46px;margin-bottom:32px;box-shadow:0 1px 3px rgba(0,0,0,0.06);border:1px solid var(--line);border-top:4px solid var(--honey);}
+  .example-card h3{font-size:23px;font-weight:700;color:var(--green);margin-bottom:6px;}
+  .example-meta{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--honey);margin-bottom:24px;}
+  .embed-slot{background:var(--bone-warm);border:1px dashed var(--muted);border-radius:12px;padding:22px 24px;margin-bottom:30px;}
+  .annotate{margin-top:24px;border-radius:0 10px 10px 0;padding:20px 24px;font-size:15px;line-height:1.75;}
+  .annotate.good{background:rgba(43,83,54,0.05);border-left:3px solid var(--green);}
+  .annotate.better{background:rgba(150,80,43,0.08);border-left:3px solid var(--thermo);}
+  .annotate h4{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
   .annotate.good h4{color:var(--green);}
-  .annotate.better h4{color:var(--terracotta);}
+  .annotate.better h4{color:var(--thermo);}
   .annotate ul{margin:0;padding-left:20px;}
   .annotate li{margin-bottom:10px;}
   .annotate li:last-child{margin-bottom:0;}
 
-  footer{
-    text-align:center;
-    font-size:12.5px;
-    color:var(--muted);
-    padding:48px 24px 0;
+  /* ============ FAST FACTS ============ */
+  .ff-intro{background:#fff;border-radius:16px;padding:40px 48px;margin-bottom:28px;border:1px solid var(--line);border-top:4px solid var(--honey);}
+  .ff-intro h3{font-size:23px;font-weight:700;color:var(--green);margin-bottom:14px;}
+  .ff-intro p{font-size:15.5px;color:var(--ink);margin-bottom:22px;line-height:1.75;}
+  .ff-intro p:last-of-type{margin-bottom:26px;}
+  .cfg-btn{
+    display:inline-block;background:var(--honey);color:#fff;text-decoration:none;
+    font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+    padding:16px 34px;border-radius:10px;transition:background 0.15s ease,transform 0.12s ease;
+    box-shadow:0 2px 10px rgba(150,80,43,0.25);
   }
-  footer .rule{
-    font-style:italic;
-    font-weight:500;
-    color:var(--green);
-    font-size:16px;
-    margin-bottom:8px;
+  .cfg-btn:hover{background:var(--thermo);transform:translateY(-1px);}
+  .subtabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
+  .subtab{
+    background:#fff;border:1px solid var(--line);color:var(--muted);border-radius:999px;
+    padding:9px 18px;font-family:inherit;font-size:12.5px;font-weight:600;letter-spacing:0.5px;
+    cursor:pointer;transition:all 0.15s ease;-webkit-tap-highlight-color:transparent;
   }
+  .subtab:hover{border-color:var(--thermo);color:var(--thermo);}
+  .subtab.active{background:var(--thermo);color:#fff;border-color:var(--thermo);}
+  .ff-section{display:none;}
+  .ff-section.active{display:block;animation:rise 0.4s cubic-bezier(0.16,0.84,0.44,1);}
 
-  .tab-bar{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin-top:26px;
-  }
-  .tab-btn{
-    background:rgba(241,242,236,0.12);
-    color:var(--sage);
-    border:1px solid rgba(241,242,236,0.35);
-    border-radius:999px;
-    padding:10px 26px;
-    font-family:inherit;
-    font-size:13px;
-    font-weight:700;
-    letter-spacing:1px;
-    text-transform:uppercase;
-    cursor:pointer;
-    transition:background 0.2s ease,color 0.2s ease;
-    -webkit-tap-highlight-color:transparent;
-  }
-  .tab-btn:hover{background:rgba(241,242,236,0.22);}
-  .tab-btn.active{
-    background:var(--sage);
-    color:var(--green);
-    border-color:var(--sage);
-  }
-  .tab-panel{display:none;}
-  .tab-panel.active{display:block;}
+  .spec{background:#fff;border-radius:14px;padding:36px 40px 38px;margin-bottom:22px;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,0.05);}
+  .spec-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:8px;flex-wrap:wrap;}
+  .spec-head h3{font-size:21px;font-weight:700;color:var(--green);line-height:1.3;}
+  .spec-price{font-size:16px;font-weight:800;color:var(--sage);white-space:nowrap;}
+  .spec-price.inc{color:var(--muted);font-weight:700;}
+  .spec-price.ph{color:var(--honey);}
+  .spec-sub{font-size:13px;color:var(--muted);margin-bottom:18px;font-style:italic;}
+  .spec-say{background:var(--bone-warm);border-left:3px solid var(--honey);border-radius:0 10px 10px 0;padding:18px 22px;margin-bottom:20px;font-size:15.5px;line-height:1.75;color:var(--ink);}
+  .spec-say .say-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--honey);display:block;margin-bottom:8px;}
+  .spec-say p{margin-bottom:12px;}
+  .spec-say p:last-child{margin-bottom:0;}
+  .spec-grid{list-style:none;margin:0 0 6px;display:grid;grid-template-columns:auto 1fr;gap:2px 18px;font-size:14.5px;}
+  .spec-grid dt{color:var(--muted);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 0;border-bottom:1px solid var(--line-s);}
+  .spec-grid dd{color:var(--ink);padding:8px 0;border-bottom:1px solid var(--line-s);}
+  .spec-note{font-size:14px;line-height:1.7;color:var(--ink);margin-top:14px;padding:14px 18px;background:rgba(43,83,54,0.04);border-radius:8px;}
+  .spec-note.warn{background:rgba(150,80,43,0.09);}
+  .spec-note .n-tag{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--sage);display:block;margin-bottom:6px;}
+  .spec-note.warn .n-tag{color:var(--thermo);}
+  .spec-imgs{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
+  .spec-imgs img{width:130px;height:100px;object-fit:cover;border-radius:8px;border:1px solid var(--line);background:var(--bone);}
 
-  .nav-btns{
-    position:fixed;right:20px;bottom:24px;
-    display:flex;flex-direction:column;gap:10px;z-index:50;
-    opacity:0;pointer-events:none;transition:opacity 0.25s ease;
+  .confirm{margin:6px 0 22px;background:rgba(150,80,43,0.08);border-left:3px solid var(--thermo);border-radius:0 10px 10px 0;padding:18px 24px;font-size:14.5px;color:#6d4423;line-height:1.7;}
+  .confirm .confirm-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--thermo);display:block;margin-bottom:8px;}
+  .confirm strong{color:var(--thermo);font-weight:700;}
+
+  .ptable{width:100%;border-collapse:collapse;margin:6px 0 24px;font-size:15px;}
+  .ptable th{text-align:left;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#fff;background:var(--green);padding:11px 14px;}
+  .ptable th:first-child{border-radius:8px 0 0 0;}
+  .ptable th:last-child{border-radius:0 8px 0 0;}
+  .ptable td{padding:11px 14px;border-bottom:1px solid var(--line-s);color:var(--ink);}
+  .ptable tr:last-child td{border-bottom:none;}
+  .ptable .yes{color:var(--sage);font-weight:800;}
+  .ptable .no{color:var(--flag);font-weight:800;}
+  .matrix-wrap{overflow-x:auto;margin-bottom:24px;}
+  .matrix{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px;}
+  .matrix th,.matrix td{padding:9px 10px;text-align:center;border:1px solid var(--line-s);}
+  .matrix thead th{background:var(--green);color:#fff;font-size:11px;letter-spacing:0.5px;text-transform:uppercase;font-weight:700;}
+  .matrix tbody th{background:var(--bone-warm);color:var(--ink);text-align:left;font-weight:600;font-size:13px;}
+  .matrix .yes{color:var(--sage);font-weight:800;}
+  .matrix .no{color:var(--flag);font-weight:800;}
+
+  .xref{display:inline-block;font-size:12px;font-weight:700;color:var(--send);background:var(--send-bg);padding:2px 10px;border-radius:999px;letter-spacing:0.3px;text-decoration:none;cursor:pointer;border:none;font-family:inherit;transition:background 0.15s ease,color 0.15s ease;}
+  .xref:hover{background:var(--send);color:#fff;}
+
+  .qtable{width:100%;border-collapse:collapse;margin:6px 0 24px;font-size:15px;}
+  .qtable th{text-align:left;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--honey);padding:0 14px 12px 0;border-bottom:2px solid var(--line);}
+  .qtable td{padding:11px 14px 11px 0;border-bottom:1px solid var(--line);color:var(--ink);}
+  .qtable td:last-child{font-weight:800;color:var(--green);white-space:nowrap;}
+  .qtable tr:last-child td{border-bottom:none;}
+
+  /* ============ DEPOSIT GATE — maroon signature theme ============ */
+  #tab-deposit .oneliner{background:var(--green);background-image:linear-gradient(105deg,var(--green-l) 0%,var(--green) 60%,var(--green-deep) 100%);color:#fff;border-radius:16px;padding:52px 48px;margin-bottom:32px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.06);position:relative;overflow:hidden;}
+  #tab-deposit .oneliner::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--maroon);}
+  .oneliner .oneliner-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--honey);display:block;margin-bottom:20px;}
+  .oneliner p{font-size:25px;font-weight:700;line-height:1.55;color:#fff;font-style:italic;max-width:640px;margin:0 auto;}
+  #tab-deposit .ff-intro{border-top-color:var(--maroon);}
+  #tab-deposit .num{color:var(--honey);}
+  /* headings stay charcoal like the rest of the guide — maroon is an accent, not a flood */
+  .script{margin:6px 0 26px;background:var(--bone-warm);border:1px solid var(--line);border-left:4px solid var(--honey);border-radius:0 12px 12px 0;padding:26px 30px 28px;}
+  .script .script-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--honey);display:block;margin-bottom:14px;}
+  .script p{font-size:16.5px;font-weight:500;line-height:1.8;color:var(--ink);margin-bottom:18px;}
+  .script p:last-child{margin-bottom:0;}
+  .script strong{color:var(--green);font-weight:700;}
+  .wa{margin:6px 0 22px;background:#fff;border:1px solid var(--line);border-radius:4px 14px 14px 14px;padding:22px 26px 24px;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
+  .wa .wa-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:14px;}
+  .wa p{font-size:16px;font-weight:400;line-height:1.75;color:var(--ink);margin-bottom:16px;}
+  .wa p:last-child{margin-bottom:0;}
+  .beat{border-left:3px solid var(--line);padding:0 0 0 26px;margin-bottom:30px;position:relative;}
+  .beat:last-child{margin-bottom:0;}
+  .beat.final{border-left-color:var(--honey);}
+  .beat-num{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--honey);display:block;margin-bottom:8px;}
+  .beat h3{font-size:19px;font-weight:700;color:var(--green);margin-bottom:14px;line-height:1.4;}
+  .beat p{font-size:16px;line-height:1.8;margin-bottom:14px;color:var(--ink);}
+  .beat p:last-child{margin-bottom:0;}
+  .beat strong{color:var(--green);font-weight:700;}
+  .rulebox{background:var(--maroon-bg);border:1px solid rgba(94,31,40,0.18);border-left:4px solid var(--maroon);border-radius:0 14px 14px 0;padding:30px 34px;margin:6px 0 30px;text-align:center;}
+  .rulebox .rulebox-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:1;display:block;margin-bottom:12px;color:var(--maroon);}
+  .rulebox p{font-size:21px;font-weight:700;line-height:1.5;color:var(--maroon);}
+  .seq{list-style:none;counter-reset:s;margin:0 0 26px;}
+  .seq li{counter-increment:s;font-size:16px;padding:13px 0;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:16px;line-height:1.7;}
+  .seq li:last-child{border-bottom:none;}
+  .seq li::before{content:counter(s);flex:0 0 26px;height:26px;display:flex;align-items:center;justify-content:center;background:var(--bone-warm);border-radius:50%;font-size:12px;font-weight:700;color:var(--green);margin-top:3px;}
+  .seq li.gate::before{background:var(--green);color:#fff;}
+  .seq li.gate{font-weight:600;color:var(--green);}
+  .dtable{width:100%;border-collapse:collapse;margin:6px 0 24px;font-size:15.5px;}
+  .dtable th{text-align:left;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--honey);padding:0 16px 12px 0;border-bottom:2px solid var(--line);}
+  .dtable td{padding:16px 16px 16px 0;border-bottom:1px solid var(--line);color:var(--ink);line-height:1.7;vertical-align:top;}
+  .dtable td:first-child{font-style:italic;color:var(--muted);width:34%;}
+  .dtable td em{color:var(--green);font-style:italic;}
+  .dtable tr:last-child td{border-bottom:none;}
+
+  /* ============ FOOTER + NAV + PROGRESS RAIL ============ */
+  footer{text-align:center;font-size:12.5px;color:var(--muted);padding:48px 24px 0;}
+  footer .rule{font-style:italic;font-weight:500;color:var(--maroon);font-size:16px;margin-bottom:8px;}
+
+  /* sticky progress rail: skinny rounded PILL that fills top-to-bottom */
+  .prail{
+    position:fixed;left:16px;top:50%;transform:translateY(-50%);
+    width:6px;height:56vh;max-height:520px;
+    background:var(--char-line);border-radius:999px;overflow:hidden;
+    z-index:45;opacity:0;transition:opacity 0.3s ease;
   }
+  .prail.show{opacity:1;}
+  .prail-fill{
+    position:absolute;left:0;top:0;width:100%;height:0;
+    background:linear-gradient(180deg,var(--honey),var(--thermo));
+    border-radius:999px;transition:height 0.12s linear;
+  }
+  .pcount{
+    position:fixed;left:30px;top:50%;z-index:46;
+    background:var(--char);color:#fff;font-size:12px;font-weight:700;letter-spacing:0.5px;
+    padding:9px 15px;border-radius:999px;box-shadow:0 3px 14px rgba(0,0,0,0.30);
+    opacity:0;transform:translateY(-50%) translateX(-4px);transition:opacity 0.25s ease,transform 0.25s ease;pointer-events:none;white-space:nowrap;
+  }
+  .pcount.show{opacity:1;transform:translateY(-50%) translateX(0);}
+  .pcount b{color:var(--honey);font-weight:800;}
+
+  .nav-btns{position:fixed;right:20px;bottom:24px;display:flex;flex-direction:column;gap:10px;z-index:50;opacity:0;pointer-events:none;transition:opacity 0.25s ease;}
   .nav-btns.show{opacity:1;pointer-events:auto;}
-  .nav-btns button{
-    width:46px;height:46px;border-radius:50%;border:none;
-    background:var(--green);color:var(--sage);font-size:20px;line-height:1;cursor:pointer;
-    box-shadow:0 3px 10px rgba(0,0,0,0.25);
-    display:flex;align-items:center;justify-content:center;
-    transition:background 0.2s ease,transform 0.15s ease;
-    -webkit-tap-highlight-color:transparent;
-  }
-  .nav-btns button:hover{background:#39694a;}
+  .nav-btns button{width:46px;height:46px;border-radius:50%;border:none;background:var(--char);color:#fff;font-size:20px;line-height:1;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;transition:background 0.2s ease,transform 0.15s ease;-webkit-tap-highlight-color:transparent;}
+  .nav-btns button:hover{background:var(--char-l);}
   .nav-btns button:active{transform:scale(0.92);}
 
+  /* ============ REDUCED MOTION ============ */
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *{animation:none !important;transition:none !important;}
+  }
+
+  /* ============ RESPONSIVE ============ */
   @media (max-width:600px){
-    header{padding:40px 20px 32px;}
-    header h1{font-size:27px;}
-    .wrap{padding:26px 16px 0;}
-    .card{padding:32px 26px 34px;border-radius:14px;}
+    .hero{padding:52px 20px 30px;}
+    .hero h1{font-size:44px;letter-spacing:-1px;}
+    .hero-eyebrow{font-size:11px;letter-spacing:2px;padding:9px 15px;margin-bottom:24px;}
+    .hero .hero-sub{font-size:15.5px;}
+    .tab-btn{padding:14px 13px 12px;font-size:11px;letter-spacing:0.5px;}
+    .wrap{padding:28px 16px 0;}
+    .card{padding:34px 26px 34px;border-radius:14px;}
+    .card[data-ghost]::before{font-size:100px;top:-16px;right:8px;}
     .card h2{font-size:24px;margin-bottom:24px;}
     .story{padding:20px 22px;}
     .story p{font-size:15px;}
@@ -384,12 +447,27 @@
     .toc a::before{flex:0 0 26px;height:26px;font-size:12px;}
     .ground-rules{padding:28px 26px;}
     .say{font-size:16px;}
-    .examples-banner{padding:30px 24px;margin:40px 0 24px;}
+    .examples-banner{padding:30px 24px;}
     .examples-banner h2{font-size:22px;}
     .example-card{padding:32px 26px 34px;}
     .example-card h3{font-size:20px;}
-    .tab-bar{margin-top:20px;gap:8px;}
-    .tab-btn{padding:9px 18px;font-size:12px;}
+    .ff-intro{padding:30px 26px;}
+    .spec{padding:28px 24px 30px;}
+    .spec-head h3{font-size:19px;}
+    .spec-grid{grid-template-columns:1fr;gap:0;}
+    .spec-grid dt{padding:8px 0 2px;border-bottom:none;}
+    .spec-grid dd{padding:0 0 8px;}
+    .script{padding:22px 22px 24px;}
+    .script p{font-size:16px;}
+    .wa{padding:20px 22px;}
+    .beat{padding-left:20px;}
+    .rulebox{padding:24px 22px;}
+    .rulebox p{font-size:18px;}
+    .oneliner{padding:38px 26px;}
+    .oneliner p{font-size:20px;}
+    .dtable td:first-child{width:40%;}
+    .prail{height:44vh;left:10px;width:5px;}
+    .pcount{left:22px;font-size:11px;padding:7px 12px;}
     .nav-btns{right:16px;bottom:18px;}
     .nav-btns button{width:44px;height:44px;font-size:19px;}
   }
@@ -397,16 +475,27 @@
 </head>
 <body>
 
-<header>
-  <h1>Barrel Sauna UK</h1>
-  <p>Closer Scripts &middot; How to Say It</p>
+<div class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">The Closer's Guide &middot; BSUK</span>
+    <h1>Every call,<br>start to <span class="accent">close</span></h1>
+    <p class="hero-sub">Hand-built in Wales. Sold with conviction. Everything a closer needs &mdash; the scripts, the specs, the numbers, and the one sentence that holds the sale &mdash; in <strong>one place</strong>.</p>
+  </div>
+</div>
+<div class="hero-rule"></div>
+
+<div class="tab-wrap">
   <div class="tab-bar">
     <button class="tab-btn active" data-tab="tab-scripts">Scripts</button>
-    <button class="tab-btn" data-tab="tab-examples">Live Call Examples</button>
+    <button class="tab-btn" data-tab="tab-calls">Live Calls</button>
+    <button class="tab-btn" data-tab="tab-facts">Fast Facts</button>
+    <button class="tab-btn" data-tab="tab-qa">Q&amp;A</button>
+    <button class="tab-btn" data-tab="tab-deposit">Deposit Gate</button>
   </div>
-</header>
+</div>
 
 <div class="wrap">
+<!-- ==================== PANELS INSERTED BELOW ==================== -->
 
 <div class="tab-panel active" id="tab-scripts">
 
@@ -447,10 +536,10 @@
     </ol>
   </div>
 
-  <div class="card" id="c1">
+  <div class="card" data-ghost="1" id="c1">
     <span class="num">One</span>
     <h2>Open — Who We Are</h2>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>"So we're a Welsh family business — everything's hand-built in Wales, made to order. We don't mass produce. We're not the cheapest out there and we're not trying to be. We build bespoke projects that last, that you only ever have to buy once."</p>
       <p>"We've got a UK office, a team who answer the phone, aftercare's all there, and we're doing installs around the UK all the time. We actually quite often go to a client's house, strip out a sauna they had built less than a year ago, and replace it with ours."</p>
@@ -471,10 +560,10 @@
       <p>Get them talking about themselves early — their land, their plans, the neighbour's farm, whatever it is. People warm up fast when you're genuinely interested, and it tells you where they are in the process.</p>
       <p>The Welsh spiel — hand-built in Wales, not the cheapest, buy it once — has to land somewhere: start, middle, end, or twice over in different ways. The one place it can't land is straight after the price. Say it before, never after, or it sounds like you're making excuses for the number.</p>
     </div>
-    <div class="move"><strong>The move:</strong> Set the quality frame before price ever comes up. Everything after this defends it — made in Wales, come and see it, buy once. Made-to-order isn't a drawback — it's proof it's bespoke.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Set the quality frame before price ever comes up. Everything after this defends it — made in Wales, come and see it, buy once. Made-to-order isn't a drawback — it's proof it's bespoke.</div>
   </div>
 
-  <div class="card" id="c2">
+  <div class="card" data-ghost="2" id="c2">
     <span class="num">Two</span>
     <h2>Read the Customer</h2>
     <span class="label">What to say / listen for</span>
@@ -484,25 +573,25 @@
       <p>For commercial, once capacity comes up, make the go-bigger case: picture a nice big sauna with only four people in it — spread out, loads of space, lying down both sides. Now picture six people inside and twenty being turned away outside. Which would you rather? There's no harm going bigger — fewer people just means more space, and it's also where you get a read on what they can actually afford.</p>
       <p>When they give you a capacity, that's also the natural moment to recommend a changing room — not just somewhere to get changed, but an airlock (see Card 4). Frame it as "for that number, I'd include a changing room, and here's why."</p>
     </div>
-    <div class="move"><strong>The move:</strong> Diagnose before you pitch. You're not selling size — you're reading them and nudging toward the right fit.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Diagnose before you pitch. You're not selling size — you're reading them and nudging toward the right fit.</div>
   </div>
 
-  <div class="card" id="c3">
+  <div class="card" data-ghost="3" id="c3">
     <span class="num">Three</span>
     <h2>Diameter — 2m vs 2.3m</h2>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>"Standard diameter's 2 metres. But going up to 2.3, it's surprising how much more space you get." Talk from your own body if it fits, or a friend or family member's if you're not built for it — "my mate's six foot three and pretty broad, sat in the 2.3 he's got plenty of room, head's not touching the sides, he can lie flat on the bench without his arm dropping off the edge." Benches are wider, backrests thicker, more space between them.</p>
       <p>"Don't worry about heat-up time — you match the heater to the room, so a bigger room just gets a bigger heater. Same as a bigger radiator. Makes barely any difference."</p>
       <p>On value: "Look, we don't compete on price with the really cheap saunas — they're selling for less than ours cost us to make. But once you've got a larger sauna, we try to put a ceiling on what going wider actually costs you. We're not really making money on it, we just want to give good value to someone who's already investing and wants to use the space properly." Think of it as a loss leader — you're glad they're doing business with you, so you're not going to sting them for a bit more width. Widening is much cheaper than lengthening, so it's the better-value way to get more room.</p>
     </div>
-    <div class="move"><strong>The move:</strong> Your own body in the sauna is the whole pitch — or a friend or family member's if you're not the size for it. Genuine enthusiasm does the selling — lean into it.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Your own body in the sauna is the whole pitch — or a friend or family member's if you're not the size for it. Genuine enthusiasm does the selling — lean into it.</div>
   </div>
 
-  <div class="card" id="c4">
+  <div class="card" data-ghost="4" id="c4">
     <span class="num">Four</span>
     <h2>Length &amp; Changing Room</h2>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>"Three metres is a really nice size — you can lie down either side with space at the end for a bucket and ladle at your feet. And with a changing room it's more than just changing — you can chill between sessions, take a break."</p>
       <p><strong>Spec rule — never get this wrong:</strong> the changing room comes out of the total length, it's not added on top. A 3m sauna with a 1m changing room is a 2m hot room. Quote it that way from the start, or the customer ends up with a smaller sauna than they pictured.</p>
@@ -517,7 +606,7 @@
       <p><strong>Commercial — lay the jarring point on thick.</strong> It's about their customer's experience, not theirs: "When your clients are sat inside and that door's opening and closing straight to the outside, it's jarring. With the changing room, the second door's silent — it's just a much nicer overall experience for your clients." They hear "my clients" and it sells itself.</p>
       <p><strong>Residential — go personal instead.</strong> The ritual story below does the work. You can still drop the personal story into a commercial call too — it just shouldn't be the lead.</p>
     </div>
-    <div class="move"><strong>The move:</strong> Turn "I'll get changed elsewhere" into "actually that makes sense." Storage plus heat trap stacks reasons to go bigger — but the one-metre line keeps it feeling like advice, not a push.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Turn "I'll get changed elsewhere" into "actually that makes sense." Storage plus heat trap stacks reasons to go bigger — but the one-metre line keeps it feeling like advice, not a push.</div>
     <div class="story">
       <span class="story-tag">Example anecdote</span>
       <p>Talk them through your own ritual — fifteen minutes in the heat, then into the changing room, crack the door, catch your breath, back in, back out. Afterwards you might sit out there thirty to forty minutes just relaxing — cool blue lights under the seats in the changing room, warm ones in the sauna. Proper hot-and-cool vibe.</p>
@@ -528,10 +617,10 @@
     </div>
   </div>
 
-  <div class="card" id="c5">
+  <div class="card" data-ghost="5" id="c5">
     <span class="num">Five</span>
     <h2>Lighting</h2>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>"The undersea warm LED lights give off a really nice ambience — nothing overpowering, it's all about the glow. We fit them under the seats, and we've started doing them behind the backrests too."</p>
       <p>Then talk them out of the wall lights: "Realistically you don't really need the wall lights in the main sauna. It's nice to sit with your back to that wall and your feet facing out, and a wall light there stops you doing that. The undersea LEDs give off plenty on their own."</p>
@@ -545,10 +634,10 @@
       <p>Mobile saunas are different again — fully turnkey, professionally tested and wired, with the battery and solar already fitted and ready to go.</p>
       <p>And mention the manual — everything they need on the lighting and electrics is written up and comes with the sauna, so nobody's left guessing after the install.</p>
     </div>
-    <div class="move"><strong>The move:</strong> Sacrificing the wall lights buys trust for everything else. The blue-light story sells the changing room without asking for it. And "arrives plug-and-play" quietly sells the fully built delivery — which is the delivery we want them to pick.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Sacrificing the wall lights buys trust for everything else. The blue-light story sells the changing room without asking for it. And "arrives plug-and-play" quietly sells the fully built delivery — which is the delivery we want them to pick.</div>
   </div>
 
-  <div class="card" id="c6">
+  <div class="card" data-ghost="6" id="c6">
     <span class="num">Six</span>
     <h2>Bench Layouts</h2>
     <span class="label">What to say — U-shaped</span>
@@ -561,7 +650,7 @@
       <p>"L-shape's for the compact — heater on the left as you walk in, makes the most of the space. Works nicely with a glass door front so you can sit in the middle looking straight out."</p>
       <p>"You can only do L-shape with an electric heater. A wood burner needs to go in the middle at the end with benches either side — not enough space otherwise."</p>
     </div>
-    <div class="move"><strong>The move:</strong> "Personally I prefer" lets them feel advised, not sold. If they want the other layout you've lost nothing — you agree and it's their idea.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>"Personally I prefer" lets them feel advised, not sold. If they want the other layout you've lost nothing — you agree and it's their idea.</div>
     <div class="story">
       <span class="story-tag">Example anecdote one — the grandad</span>
       <p>There's a customer whose grandad had the dome-window sauna — they'd put a mattress in and the grandkids would have campouts in there, the dome basically a viewing window for the stars. It doubled up as a glamping pod. Lovely one to tell when they've got kids or grandkids — paints such a nice picture that sometimes the story alone sells the whole idea.</p>
@@ -579,24 +668,24 @@
     </div>
   </div>
 
-  <div class="card" id="c7">
+  <div class="card" data-ghost="7" id="c7">
     <span class="num">Seven</span>
     <h2>Windows</h2>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>Always diagnose first: "Where's the sauna going — flush against a wall, or have you got some nice views looking out?" If it's against a wall, don't pitch a window at all. If there's a view, let them talk about it — ask about the view, the space, mention we've done something similar elsewhere, and let them enjoy talking about their own place for a bit before you pitch anything.</p>
       <p>Then bring in the globe: "Have you seen our panoramic dome windows? We get a timber ring cut at a specialist sawmill just for us, custom moulded, frames the whole inside, and we build the benches flush into the dome so you're basically sat inside it. Especially for commercial, it's a real wow factor — it's quirky enough that people take photos and videos and tag you in them, so it does a bit of organic promotion on its own. Nice mix of classic sauna and a modern twist."</p>
       <p>"If you want to keep costs down, the full flat glass is also really nice — we build a floating bench for it. And the half-moon's still lovely, gives you your view at a lower price point. If they can afford the globe, they'll go for the globe — no need to push it too hard."</p>
       <p><strong>Spec rule — never get this wrong:</strong> the external-feed wood burner ONLY pairs with either the two double-glazed windows or the half-moon — never the big flat glass. You're not passing logs through a sheet of glass. With the half-moon, the chute runs through the wooden bottom half and the top half is the window. All windows are double glazed. Check the combination before you quote it — this is the one that keeps getting forgotten.</p>
     </div>
-    <div class="move"><strong>The move:</strong> The diagnostic question stops you selling a window to a blank wall — and gets them talking about their view, which they love. Not pushing the globe is the trust move.</div>
-    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>The diagnostic question stops you selling a window to a blank wall — and gets them talking about their view, which they love. Not pushing the globe is the trust move.</div>
+    <div class="send hasic"><div class="send-head"><span class="chip send-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3B6E8F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span><span class="stag">Send</span></div>Send relevant video here.</div>
   </div>
 
-  <div class="card" id="c8">
+  <div class="card" data-ghost="8" id="c8">
     <span class="num">Eight</span>
     <h2>Heaters</h2>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>Start on the fence: "There's pros and cons to each." Wood burner: "It's lovely and ambient — the glow, seeing the fire. There's something very natural and therapeutic about it, almost primal." It also makes great content — a video of the fire going, zooming out to the sauna, is different to just another photo post.</p>
       <p>With any wood burner, we include all the safety accessories as standard — base plate, heat shields, guardrail/safety rail, shields on top and around the flue. Worth saying out loud so they know it's all covered, not extra.</p>
@@ -607,7 +696,7 @@
       <p>Heater on the side, as you walk in, is worth mentioning too — nobody's walking past a row of sweaty bodies to feed logs at the far end, you're stood right by the changing room, and it gives you a natural reason to check in on everyone as you pass.</p>
       <p>Then back them the moment they lean: "Sounds like the wood burner's the best fit for you, honestly."</p>
     </div>
-    <div class="move"><strong>The move:</strong> Stay on the fence until they choose — then it's always their decision. The volcanic-stones line rescues electric from feeling second-rate, and the four-way shortlist turns endless choice into an easy one.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Stay on the fence until they choose — then it's always their decision. The volcanic-stones line rescues electric from feeling second-rate, and the four-way shortlist turns endless choice into an easy one.</div>
     <div class="story">
       <span class="story-tag">Straight answer — the external-feed trade-off</span>
       <p>If they ask whether you can see the flames from inside on an external-feed burner: you can't — that's the trade-off, and it's a bit annoying. Be upfront: "We've spoken to Harvia about making one with a viewing window in the feed itself, and they agree it should exist — but right now it's just not a function. External access or flames in view, you pick one." Honesty here buys more than a workaround would.</p>
@@ -618,14 +707,14 @@
     </div>
   </div>
 
-  <div class="card" id="c9">
+  <div class="card" data-ghost="9" id="c9">
     <span class="num">Nine</span>
     <h2>Mobile Saunas</h2>
     <span class="label">Why you always mention it</span>
     <div class="say">
       <p>Mobile isn't just a product pitch — it's a trust-builder. Bringing it up highlights that we're bespoke manufacturers who can do a wide range of things, not a shop selling one fixed item. And it's not commercial-only: plenty of residential and personal-use clients want it too. Someone living on a farm might want to move it around their estate, sauna in different spots. So working mobile into any call — even a straight residential one — quietly explains who we are and what we're capable of.</p>
     </div>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>"These trailers are built bespoke to order in our fabrication workshop in Wales. You can buy off-the-shelf trailers cheap, but nothing off the shelf is designed to be part of a mobile sauna — the suspension, the wheels, the galvanised steel reinforcement, all built for purpose. It gets tested at DVSA and it's on record as a mobile sauna trailer — there are no other trailers in existence with that."</p>
       <p>"And we don't just plonk a sauna on a trailer — we fix it to buffalo boards, L-brackets under each leg, then box it in with a timber decking platform and build the steps from the same material. So it looks like a nice raised deck, not a sauna on a random trailer. And there's something quite nice about walking up steps into a sauna too — it elevates your view once you're in there."</p>
@@ -639,31 +728,31 @@
       <p>On councils: they're generally on side with wellness — much easier sell than, say, a bar. What you're not in control of is how long they take to say yes, which is exactly the case for getting a mobile sauna now and starting straight away rather than waiting on planning.</p>
       <p>Once it's parked up, there's nothing stopping a bamboo wall and a bath going in around it either — quickly looks like a proper outdoor wellness space. But the fence comes down in a day, the ice bath goes in a van, and the sauna gets wheeled away, if they ever need to.</p>
     </div>
-    <div class="move"><strong>The move:</strong> DVSA plus "no other trailer has this" is a hard trust anchor. The pushing-it-by-hand joke defuses towing fear without giving licence advice — point them to the website chart, never advise on licences yourself.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>DVSA plus "no other trailer has this" is a hard trust anchor. The pushing-it-by-hand joke defuses towing fear without giving licence advice — point them to the website chart, never advise on licences yourself.</div>
     <div class="story">
       <span class="story-tag">Example anecdote — the big one</span>
       <p>There's a guy in Devon — "Escape to the Sauna" — put his life savings in, tested two or three spots a week, Monday–Tuesday one place, Wednesday–Thursday another. Now he's on his second and third units. Even once he got planning for the third, he kept it mobile — boxed into decking, raised, steps up to it, looks the part, and he can still move it whenever.</p>
     </div>
-    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
+    <div class="send hasic"><div class="send-head"><span class="chip send-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3B6E8F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span><span class="stag">Send</span></div>Send relevant video here.</div>
   </div>
 
-  <div class="card" id="c10">
+  <div class="card" data-ghost="10" id="c10">
     <span class="num">Ten</span>
     <h2>Hot Tubs</h2>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>"We make them bespoke — different shapes and sizes — but personally I like a round tub, looks nice and authentic and classic, and it's cladded in the same material as the saunas so they sit beautifully side by side. Basic, or we add air jets, jacuzzi jets, massage jets, LED lights."</p>
       <p>"Bought together with a sauna there's a package deal — 5k plus VAT, and that includes the lot: hot tub, steps, thermocover, jets, all the accessories." Never name competitors — the "includes the lot from the start" line does the comparison work on its own without sending anyone off to google other brands.</p>
       <p><strong>The big one — say it every time:</strong> "And you save on delivery — we bring it all at once, one trip." Bought alongside a sauna, that's a real saving they can feel. Plus: "All our spa builds are designed to match — same cladding, same colour — so the sauna and the tub sit beautifully side by side."</p>
     </div>
-    <div class="move"><strong>The move:</strong> Picking a favourite for them cuts through choice paralysis. The package price feels like real value against a big sauna spend — and the one-delivery saving is the rational reason to add it now, not later.</div>
-    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Picking a favourite for them cuts through choice paralysis. The package price feels like real value against a big sauna spend — and the one-delivery saving is the rational reason to add it now, not later.</div>
+    <div class="send hasic"><div class="send-head"><span class="chip send-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3B6E8F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span><span class="stag">Send</span></div>Send relevant video here.</div>
   </div>
 
-  <div class="card" id="c11">
+  <div class="card" data-ghost="11" id="c11">
     <span class="num">Eleven</span>
     <h2>Ice Baths — The Dippers</h2>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>"So there's the single dipper and the double dipper. Both come with a chiller, cooler, filter and heater machine — heats to 40 degrees, cools to zero, so it's both an ice bath and a hot tub. It's not a flick-on-and-jump-in job — you'd decide, ice bath tomorrow or hot tub tomorrow, and switch it overnight. Comes complete with thin wood steps, lids, inserts, seats, the lot."</p>
       <p>"Single dipper's 3,995 plus VAT, double's 5,995 plus VAT."</p>
@@ -672,7 +761,7 @@
       <p>"It's like a big deep solid outdoor bath tub — one head each side, go through the pain together."</p>
       <p>For commercial, the switching time is a promotable feature, not a limitation: run a hot-and-cold day once a week or so, at set times, and let people know. Gives the calendar something to promote alongside anything else going on — group yoga session, hot-and-cold day — and gives you something fresh to post about.</p>
     </div>
-    <div class="move"><strong>The move:</strong> The switching joke turns a technical limitation into something charming instead of a drawback. Holding the function back to the end makes it feel like a bonus, not a pitch.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>The switching joke turns a technical limitation into something charming instead of a drawback. Holding the function back to the end makes it feel like a bonus, not a pitch.</div>
     <div class="story">
       <span class="story-tag">Live example — the man who bought two</span>
       <p>A commercial client was being talked through the double dipper and the hot-and-cold switching days. The honest observation got dropped in: "Obviously it'd be even nicer to just have two — one set hot, one set cold — and they look great side by side anyway." He went quiet for a second and said, "You know what, I think I'll just get two." You're almost encouraging them <em>not</em> to buy two, and that's exactly why it works.</p>
@@ -680,10 +769,10 @@
     </div>
   </div>
 
-  <div class="card" id="c12">
+  <div class="card" data-ghost="12" id="c12">
     <span class="num">Twelve</span>
     <h2>The Barrel Shower</h2>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>"It's a barrel shower — looks just like the sauna, same materials, same colour, so it sits right alongside it and matches everything else. Really it's just a nice little enclosure you pop into. No door needed, it still feels solid and authentic, and it adds to that whole outdoor wellness vibe."</p>
       <p>Uncomplicate it before they ask — people worry about heating and plumbing: "There's nothing complicated to it. No heating to think about — you come out the sauna, have a cold rinse, jump out. It's plumbed in exactly like a normal shower, that's it."</p>
@@ -695,15 +784,15 @@
       <p>Push this harder on commercial jobs than we have been. It's the practical fix for a room full of people coming out the sauna and going straight into the ice bath before they've rinsed off — otherwise the ice bath ends up mostly sweat before you know it. Frame it almost as basic hygiene practice: "For a commercial setup I'd honestly make it a shower-before rule, and this is how you do it."</p>
       <p>Cost-wise it's roughly a tenth of a sauna, so against the main investment it's a low-cost way to add real volume and finish to the space. The word is <strong>footprint</strong>: when the quote's already at twenty-five grand, a couple more thousand adds another big, solid wooden item to the footprint — the whole setup instantly looks more substantial and complete.</p>
     </div>
-    <div class="move"><strong>The move:</strong> Sell the finished look, not just the function — it's decorative as much as practical. On commercial, the hygiene angle turns it from a nice-to-have into something that feels necessary. It's an add-on, but a high-value, easy-yes one.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Sell the finished look, not just the function — it's decorative as much as practical. On commercial, the hygiene angle turns it from a nice-to-have into something that feels necessary. It's an add-on, but a high-value, easy-yes one.</div>
     <div class="story">
       <span class="story-tag">Example anecdote — the joke to throw in</span>
       <p>The glass roof's lovely — though maybe don't have it in your own back garden. If you're having a proper naked shower out there, no real need for a glass roof over the top, is there.</p>
     </div>
-    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
+    <div class="send hasic"><div class="send-head"><span class="chip send-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3B6E8F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span><span class="stag">Send</span></div>Send relevant video here.</div>
   </div>
 
-  <div class="card" id="c13">
+  <div class="card" data-ghost="13" id="c13">
     <span class="num">Thirteen</span>
     <h2>Delivery &amp; Lifting</h2>
     <span class="label">What to say — installation</span>
@@ -716,27 +805,27 @@
       <p>"We used to include fully assembled deliveries — crane lifting it in, the works. But clients kept coming back saying they'd found a local lift cheaper, and we were never adding anything on top. So the best way we landed on: we bring it fully assembled on one of our trailers, and you get the cheapest local quote for the lift off the trailer onto site — most people find that works out cheaper than what we were charging for the crane anyway."</p>
       <p>"A lot of sites already have their own lifting kit, some farms too — and our guys are experienced, they'll be there to oversee the lift, make sure the straps are on properly and guide it in on site." That line handles most technical questions about the lift before they're asked.</p>
     </div>
-    <div class="move"><strong>The move:</strong> Framing the no-crane change as a saving keeps it a benefit, not a fob-off. Keep it about the saving, not about what they'd be doing anyway — that reads as accusatory.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Framing the no-crane change as a saving keeps it a benefit, not a fob-off. Keep it about the saving, not about what they'd be doing anyway — that reads as accusatory.</div>
   </div>
 
-  <div class="card" id="c14">
+  <div class="card" data-ghost="14" id="c14">
     <span class="num">Fourteen</span>
     <h2>Decking &amp; Ground Prep</h2>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>"The cheapest way — we dig railway sleepers into the ground, sit the sauna's feet on them, done. Cost-effective and it works. We did one locally in Penarth about three years ago, haven't heard from him since — no news is good news, the weight of the sauna packs it right down onto the sleepers."</p>
       <p>"Honestly, any solid, level surface is fine — patio, concrete pad, gravel, hardstanding, as long as it's level you're good. No need to lift your patio."</p>
       <p>"But if you want a proper decking platform built around it — space in front for an ice bath or hot tub — it's there ready to add to. And doing it all in one means no second delivery charge later. We can bring the whole lot at once."</p>
     </div>
-    <div class="move"><strong>The move:</strong> Offering the cheapest option first is the trust move. Then the deck naturally teases the hot-tub/ice-bath upsell and the one-delivery saving.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Offering the cheapest option first is the trust move. Then the deck naturally teases the hot-tub/ice-bath upsell and the one-delivery saving.</div>
     <div class="story">
       <span class="story-tag">Example anecdote — proof it works anywhere</span>
       <p>There was a double-dipper and sauna job in London recently — really difficult access, small house, long narrow scary garden. It all got carried through, decked round tree roots, the deck cut around a tree stump, ending with the dipper and sauna side by side in matching wood. Looked brilliant once it was in.</p>
     </div>
-    <div class="send"><strong>Send:</strong> Send relevant video here.</div>
+    <div class="send hasic"><div class="send-head"><span class="chip send-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3B6E8F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span><span class="stag">Send</span></div>Send relevant video here.</div>
   </div>
 
-  <div class="card" id="c15">
+  <div class="card" data-ghost="15" id="c15">
     <span class="num">Fifteen</span>
     <h2>Ireland &amp; International</h2>
     <span class="label">What to say — Ireland</span>
@@ -748,50 +837,50 @@
       <p>"International's no problem either — we've done it before. Just send us your address and we'll figure out a price and confirm it. And look, we appreciate you're not in the UK and can't come and see the quality in person, so we'll meet you in the middle on delivery — you pay half, we pay half."</p>
       <p>Then take the details and pass to <strong>Marta</strong> — don't quote on the spot, and don't route it to James, international is Marta's.</p>
     </div>
-    <div class="move"><strong>The move:</strong> "Ian's our Irish guy" beats "yes we deliver to Ireland." Makes the infrastructure real and personal. "We pay half" sounds like goodwill, even though they're the ones transferring the money — it reads better than "we'll offset some of the cost."</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>"Ian's our Irish guy" beats "yes we deliver to Ireland." Makes the infrastructure real and personal. "We pay half" sounds like goodwill, even though they're the ones transferring the money — it reads better than "we'll offset some of the cost."</div>
   </div>
 
-  <div class="card" id="c16">
+  <div class="card" data-ghost="16" id="c16">
     <span class="num">Sixteen</span>
     <h2>Glamping — Hold &amp; Refer</h2>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>"We're a team of fabricators and carpenters — we can build pretty much anything in the wellness space, an entire glamping site if you wanted. Shepherd's huts and glamping projects aren't quite my specialism, but let me send you a video and a link to have a look, I'll make a note and get James to call you back for a proper chat."</p>
       <p>Send the eco-pod expo video and the Shepherd's Hut page. That's the clean exit.</p>
     </div>
-    <div class="move"><strong>The move:</strong> Keeps you credible without over-promising on something not yet productised. The James call-back is a warm hand-off, not a dead end — glamping routes to James (international routes to Marta, card 15 — don't mix them up). Phase one is saunas — don't let glamping pull focus.</div>
-    <div class="send"><strong>Send:</strong> The glamping reel — <a href="https://www.instagram.com/barrelsaunauk/reel/CzOW_UoI2Fg/" target="_blank" rel="noopener">instagram.com/barrelsaunauk/reel/CzOW_UoI2Fg</a> — starts with a walk out of a glamping pod and shows we do more than saunas.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Keeps you credible without over-promising on something not yet productised. The James call-back is a warm hand-off, not a dead end — glamping routes to James (international routes to Marta, card 15 — don't mix them up). Phase one is saunas — don't let glamping pull focus.</div>
+    <div class="send hasic"><div class="send-head"><span class="chip send-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3B6E8F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span><span class="stag">Send</span></div>The glamping reel — starts with a walk out of a glamping pod and shows we do more than saunas.</div>
   </div>
 
-  <div class="card" id="c17">
+  <div class="card" data-ghost="17" id="c17">
     <span class="num">Seventeen</span>
     <h2>Accessories</h2>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>The shop's not live yet, but you can now say so rather than staying quiet on it: "We've actually got an online accessory shop in development — bits like sauna hats and more — and once it's live you'll get a discount code to use on it." No need to promise a live link today, just that it's coming and there'll be a code waiting for them.</p>
       <p>The first voucher's worth £30 and it's one-use — enough to get one item outright, or heavily discount something bigger like a bucket and ladle, and enough to bring them onto the shop for a proper look round. After that, every sauna customer gets a <strong>lifetime 10% discount code</strong> for the shop. Say it that way — "you've bought a sauna, so you get a lifetime 10% code" — it's got real value because not everyone gets one.</p>
       <p>For commercial jobs, mention branding: we can put a name or logo on the build itself — worth a quick mention for anyone doing a commercial space, since it makes the whole thing feel personal to them (think "the Smith's House" style naming).</p>
     </div>
-    <div class="move"><strong>The move:</strong> Give, don't sell. A £30 voucher lands warmer than an add-on list, and the lifetime 10% keeps them coming back to the shop for years.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Give, don't sell. A £30 voucher lands warmer than an add-on list, and the lifetime 10% keeps them coming back to the shop for years.</div>
   </div>
 
-  <div class="card" id="c18">
+  <div class="card" data-ghost="18" id="c18">
     <span class="num">Eighteen</span>
     <h2>Bundling — Buy It All From Us</h2>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>"Everything we make — the saunas, the hot tubs, the ice baths, the barrel showers, the glamping pods — it's all built from the same material, so it's worth getting the lot from us. It all suits, it all merges together, it looks the part, it sits nicely side by side, and it all matches up."</p>
       <p>"And you save on delivery too — we bring it all in one go, rather than you paying a separate delivery cost every time. One trip, not three."</p>
       <p>The wood store line for when they're watching the full-setup video: "Even the wood store in that video — nothing goes to waste with us, we actually made that from the offcuts of our saunas." Small line, big message: bespoke, custom, everything from the same hands. Half of them pause the video and decide they want the wood store too.</p>
     </div>
-    <div class="move"><strong>The move:</strong> Raises order value by reframing add-ons as a smart bundle, not extra spend. The "same material, sits side by side" line sells the finished picture — their whole garden, not one product — so extra items feel like completing a set. The delivery saving hands them a rational reason to say yes, so trading up feels like saving. Bring it in the moment they mention a hot tub, ice bath, shower or pod alongside the sauna, and again in the Close. One caveat: glamping still routes to James (card 16) — pods sit in the same-material family for the pitch, but the pod itself stays a referral, not a live bundle item.</div>
-    <div class="send"><strong>Send:</strong> The full-setup video — sauna, hot tub, ice bath and the offcut wood store in one shot. (Video pending — being pulled from the archive.)</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Raises order value by reframing add-ons as a smart bundle, not extra spend. The "same material, sits side by side" line sells the finished picture — their whole garden, not one product — so extra items feel like completing a set. The delivery saving hands them a rational reason to say yes, so trading up feels like saving. Bring it in the moment they mention a hot tub, ice bath, shower or pod alongside the sauna, and again in the Close. One caveat: glamping still routes to James (card 16) — pods sit in the same-material family for the pitch, but the pod itself stays a referral, not a live bundle item.</div>
+    <div class="send hasic"><div class="send-head"><span class="chip send-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3B6E8F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span><span class="stag">Send</span></div>The full-setup video — sauna, hot tub, ice bath and the offcut wood store in one shot. (Video pending — being pulled from the archive.)</div>
   </div>
 
-  <div class="card" id="c19">
+  <div class="card" data-ghost="19" id="c19">
     <span class="num">Nineteen</span>
     <h2>Show Site Visits — Booking the Viewing</h2>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>Set the scene properly before anyone comes down — this is the bit that goes wrong if you skip it. We're not a signposted showroom. We've got an outdoor space with tens of thousands of pounds of product on show that we deliberately don't signpost, so it's meetings only, by arrangement.</p>
       <p>"So it's meetings only — we'll meet you across the road at the Maze Manor. There's a farm track just opposite the Maze Manor, on your right. If you're struggling to find it, give us a shout and we'll come out and bring you down the lane. Otherwise, head for the Maze Manor and you'll see the track."</p>
@@ -803,22 +892,22 @@
       <p>When you book someone in, mark the show site visit on their client card. Two messages then go out around the visit: <strong>the day before</strong> — "Still good for tomorrow? Here's where we're meeting" — and <strong>the evening after</strong> — "How did you find today? Anything you want us to price up while it's fresh?"</p>
       <p>These are being set up as GHL automations off the booking, so the messages go for you — all you do is reply when the customer replies, and that rolls straight into your follow-ups. Until the automation's live, send those two messages yourself, same wording, same timing. Even when the yard team's given a full brief of the visit, the customer hearing from <em>you</em> afterwards is what makes it feel organised — and keeps the sale yours.</p>
     </div>
-    <div class="move"><strong>The move:</strong> Setting the scene on the call is what stops someone rocking up lost at the end of the wrong lane. Frame the no-signpost, meetings-only setup as deliberate — it's protecting a yard full of premium product, not disorganisation. The meet-and-feel-then-tour flow makes the visit sound like an experience, not a chore. The day-before and evening-after messages are what stop a great visit going cold.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Setting the scene on the call is what stops someone rocking up lost at the end of the wrong lane. Frame the no-signpost, meetings-only setup as deliberate — it's protecting a yard full of premium product, not disorganisation. The meet-and-feel-then-tour flow makes the visit sound like an experience, not a chore. The day-before and evening-after messages are what stop a great visit going cold.</div>
   </div>
 
-  <div class="card" id="c20">
+  <div class="card" data-ghost="20" id="c20">
     <span class="num">Twenty</span>
     <h2>Big Custom Projects</h2>
-    <span class="label">What to say</span>
+    <span class="label label-ic"><span class="chip say-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C08B41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>What to say</span>
     <div class="say">
       <p>For larger custom projects — someone wanting six hot tubs, seven ice baths, four saunas, a whole layout — the client usually wants a lot up front: presentations, drawings, ideas, the full picture. That's real time on our side, and there's a genuine risk of pouring it into someone who never buys.</p>
       <p>So get some commitment before you build the presentation. The line: "There's loads we can do here and I'd love to put a proper plan together for you — drawings, the layout, all of it. What I'd suggest is we lock in at least one item to get started, so we can prioritise you and set the time aside to do it properly. This is a ballpark on price, it can all be customised — so why not commit and we'll get moving?"</p>
       <p>Frame the deposit as unlocking the work, not a hurdle. It's the same £500 deposit as any order — that's them committing to one item, and it's all the qualification you need. Once they've committed to even one item, you know they're real, and you can justify the drawings and the time. If they won't commit to a single item, that's your answer on how serious they are.</p>
     </div>
-    <div class="move"><strong>The move:</strong> Get a minimum deposit against at least one item before doing the big presentation work. It qualifies the serious buyers from the time-wasters and lets you prioritise the ones who'll actually pay. "Why not commit?" is the whole close — a ballpark they can build on beats a blank cheque of your time.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Get a minimum deposit against at least one item before doing the big presentation work. It qualifies the serious buyers from the time-wasters and lets you prioritise the ones who'll actually pay. "Why not commit?" is the whole close — a ballpark they can build on beats a blank cheque of your time. See the <button class="xref" data-target="tab-deposit">Deposit Gate</button> tab for the full deposit pitch.</div>
   </div>
 
-  <div class="card" id="c21">
+  <div class="card" data-ghost="21" id="c21">
     <span class="num">Twenty-One</span>
     <h2>The Close</h2>
     <span class="label">What it comes down to</span>
@@ -837,12 +926,13 @@
       <p>Then make the paperwork side plain: the estimate is an estimate — the invoice created in our main invoicing system is the actual invoice. Nobody should be left wondering which document is which.</p>
       <p>Why this matters: when the process isn't explained, people pay the £500 and then email asking "I've paid my deposit, when's my sauna arriving?" That confusion is entirely preventable — it means the closer didn't explain it. Being crystal clear here is part of the close, not admin after it.</p>
     </div>
-    <div class="move"><strong>The move:</strong> Rapport, made-in-Wales, buy-once, and a story. That's the close. The queue framing turns the deposit from a barrier into protection — their place, held. Photos and videos coming back from them after the call is the real sign they're still on the hook.</div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>Rapport, made-in-Wales, buy-once, and a story. That's the close. The queue framing turns the deposit from a barrier into protection — their place, held. Photos and videos coming back from them after the call is the real sign they're still on the hook. Full deposit pitch lives in the <button class="xref" data-target="tab-deposit">Deposit Gate</button>.</div>
   </div>
 
 </div><!-- /tab-scripts -->
 
-<div class="tab-panel" id="tab-examples">
+
+<div class="tab-panel" id="tab-calls">
 
   <div class="examples-banner">
     <h2>Live Call Examples</h2>
@@ -852,19 +942,16 @@
   <div class="example-card">
     <h3>The Cold-Shower Sauna</h3>
     <p class="example-meta">Client: Luke &middot; Log burner, porch, half-moon window</p>
-
     <div class="embed-slot">
       <audio controls preload="none" style="width:100%;">
         <source src="luke.mp3" type="audio/mpeg">
         Your browser doesn't support audio playback.
       </audio>
     </div>
-
     <span class="label">What the call was about</span>
     <div class="say">
       <p>Luke had a clear vision: a sauna on his storage-yard hardstanding, two seats out front to rest on, and a cold shower dropped in round the back. He'd bought a cheap electric sauna before that arrived flat-packed and shoddy, and he's got an abundance of wood — so he was set on a log burner. James pitched 3 metres with a 0.6m porch, external-feed burner, half-moon window with the chute running through the wooden bottom half, premium LED lights. Landed the price at around £11,585 plus VAT including the summer discount, itemised estimate to follow by email.</p>
     </div>
-
     <div class="annotate good">
       <h4>What worked</h4>
       <ul>
@@ -875,7 +962,6 @@
         <li>Closed with a real reason to act now — the £500 summer/low-season discount — rather than leaving it open-ended.</li>
       </ul>
     </div>
-
     <div class="annotate better">
       <h4>What could've been sharper</h4>
       <ul>
@@ -1023,14 +1109,924 @@
     </div>
   </div>
 
-</div><!-- /tab-examples -->
+</div><!-- /tab-calls -->
+
+
+<div class="tab-panel" id="tab-facts">
+
+  <div class="ff-intro">
+    <h3>Fast Facts — The Spec Behind the Sell</h3>
+    <p>Everything the configurator quotes, explained. This is where you look up the compatibility rules, the spoken lines for each option, and the "if residential / if commercial" reframes — pulled together from the old pop-ups so it lives in one place, not buried in the shop.</p>
+    <p>Building a live estimate on a call? The configurator does the numbers — this tab tells you what each option <em>is</em> and what to say about it.</p>
+    <a class="cfg-btn" href="./estimate.html">Open the Estimate Configurator &rarr;</a>
+  </div>
+
+  <div class="subtabs">
+    <button class="subtab active" data-ff="ff-included"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7 12 3 4 7v10l8 4 8-4z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg>Included in Base</button>
+    <button class="subtab" data-ff="ff-length"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>Length &amp; Layout Rules</button>
+    <button class="subtab" data-ff="ff-timber"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><path d="M6 12h12"/></svg>Timber</button>
+    <button class="subtab" data-ff="ff-rear"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 12h16M12 4v16"/></svg>Rear Windows</button>
+    <button class="subtab" data-ff="ff-entrance-win"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="1"/><path d="M6 12h12"/></svg>Entrance Windows</button>
+    <button class="subtab" data-ff="ff-doors"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1"/><circle cx="15" cy="12" r="1"/></svg>Front Doors</button>
+    <button class="subtab" data-ff="ff-entrance"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 21V8l6-4 6 4v13"/><path d="M10 21v-6h4v6"/></svg>Entrance Layout</button>
+    <button class="subtab" data-ff="ff-internal"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M13 4v16"/></svg>Internal Layout</button>
+    <button class="subtab" data-ff="ff-heater"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3s2 2 2 4-2 3-2 5 2 4 2 4M14 3s2 2 2 4-2 3-2 5 2 4 2 4"/><rect x="4" y="16" width="16" height="5" rx="1"/></svg>Heater Compatibility</button>
+    <button class="subtab" data-ff="ff-bench"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18v3H3zM5 13v6M19 13v6"/></svg>Bench Layouts</button>
+    <button class="subtab" data-ff="ff-roof"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 11v9h14v-9"/></svg>Roof &amp; Finish</button>
+    <button class="subtab" data-ff="ff-foundations"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M5 20v-6h14v6M8 14V9M16 14V9"/></svg>Foundations</button>
+    <button class="subtab" data-ff="ff-mobile"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="15" height="9" rx="1"/><circle cx="6" cy="18" r="2"/><circle cx="13" cy="18" r="2"/><path d="M16 10h3l3 3v3h-6"/></svg>Mobile Trailer</button>
+    <button class="subtab" data-ff="ff-water"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6 6 11a6 6 0 0 1-12 0c0-5 6-11 6-11z"/></svg>Ice Baths &amp; Hot Tubs</button>
+  </div>
+
+  <!-- ============ INCLUDED IN BASE ============ -->
+  <div class="ff-section active" id="ff-included">
+    <div class="spec">
+      <div class="spec-head">
+        <h3>What's included with every barrel sauna</h3>
+        <span class="spec-price inc">Included &middot; from £5,685</span>
+      </div>
+      <div class="spec-say">
+        <span class="say-tag">What to say</span>
+        <p>"When you pick your size and wood type, the base price already includes everything you need to get going. My grandad actually used the same roof shingles on a little Wendy house at the bottom of the garden about 30 years ago — and they're still hanging in there, doing their job. So the quality's solid."</p>
+        <p>"Then if you want to make it your own with windows or layout tweaks, I'll walk you through those — or if you've already chosen, I'll pop it all into the estimate as we go."</p>
+      </div>
+      <p class="say" style="margin-bottom:14px;">Included in the base price:</p>
+      <dl class="spec-grid">
+        <dt>Structure</dt><dd>Handcrafted barrel sauna, benches with backrests, moisture-managed internal construction, structural fixed floor panels, wooden base feet</dd>
+        <dt>Door</dt><dd>Solid timber front door, framed opening, vertical tinted window, lock, handle &amp; spare keys</dd>
+        <dt>Heater</dt><dd>Wood-burning or electric heater, with heater surround, fire protection plates, safety guarding &amp; rail</dd>
+        <dt>Stones</dt><dd>High-density volcanic sauna stones (5–10cm)</dd>
+        <dt>Roof</dt><dd>Black hexagon bitumen shingles (UV-resistant), roof edge lip panels</dd>
+        <dt>Fixings</dt><dd>Stainless steel tightening bands, exterior fixings, door hinges, lockable latch</dd>
+        <dt>Systems</dt><dd>Floor drainage, rodent guard plates, integrated ventilation fixtures</dd>
+        <dt>Warranty</dt><dd>2-year warranty on structural &amp; mechanical components</dd>
+      </dl>
+      <div class="spec-note">
+        <span class="n-tag">Agent note</span>
+        If the customer's on a budget, they can stop here and enjoy a fully functional barrel sauna with all essentials included — the only extra cost would be delivery and installation. Otherwise, keep building with upgrades.
+      </div>
+      <div class="spec-note warn">
+        <span class="n-tag">Not included</span>
+        Any electrics installation. The team supplies and fits the unit with all safety elements, but wiring must be done by a qualified local electrician after the build. An optional £1,200/year maintenance plan is available after ordering (2 visits/year — deep clean, chimney sweep, oil/stain re-application, heater inspection, timber adjustment). Never quoted in the estimate.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ LENGTH & LAYOUT RULES ============ -->
+  <div class="ff-section" id="ff-length">
+    <div class="spec">
+      <div class="spec-head"><h3>Layout rules — what fits at each length</h3></div>
+      <p class="spec-sub">The changing room comes OUT of the total length — never added on top. A 3m sauna with a 1m changing room is a 2m hot room. Quote it that way from the start.</p>
+      <div class="matrix-wrap">
+        <table class="matrix">
+          <thead>
+            <tr><th>Length</th><th>Sits (adults)</th><th>Changing room</th><th>Porch</th><th>Front door</th><th>Side door</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>1.8m</th><td>2–3</td><td class="no">✕</td><td class="no">✕</td><td class="yes">✓</td><td class="no">✕</td></tr>
+            <tr><th>2.5m</th><td>3–4</td><td class="no">✕</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✕</td></tr>
+            <tr><th>3.2m</th><td>4–5</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✕</td></tr>
+            <tr><th>3.7m</th><td>5–6</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✕</td></tr>
+            <tr><th>4.2m</th><td>6–7</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✕</td></tr>
+            <tr><th>4.7m</th><td>7–8</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✕</td></tr>
+            <tr><th>5m</th><td>8–10</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><th>6.1m</th><td>10+</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="spec-note warn">
+        <span class="n-tag">Confirm with Liam</span>
+        The floor-plan thumbnails for this table are ours to remake (Liam's instruction). Placeholder for now — drop the redrawn per-length plans in when ready.
+      </div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-head"><h3>Diameter — 2m vs 2.3m</h3></div>
+      <div class="spec-say">
+        <span class="say-tag">Fast facts</span>
+        <p>Standard diameter is 2m x 2m, included with selected windows. Going to 2.3m x 2.3m gains surprising space — wider seats, thicker backrests, more room between benches. Widening is much cheaper than lengthening, so it's the better-value route to more room. See <button class="xref" data-target="tab-scripts">Scripts Card 3</button> for the pitch.</p>
+      </div>
+      <dl class="spec-grid">
+        <dt>2m x 2m</dt><dd>Included (with selected windows)</dd>
+        <dt>2.3m x 2.3m + wider seats</dt><dd class="spec-price ph">+£725 &middot; TBC</dd>
+        <dt>Large 2.3m + wider seats</dt><dd class="spec-price ph">+£995 &middot; TBC</dd>
+        <dt>Large 2.3m + wider bench design</dt><dd class="spec-price ph">+£1,100 &middot; TBC</dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- ============ TIMBER ============ -->
+  <div class="ff-section" id="ff-timber">
+    <div class="spec">
+      <div class="spec-head">
+        <h3>Thermowood — the standard</h3>
+        <span class="spec-price inc">Standard build</span>
+      </div>
+      <div class="spec-say">
+        <span class="say-tag">What to say</span>
+        <p>"We use Thermowood on nearly every build — it's what we always recommend. It's heat-treated to toughen the wood without any chemicals, which pulls out most of the moisture and makes it far more stable — much less chance of swelling, warping or cracking over time. Holds up brilliantly in sauna heat and outdoor weather, and the colour only gets nicer as it ages."</p>
+      </div>
+      <dl class="spec-grid">
+        <dt>Thickness</dt><dd>48mm Thermowood — ideal for outdoor sauna structures</dd>
+        <dt>Treatment</dt><dd>Heat-treated at 200°C, removes up to 96% of moisture</dd>
+        <dt>Stability</dt><dd>Won't warp, swell or crack over time</dd>
+        <dt>Resistance</dt><dd>Naturally mould-resistant, fully weatherproof, antibacterial surface</dd>
+        <dt>Chemicals</dt><dd>None — just heat and steam</dd>
+      </dl>
+      <div class="spec-note">
+        <span class="n-tag">Agent note</span>
+        Pinewood is the alternative, but Thermowood is what we stand by — highest quality for sauna environments, and the standard on nearly every build.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ REAR WINDOWS ============ -->
+  <div class="ff-section" id="ff-rear">
+    <div class="spec-note warn" style="margin-bottom:22px;">
+      <span class="n-tag">Spec rule — check before you quote</span>
+      Heater placement depends on the rear window. See the <button class="xref" data-target="tab-facts">Heater Compatibility</button> matrix — it's the single source of truth. Globe windows are side-placement only, always.
+    </div>
+
+    <div class="spec">
+      <div class="spec-head"><h3>Full Wood Wall</h3><span class="spec-price inc">Included</span></div>
+      <p class="spec-sub">Full-privacy solid timber rear wall — no glass.</p>
+      <div class="spec-say">
+        <span class="say-tag">What to say</span>
+        <p>"Solid timber all the way — full privacy and that proper cabin feel. Great if the sauna's going against a fence, wall or trees, or there's no rear view to make use of. No point paying for glass you won't see through. Bonus is it heats up faster too — the wood all round keeps the warmth in, especially good in winter. And it's a solid way to keep costs down without compromising quality."</p>
+      </div>
+      <dl class="spec-grid">
+        <dt>Material</dt><dd>Solid wood</dd>
+        <dt>Heater</dt><dd>Any type &amp; placement</dd>
+        <dt>Benches</dt><dd>Any layout</dd>
+        <dt>Size</dt><dd>2m x 2m included &middot; upgrade to 2.3m +£475</dd>
+      </dl>
+    </div>
+
+    <div class="spec">
+      <div class="spec-head"><h3>2 x Vertical Sleek Glass</h3><span class="spec-price ph">+£275 &middot; TBC</span></div>
+      <p class="spec-sub">Slim side windows — adds light while keeping the rear functional.</p>
+      <dl class="spec-grid">
+        <dt>Material</dt><dd>Solid wood frame, tempered sandglass, medium reflective tint</dd>
+        <dt>Heater</dt><dd>Any type &amp; placement</dd>
+        <dt>Benches</dt><dd>Any layout</dd>
+        <dt>Size</dt><dd>2m x 2m included &middot; upgrade to 2.3m +£475</dd>
+      </dl>
+      <div class="spec-note"><span class="n-tag">Good for</span>Natural light without compromising heater placement.</div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-head"><h3>Half Glass Rear Wall</h3><span class="spec-price ph">+£500 &middot; TBC</span></div>
+      <p class="spec-sub">Split wood-and-glass rear wall — tinted tempered glass top, timber bottom.</p>
+      <dl class="spec-grid">
+        <dt>Heater</dt><dd>Centre or side — supports external-feed burners (chute through solid lower wall)</dd>
+        <dt>Benches</dt><dd>Any layout</dd>
+        <dt>Size</dt><dd>2m x 2m included &middot; upgrade to 2.3m +£475</dd>
+      </dl>
+      <div class="spec-note"><span class="n-tag">Good for</span>External wood-feed heaters — solid lower wall for mounting, glass for light. Popular in mobile saunas: secure, bright, balanced.</div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-head"><h3>Full Flat Glass</h3><span class="spec-price ph">+£850 &middot; TBC</span></div>
+      <p class="spec-sub">Modern fully-glazed rear wall — full-height tempered glass with Thermowood border.</p>
+      <dl class="spec-grid">
+        <dt>Heater</dt><dd>Side or centre — NOT suitable for external-feed wood burners</dd>
+        <dt>Benches</dt><dd>Any layout (floating bench built for it)</dd>
+        <dt>Size</dt><dd>Included at 2.3m x 2.3m</dd>
+      </dl>
+      <div class="spec-note"><span class="n-tag">Good for</span>When the sauna faces a view — ultra-modern, light-filled, immersive from inside.</div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-head"><h3>Blackout Globe</h3><span class="spec-price ph">+£2,200 &middot; TBC</span></div>
+      <p class="spec-sub">Dark-tinted curved dome window with a bold privacy finish — moulded in the UK.</p>
+      <dl class="spec-grid">
+        <dt>Material</dt><dd>Acrylic, heatproof, UK-moulded</dd>
+        <dt>Heater</dt><dd>Side placement only — NOT compatible with external-feed burners</dd>
+        <dt>Benches</dt><dd>3-way U-shape only — rear bench sits flush to window, adds 0.5m internal space</dd>
+        <dt>Size</dt><dd>Fixed 2m x 2m</dd>
+      </dl>
+      <div class="spec-note"><span class="n-tag">Good for</span>Full privacy with modern style in compact spaces — appears blacked-out from outside. Rear bench flush gives 0.5m extra internal room.</div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-head"><h3>Tint Globe</h3><span class="spec-price ph">Price TBC</span></div>
+      <p class="spec-sub">Tinted curved dome window — the panoramic favourite, custom-moulded and tinted to match.</p>
+      <div class="spec-say">
+        <span class="say-tag">What to say</span>
+        <p>"The Globe's a proper favourite — we custom-mould them here in the UK and tint each one to match the sauna. Had a client once who used the barrel shells as camping pods on her pig farm — asked for the globes tinted pink like pig noses, and we added little custom pig ears on top. Brilliant."</p>
+      </div>
+      <dl class="spec-grid">
+        <dt>Heater</dt><dd>Side placement only (see matrix)</dd>
+        <dt>Benches</dt><dd>3-way U-shape</dd>
+      </dl>
+      <div class="spec-note warn"><span class="n-tag">Confirm with Liam</span>Tint Globe price wasn't in the source — needs a number before it's quoted.</div>
+    </div>
+  </div>
+
+  <!-- ============ ENTRANCE WINDOWS ============ -->
+  <div class="ff-section" id="ff-entrance-win">
+    <div class="spec">
+      <div class="spec-head"><h3>Entrance window options</h3></div>
+      <div class="spec-say">
+        <span class="say-tag">What to say</span>
+        <p>"With the entrance windows we've got a few styles — it depends on privacy, your view, and budget. The glass is slightly tinted and reflective, so you get built-in privacy — you'd have to be right up close to see much."</p>
+        <p>"You get one sleek vertical window in the front door as standard. Want more light? We add an extra window either side of the door, or both, for a trio of slim windows across the front. And if you've got a view, we can go full glass facade — full glass door in the centre with two tall side panels. We did one like that over a lake recently — lush."</p>
+      </div>
+      <div class="spec-note">
+        <span class="n-tag">Design rule</span>
+        All entrance windows are heatproof glass, safe for repeated steam exposure — and fully compatible with every internal layout and heater type.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ FRONT DOORS ============ -->
+  <div class="ff-section" id="ff-doors">
+    <div class="spec">
+      <div class="spec-head"><h3>Classic Sauna Door</h3><span class="spec-price inc">Included</span></div>
+      <p class="spec-sub">The most private and weather-ready option — included as standard.</p>
+      <div class="spec-say">
+        <span class="say-tag">What to say</span>
+        <p>"We usually recommend the thicker frame and proper lock — better suited to outdoor use, feel more solid. The Classic comes as standard: chunky timber frame, vertical tinted window, wooden handle, stainless steel lock and key. Most private and secure of the lot. One client — a DOP who works on Netflix documentaries — asked us to build a shed with the same door to store his camera gear, just because it felt so secure."</p>
+      </div>
+      <dl class="spec-grid">
+        <dt>Window</dt><dd>Vertical tinted sauna glass</dd>
+        <dt>Frame</dt><dd>Solid timber, thick profile</dd>
+        <dt>Locking</dt><dd>Stainless steel lock &amp; key set</dd>
+      </dl>
+    </div>
+
+    <div class="spec">
+      <div class="spec-head"><h3>ZenView</h3><span class="spec-price ph">+£150 &middot; TBC</span></div>
+      <p class="spec-sub">Full-glass front door with slim-line spa look.</p>
+      <dl class="spec-grid">
+        <dt>Glass</dt><dd>Full bronze-tinted sandglass</dd>
+        <dt>Frame</dt><dd>Slim timber trim</dd>
+        <dt>Locking</dt><dd>Lower-position integrated lock &amp; key</dd>
+      </dl>
+      <div class="spec-note"><span class="n-tag">Agent tip</span>Contemporary spa look, light security. Best for sleek builds with smoked windows, or sheltered setups and changing rooms.</div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-head"><h3>ZenView Secure</h3><span class="spec-price ph">+£175 &middot; TBC</span></div>
+      <p class="spec-sub">Full-glass door with a thicker frame and proper key lock.</p>
+      <dl class="spec-grid">
+        <dt>Glass</dt><dd>Full bronze-tinted sandglass</dd>
+        <dt>Frame</dt><dd>Thick timber frame</dd>
+        <dt>Locking</dt><dd>Stainless steel lock &amp; key set</dd>
+      </dl>
+      <div class="spec-note"><span class="n-tag">Agent tip</span>The full-glass spa look with the confidence of secure locking and a stronger build — holds up much better outside.</div>
+    </div>
+  </div>
+
+  <!-- ============ ENTRANCE LAYOUT ============ -->
+  <div class="ff-section" id="ff-entrance">
+    <div class="spec">
+      <div class="spec-head"><h3>Flush vs Porch entrance</h3></div>
+      <div class="spec-say">
+        <span class="say-tag">What to say</span>
+        <p>"Entrance-wise you've got two options — flush or porch. If your build's 2.5m or bigger you can go porch, and honestly I'd recommend it — gives you that bit of breathing space stepping out between rounds."</p>
+        <p>"Just a heads-up: the porch doesn't add to the length, it uses 0.6m of it, so slightly less sauna space inside. Porch is +£350, or +£400 with armrests — I'd go armrests if you like a bit of help getting up, or want somewhere to sling a towel. It's even got a drinks hole for your water bottle."</p>
+      </div>
+      <dl class="spec-grid">
+        <dt>Flush</dt><dd>Included — keeps all space inside, best for smaller builds</dd>
+        <dt>Porch</dt><dd class="spec-price ph">+£350 &middot; TBC — takes 0.6m off internal sauna length</dd>
+        <dt>Porch + armrests</dt><dd class="spec-price ph">+£400 &middot; TBC (armrests are a +£50 add-on: towel spot + drinks hole)</dd>
+      </dl>
+      <div class="spec-note warn">
+        <span class="n-tag">Design rule</span>
+        Porch is NOT available on 1.8m saunas (space restriction). Needs 2.5m+. Remember it shortens internal sauna space by 0.6m — factor it into the length pitch.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ INTERNAL LAYOUT ============ -->
+  <div class="ff-section" id="ff-internal">
+    <div class="spec">
+      <div class="spec-head"><h3>Internal sauna layout</h3></div>
+      <p class="spec-sub">The changing room comes out of total length — see <button class="xref" data-target="tab-scripts">Scripts Card 4</button> for the pitch and the airlock story.</p>
+      <dl class="spec-grid">
+        <dt>All sauna space</dt><dd>Included</dd>
+        <dt>1m changing / cooling room + sandglass door</dt><dd class="spec-price ph">+£725 &middot; TBC</dd>
+        <dt>1.5m changing / cooling room + sandglass door</dt><dd class="spec-price ph">+£725 &middot; TBC</dd>
+        <dt>Under-seat storage in changing room</dt><dd class="spec-price ph">+£150 &middot; TBC</dd>
+        <dt>Bespoke layout</dt><dd>See notes — not in estimate subtotal</dd>
+        <dt>Towel hanger (4 hooks)</dt><dd class="spec-price ph">+£20 &middot; TBC</dd>
+        <dt>Towel hanger (8 hooks)</dt><dd class="spec-price ph">+£35 &middot; TBC</dd>
+        <dt>Fold-up table</dt><dd class="spec-price ph">+£195 &middot; TBC</dd>
+      </dl>
+    </div>
+
+    <div class="spec">
+      <div class="spec-head"><h3>ZenView Spa Sandglass Door</h3><span class="spec-price inc">Included with any changing room</span></div>
+      <p class="spec-sub">The internal door between changing room and sauna — comes free with any changing-room layout.</p>
+      <dl class="spec-grid">
+        <dt>Glass</dt><dd>Bronze-tinted tempered sandglass</dd>
+        <dt>Handle</dt><dd>Vertical wooden grip</dd>
+        <dt>Placement</dt><dd>Between changing room and sauna interior</dd>
+      </dl>
+      <div class="spec-note">
+        <span class="n-tag">Agent tip</span>
+        This premium internal door is included automatically with any changing-room layout — the soft-tinted glass adds a luxury spa touch while helping retain heat in the main chamber. Not to be confused with the ZenView front doors (see Front Doors tab).
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HEATER COMPATIBILITY ============ -->
+  <div class="ff-section" id="ff-heater">
+    <div class="spec">
+      <div class="spec-head"><h3>Heater vs Rear Window — placement compatibility</h3></div>
+      <p class="spec-sub">The authoritative compatibility grid. When a window card and this table seem to disagree, this table wins. Globe Centre fails every heater — Globe is side-only, always.</p>
+      <div class="matrix-wrap">
+        <table class="matrix">
+          <thead>
+            <tr>
+              <th rowspan="2" style="vertical-align:bottom;text-align:left;">Heater</th>
+              <th colspan="2">Half Glass</th>
+              <th colspan="2">Vertical Sleek</th>
+              <th colspan="2">Globe</th>
+              <th colspan="2">Full Glass Wall</th>
+            </tr>
+            <tr>
+              <th>Side</th><th>Centre</th><th>Side</th><th>Centre</th><th>Side</th><th>Centre</th><th>Side</th><th>Centre</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th>Harvia M3 (Internal Feed)</th>
+              <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✕</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><th>Harvia M3 SL (External Feed)</th>
+              <td class="no">✕</td><td class="yes">✓</td><td class="no">✕</td><td class="yes">✓</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td></tr>
+            <tr><th>Harvia KIP90 (Electric — Switch)</th>
+              <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✕</td><td class="yes">✓</td><td class="no">✕</td></tr>
+            <tr><th>Harvia Cilindro (Electric — Freestanding)</th>
+              <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✕</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="spec-note warn">
+        <span class="n-tag">The two hard rules</span>
+        <strong>External-feed burner (M3 SL)</strong> only works Centre on Half Glass or Vertical Sleek — never on Globe or Full Glass Wall, never Side. <strong>Globe</strong> is side-only for every heater. See <button class="xref" data-target="tab-scripts">Scripts Card 7</button> and <button class="xref" data-target="tab-scripts">Card 8</button>.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ BENCH LAYOUTS ============ -->
+  <div class="ff-section" id="ff-bench">
+    <div class="spec">
+      <div class="spec-head"><h3>Bench layout options</h3></div>
+      <p class="spec-sub">Four popular styles — each offers a unique flow and function. Bench layout dictates heater placement, which dictates window choice, so walk it bench → heater → window. See <button class="xref" data-target="tab-scripts">Scripts Card 6</button> for the pitch.</p>
+      <dl class="spec-grid">
+        <dt>3-Way Straight</dt><dd>Most popular — benches along both side walls and the back wall. Comfortable for groups and laying down.</dd>
+        <dt>U-Shape</dt><dd>Heater on the side, view unobstructed. Interchangeable middle section option (aspen) for stretching, yoga, sprawling.</dd>
+        <dt>L-Shape</dt><dd>For compact builds — heater on the left as you walk in. Electric heater only; a wood burner needs the middle-end position with benches either side.</dd>
+      </dl>
+      <div class="spec-note warn">
+        <span class="n-tag">Confirm with Liam</span>
+        Only 3 of the 4 promised bench layouts were in the source (3-Way Straight had a diagram, U-shape and L-shape came from the Scripts). The fourth layout and remaining diagrams need collecting/remaking.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ROOF & FINISH ============ -->
+  <div class="ff-section" id="ff-roof">
+    <div class="spec">
+      <div class="spec-head"><h3>Hexagon Bitumen Shingles</h3><span class="spec-price inc">Included</span></div>
+      <p class="spec-sub">Charcoal-black hexagon shingles — modern style, rugged outdoor protection.</p>
+      <dl class="spec-grid">
+        <dt>Material</dt><dd>Bitumen with mineral granules</dd>
+        <dt>Protection</dt><dd>UV-resistant, waterproof, wind-tolerant</dd>
+        <dt>Fits</dt><dd>All standard barrel roofs</dd>
+      </dl>
+      <div class="spec-note">
+        <span class="n-tag">Agent tip</span>
+        Shields the sauna from harsh elements, extends the roof timbers' lifespan, adds a polished geometric finish. Black pairs well with Thermowood. (The grandad's-Wendy-house story lives in the Included-in-Base tab.)
+      </div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-head"><h3>Roof Edge Lips</h3><span class="spec-price inc">Included</span></div>
+      <p class="spec-sub">Timber roof-edge trim — seals the edge, controls water runoff.</p>
+      <dl class="spec-grid">
+        <dt>Material</dt><dd>Solid glued timber, natural finish</dd>
+        <dt>Function</dt><dd>Seals edge, controls runoff</dd>
+        <dt>Fits</dt><dd>All barrel roof shapes</dd>
+      </dl>
+      <div class="spec-note warn">
+        <span class="n-tag">Confirm with Liam</span>
+        Source copy was muddled — the popup heading sold a "straight / modern" edge but the body text and the configurator both say "classic rounded." Confirm which edge style(s) are actually offered, so the sell and the estimate agree.
+      </div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-head"><h3>Exterior Stain Palette</h3><span class="spec-price ph">Wood stain +£395 &middot; TBC</span></div>
+      <p class="spec-sub">Optional stained finish — enhances appearance and protects timber from weather and UV.</p>
+      <dl class="spec-grid">
+        <dt>Type</dt><dd>Water-based UV-stable stain, satin matte</dd>
+        <dt>Protection</dt><dd>Enhanced water, mould &amp; UV resistance</dd>
+        <dt>Popular tones</dt><dd>Charcoal grey, soft pine, driftwood brown</dd>
+      </dl>
+      <div class="spec-note">
+        <span class="n-tag">The 7-day rule</span>
+        Customer doesn't decide colour on the call — they have up to 7 days after the holding payment to finalise. If their colour isn't on the chart, they can supply and apply their own on-site. (Colours vary on screen vs real timber.)
+      </div>
+      <div class="spec-note warn">
+        <span class="n-tag">System opportunity — for the Liam ping</span>
+        The 7-day colour clock is a post-deposit event with nothing enforcing it. Once the deposit is a real system trigger, "deposit paid → 7-day colour reminder" is a natural GHL automation. Flagged, not built.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ FOUNDATIONS ============ -->
+  <div class="ff-section" id="ff-foundations">
+    <div class="spec">
+      <div class="spec-head"><h3>Barrel sauna foundations</h3></div>
+      <p class="spec-sub">The siting rules. Base pricing (decking / concrete) is quoted separately, on request — not in the estimate. See <button class="xref" data-target="tab-scripts">Scripts Card 14</button> for the sleeper pitch and the Penarth story.</p>
+      <dl class="spec-grid">
+        <dt>Needs</dt><dd>Solid, level base — level ground, concrete slab, or bore-hole decking base</dd>
+        <dt>Avoid</dt><dd>Flood-prone or soggy areas</dd>
+        <dt>Height</dt><dd>Base must sit above ground to prevent rot</dd>
+        <dt>Best</dt><dd>Concrete for long-term support; railway sleepers are the cheapest leveller</dd>
+      </dl>
+      <div class="spec-note">
+        <span class="n-tag">Feet rest unfixed</span>
+        The sauna sits on horizontal wooden feet — it rests on them, not bolted down. The weight packs it right onto the base. Sleepers dug in where the feet sit is the cheapest solid option.
+      </div>
+      <div class="spec-note warn">
+        <span class="n-tag">Confirm with Liam / remake ourselves</span>
+        Per-length foundation drawings (1.8m–6.1m) carry the feet-spacing figures but are illegible at source resolution and CloudFront-hosted. Liam's instruction: remake ourselves. Needs legible spacing figures per length to redraw — placeholder until then.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MOBILE TRAILER ============ -->
+  <div class="ff-section" id="ff-mobile">
+    <div class="spec">
+      <div class="spec-head"><h3>Mobile barrel sauna — trailer specs</h3></div>
+      <p class="spec-sub">Preset trailer sizes: 3m, 3.5m, 4m — custom on request. See <button class="xref" data-target="tab-scripts">Scripts Card 9</button> for the full mobile pitch.</p>
+      <dl class="spec-grid">
+        <dt>Frame</dt><dd>Galvanised steel</dd>
+        <dt>Braking</dt><dd>Braking system with brake lever, anti-sway control</dd>
+        <dt>Running gear</dt><dd>Axle &amp; suspension, solid wheels &amp; mounting brackets, spare tyre with mount</dd>
+        <dt>Safety kit</dt><dd>Full lights, reflectors, side markers; ratchet straps &amp; anchoring points; stabilising station poles</dd>
+        <dt>Build</dt><dd>Weather-resistant, road-legal (compliance &amp; licensing), delivered fully built</dd>
+        <dt>Included</dt><dd>User manual, aftercare &amp; warranty</dd>
+      </dl>
+      <div class="spec-note">
+        <span class="n-tag">Electrics</span>
+        Mobiles are fully turnkey — professionally tested and wired, battery and solar fitted, ready to go. Different from residential builds (which need the customer's electrician for the mains connection).
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ICE BATHS & HOT TUBS ============ -->
+  <div class="ff-section" id="ff-water">
+    <div class="spec">
+      <div class="spec-head"><h3>Ice baths — the dippers</h3></div>
+      <p class="spec-sub">Both single and double are ice bath AND hot tub — heats to 40°, cools to zero. Not instant-switch: decide overnight. See <button class="xref" data-target="tab-scripts">Scripts Card 11</button> for the custody-war line.</p>
+      <table class="qtable">
+        <tr><th>Model</th><th>Price</th></tr>
+        <tr><td>Single dipper (chiller / filter)</td><td>£3,995 + VAT</td></tr>
+        <tr><td>Double dipper (chiller / filter)</td><td>£5,995 + VAT</td></tr>
+      </table>
+      <div class="spec-note">Comes complete — thin wood steps, lids, inserts, seats. Free delivery when brought with the sauna (one trip).</div>
+      <div class="spec-note warn">
+        <span class="n-tag">Gap — dims &amp; electrics</span>
+        Prices and positioning are here; footprint dimensions and chiller electrical draw are not in any source yet. A closer asked "what amp does the chiller pull / what's the footprint" can't answer from this. Needs collecting.
+      </div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-head"><h3>Hot tubs</h3></div>
+      <p class="spec-sub">Round, cladded to match the sauna. Woodburn or electric heated. See <button class="xref" data-target="tab-scripts">Scripts Card 10</button>.</p>
+      <table class="qtable">
+        <tr><th>Item</th><th>Price</th></tr>
+        <tr><td>Thermowood hot tub (jets, LED, stairs, thermocover)</td><td>£5,995</td></tr>
+        <tr><td>2 x Thermowood hot tub</td><td>£11,395</td></tr>
+        <tr><td>Barrel shower</td><td>£2,495</td></tr>
+        <tr><td>Heated water tank (wood burner option)</td><td>+£375</td></tr>
+      </table>
+      <div class="spec-note warn">
+        <span class="n-tag">Confirm with Liam — the big one</span>
+        Hot-tub pricing is inconsistent across sources (£5,495 vs £5,995 vs £7,995 in different docs). Three live buyers are blocked on tub pricing — this is the #1 missing customer-facing number. Plus: dims &amp; electrics missing, same as the dippers. Confirm the standard price before closers quote it.
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-facts -->
+
+
+<div class="tab-panel" id="tab-qa">
+
+  <div class="toc">
+    <h3>The Questions Every Buyer Asks</h3>
+    <p class="toc-sub">Twelve cards &middot; look it up, answer it, move on</p>
+    <ol>
+      <li><a href="#q1">Electrics — "Do I Need Power?"</a></li>
+      <li><a href="#q2">Dimensions &amp; Sizing</a></li>
+      <li><a href="#q3">Base, Siting &amp; Groundworks</a></li>
+      <li><a href="#q4">Delivery &amp; Install — The Prices</a></li>
+      <li><a href="#q5">On-Site Build vs Delivery</a></li>
+      <li><a href="#q6">Ireland &amp; International</a></li>
+      <li><a href="#q7">Hot Tubs &amp; Ice Baths — The Prices</a></li>
+      <li><a href="#q8">Base Sauna Price List</a></li>
+      <li><a href="#q9">Heaters — Wood vs Electric</a></li>
+      <li><a href="#q10">"If We Move, Can We Take It?"</a></li>
+      <li><a href="#q11">Planning Permission</a></li>
+      <li><a href="#q12">The Excuse Bank</a></li>
+    </ol>
+  </div>
+
+  <div class="ground-rules">
+    <h3>How to Use This</h3>
+    <ol>
+      <li><strong>This is the facts sheet, not the pitch.</strong> The Scripts tell you <em>how</em> to sell each thing — this tells you the hard numbers and answers when a customer asks on a follow-up. Cross-references to the script cards are the blue pills.</li>
+      <li><strong>Send native files, never Instagram links.</strong> Half our buyers aren't on social and a reel link is dead on arrival. Every held-back deliverable lives as a proper video or image in the content library — send the file.</li>
+      <li><strong>Anything flagged Confirm With Liam is a genuine gap</strong> — don't quote it to a customer until it's confirmed. Prices below are starting points; everything's made to order.</li>
+    </ol>
+  </div>
+
+  <div class="card" data-ghost="1" id="q1">
+    <span class="num">One</span>
+    <h2>Electrics — "Do I Need Power for It?"</h2>
+    <span class="label">The answer</span>
+    <div class="say">
+      <p>Comes up on nearly every call. Keep it simple:</p>
+      <p><strong>Wood-burning heater:</strong> electric draw is very low. A standard 240V plug socket covers it — and that only runs the lights and jets, nothing heavy.</p>
+      <p><strong>No jets, no lights:</strong> no electric required at all. Fully off-grid capable.</p>
+      <p><strong>Solar lighting option:</strong> powers the whole lighting system — porch, changing room, sauna — off-grid, no mains, zero running cost.</p>
+      <p><strong>Electric WiFi heater</strong> (Harvia, app control) does need mains access. Better fit for commercial/Airbnb where lighting a fire daily is a chore.</p>
+    </div>
+    <span class="label">Word for word</span>
+    <div class="say">
+      <p>"Say you've got a woodburning heater — the electric's very low, standard plug socket, and that just handles the lights and jets. Build it without those and there's no electric needed at all."</p>
+    </div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div><strong>Cross-ref:</strong> <button class="xref" data-target="tab-scripts">Scripts Card 5</button> for the fully-built vs on-site wiring pitch, and <button class="xref" data-target="tab-scripts">Card 8</button>.</div>
+  </div>
+
+  <div class="card" data-ghost="2" id="q2">
+    <span class="num">Two</span>
+    <h2>Dimensions &amp; Sizing</h2>
+    <span class="label">Length tiers — made to order</span>
+    <table class="qtable">
+      <tr><th>Length</th><th>Tier</th><th>Suits</th></tr>
+      <tr><td>1.8m</td><td>Compact</td><td>Sauna only, smaller gardens, 2–3 people</td></tr>
+      <tr><td>2.4m</td><td>Standard</td><td>Sauna + integrated porch capacity</td></tr>
+      <tr><td>3.2m</td><td>Spacious</td><td>Porch or changing room capacity</td></tr>
+      <tr><td>3.7m</td><td>Popular</td><td>Porch &amp; changing room compatible</td></tr>
+      <tr><td>4.2m</td><td>Spacious</td><td>Porch or changing room</td></tr>
+      <tr><td>4.7m</td><td>XL</td><td>Larger groups. Side entrance available from here up</td></tr>
+      <tr><td>6m</td><td>Grand</td><td>Full changing room, porch &amp; large sauna. Side entrance option</td></tr>
+    </table>
+    <div class="say">
+      <p>Diameter, windows, heaters and layout are all chosen separately. Standard diameter is 2m; 2.3m gains surprising space.</p>
+      <p><strong>Spec rule:</strong> the changing room comes <em>out of</em> the total length, not on top. A 3m sauna with a 1m changing room is a 2m hot room. Quote it that way from the start.</p>
+    </div>
+    <div class="confirm">
+      <span class="confirm-tag">Confirm with Liam</span>
+      Exact external diameter per length, and internal usable length once a changing room's added. Buyers asked for precise cm figures — worth a definitive spec sheet.
+    </div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div><strong>Cross-ref:</strong> <button class="xref" data-target="tab-scripts">Card 3 (Diameter)</button> and <button class="xref" data-target="tab-scripts">Card 4 (Length &amp; Changing Room)</button> for the pitch. Full layout-rules table lives in <button class="xref" data-target="tab-facts">Fast Facts</button>.</div>
+  </div>
+
+  <div class="card" data-ghost="3" id="q3">
+    <span class="num">Three</span>
+    <h2>Base, Siting &amp; Groundworks</h2>
+    <span class="label">"What do I stand it on? Do I need to prep?"</span>
+    <div class="say">
+      <p>Any solid, <strong>level</strong> surface works — patio, concrete pad, gravel, hardstanding. As long as it's level, they're good. No need to lift an existing patio.</p>
+      <p>The sauna sits on <strong>horizontal legs/feet</strong> — cut precise to form the barrel. It rests on them unfixed; the weight packs it right down onto the base.</p>
+      <p><strong>Railway sleepers</strong> are the cheapest leveller — dig them in where the feet sit, done. On an existing slab: build straight on it if level, sleepers under the feet if any levelling's needed.</p>
+    </div>
+    <div class="confirm">
+      <span class="confirm-tag">Confirm with Liam</span>
+      (1) Whether free sleepers are standard or case-by-case before promising them. (2) Exact feet-spacing measurements per length — needed to remake the foundation drawings.
+    </div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div><strong>Cross-ref:</strong> <button class="xref" data-target="tab-scripts">Card 14 (Decking &amp; Ground Prep)</button>, plus the siting rules in <button class="xref" data-target="tab-facts">Fast Facts → Foundations</button>. Unlocks two follow-up excuses — sleeper-base pics and the feet-spacing sketch (Card 12).</div>
+  </div>
+
+  <div class="card" data-ghost="4" id="q4">
+    <span class="num">Four</span>
+    <h2>Delivery &amp; Install — The Prices</h2>
+    <table class="qtable">
+      <tr><th>Option</th><th>Price</th></tr>
+      <tr><td>Fully assembled — England/Wales</td><td>+£495</td></tr>
+      <tr><td>Full onsite build</td><td>+£1,250</td></tr>
+      <tr><td>Large sauna onsite build</td><td>+£1,500</td></tr>
+      <tr><td>Ireland / Scotland / Isle of Wight</td><td>+£300</td></tr>
+      <tr><td>EU delivery</td><td>+£500</td></tr>
+      <tr><td>Crane (HIAB) delivery</td><td>+£1,200 est.</td></tr>
+      <tr><td>Collection</td><td>Included</td></tr>
+      <tr><td>Custom / remote access</td><td>Quote required</td></tr>
+    </table>
+    <div class="say">
+      <p><strong>HIAB crane</strong> for local — lifts over drives, walls, obstacles. <strong>Delivery trailer</strong> for further afield, ready for a lift on the client's side. Client can use their own crane/local company — farms, estates, commercial all fine.</p>
+      <p><strong>Always get an access-route video.</strong> It determines the delivery method (HIAB vs trailer vs handball) and it's the standard "what we need from them" ask. Difficult access is a selling point, not a problem.</p>
+    </div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div><strong>Cross-ref:</strong> <button class="xref" data-target="tab-scripts">Card 13 (Delivery &amp; Lifting)</button> for the no-crane framing.</div>
+  </div>
+
+  <div class="card" data-ghost="5" id="q5">
+    <span class="num">Five</span>
+    <h2>On-Site Build vs Delivery</h2>
+    <span class="label">The cost difference (asked directly on calls)</span>
+    <div class="say">
+      <p>Delivered fully assembled is <strong>+£495</strong>. Full on-site build is <strong>+£1,250</strong> (£1,500 for large). So on-site build runs roughly <strong>£755–£1,005 more</strong> than assembled delivery, depending on size.</p>
+      <p>Frame it right: on-site build is for when access won't allow a pre-built unit in — not the default. If access is easy and there's hardstanding, we bring it fully built and lift it into place. 80–90% of the time the team just builds it on site anyway.</p>
+    </div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div><strong>Cross-ref:</strong> <button class="xref" data-target="tab-scripts">Card 13 (Delivery &amp; Lifting)</button> — ask access early, it changes how the job runs.</div>
+  </div>
+
+  <div class="card" data-ghost="6" id="q6">
+    <span class="num">Six</span>
+    <h2>Ireland &amp; International</h2>
+    <span class="label">The answer</span>
+    <div class="say">
+      <p><strong>Ireland:</strong> no problem — +£300 delivery. Ian, qualified carpenter and long-standing team member, is Ireland-based; comes to the UK for install stints, then does the rounds on Ireland installs.</p>
+      <p><strong>International/EU:</strong> +£500 EU, custom beyond. Take details and pass to <strong>Marta</strong> — don't quote on the spot, and don't route it to James.</p>
+    </div>
+    <div class="confirm">
+      <span class="confirm-tag">Confirm with Liam</span>
+      US routing gap: WhatsApp templates and UK→US SMS are both non-functional, so US leads (+1) need email-first sequences. System fix, not a closer answer yet.
+    </div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div><strong>Cross-ref:</strong> <button class="xref" data-target="tab-scripts">Card 15 (Ireland &amp; International)</button>. Ireland routes to Ian, international routes to Marta — don't mix them up.</div>
+  </div>
+
+  <div class="card" data-ghost="7" id="q7">
+    <span class="num">Seven</span>
+    <h2>Hot Tubs &amp; Ice Baths — The Prices</h2>
+    <span class="label">The most-asked-for numbers</span>
+    <table class="qtable">
+      <tr><th>Item</th><th>Price</th></tr>
+      <tr><td>Single dipper ice bath (chiller/filter)</td><td>£3,995 + VAT</td></tr>
+      <tr><td>Double dipper ice bath (chiller/filter)</td><td>£5,995 + VAT</td></tr>
+      <tr><td>Thermowood hot tub</td><td>£5,995</td></tr>
+      <tr><td>Barrel shower</td><td>£2,495</td></tr>
+      <tr><td>Heated water tank (wood burner)</td><td>+£375</td></tr>
+    </table>
+    <div class="say">
+      <p><strong>The dipper explained:</strong> both single and double come with chiller, cooler, filter and heater — heats to 40°, cools to zero. Both ice bath <em>and</em> hot tub, but not instant-switch: decide the night before and switch overnight. Comes complete — thin wood steps, lids, inserts, seats.</p>
+      <p>Traditional wood-fired hot tub can be <strong>woodburn or electric</strong> heated. Free delivery when brought <strong>with the sauna</strong> — one trip, no second delivery charge.</p>
+    </div>
+    <div class="confirm">
+      <span class="confirm-tag">Confirm with Liam — three gaps</span>
+      (1) Thermowood hot tub shows different prices across sources (£5,495 / £5,995 / £7,995) — which is standard? (2) Double-dipper wood-burner option at +£1,000 — live to sell? Single too? (3) A proper hot-tub price guide is the #1 missing customer-facing asset — three live buyers blocked on it. Plus dims &amp; electrics missing.
+    </div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div><strong>Cross-ref:</strong> <button class="xref" data-target="tab-scripts">Card 10 (Hot Tubs)</button> and <button class="xref" data-target="tab-scripts">Card 11 (The Dippers)</button> for the pitch. Also in <button class="xref" data-target="tab-facts">Fast Facts</button>.</div>
+  </div>
+
+  <div class="card" data-ghost="8" id="q8">
+    <span class="num">Eight</span>
+    <h2>Base Sauna Price List (Thermowood)</h2>
+    <span class="label">Starting prices — made to order, before upgrades</span>
+    <table class="qtable">
+      <tr><th>Length</th><th>Price</th></tr>
+      <tr><td>1.8m</td><td>£5,250</td></tr>
+      <tr><td>2.5m</td><td>£7,995</td></tr>
+      <tr><td>3.2m</td><td>£8,795</td></tr>
+      <tr><td>3.6m</td><td>£10,250</td></tr>
+      <tr><td>4.1m</td><td>£10,995</td></tr>
+      <tr><td>4.6m</td><td>£11,795</td></tr>
+      <tr><td>5m</td><td>£12,745</td></tr>
+      <tr><td>6m</td><td>£13,495</td></tr>
+    </table>
+    <div class="say">
+      <p>Diameter, windows, heaters, lighting and delivery all priced separately. Common upgrades from live deals: globe window £2,995 · full glass front £1,200 · changing room £725 · porch £495 · solar system £1,995 · lighting package £650 · underseat LEDs £325 · heaters £895–£1,695.</p>
+    </div>
+    <div class="confirm">
+      <span class="confirm-tag">Confirm with Liam</span>
+      Deal examples show slightly different base figures than this table. Confirm which price list is current before closers quote from it — a wrong number is worse than no number.
+    </div>
+  </div>
+
+  <div class="card" data-ghost="9" id="q9">
+    <span class="num">Nine</span>
+    <h2>Heaters — Wood vs Electric</h2>
+    <span class="label">The quick facts</span>
+    <div class="say">
+      <p><strong>Wood burner:</strong> ambient, the glow, natural and therapeutic. All safety accessories included as standard — base plate, heat shields, guardrail, flue shields.</p>
+      <p><strong>Electric WiFi (Harvia):</strong> app control, remote on/off, timers. Less maintenance for commercial/Airbnb. Volcanic stones — real steam, not a zappy infrared feel. Single- or three-phase depending on supply.</p>
+      <p><strong>Spec rule:</strong> external-feed wood burner ONLY pairs with the two double-glazed windows or the half-moon — <em>never</em> the big flat glass. You're not feeding logs through a sheet of glass.</p>
+    </div>
+    <div class="confirm">
+      <span class="confirm-tag">Confirm with Liam</span>
+      The price gap between wood burner and electric.
+    </div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div><strong>Cross-ref:</strong> <button class="xref" data-target="tab-scripts">Card 8 (Heaters)</button> for the four-way shortlist, plus the full compatibility grid in <button class="xref" data-target="tab-facts">Fast Facts → Heater Compatibility</button>.</div>
+  </div>
+
+  <div class="card" data-ghost="10" id="q10">
+    <span class="num">Ten</span>
+    <h2>"If We Move House, Can We Take It?"</h2>
+    <span class="label">The answer — reusable as-is</span>
+    <div class="say">
+      <p>Yes. One sauna went to three expos before landing at a client's house.</p>
+      <p><strong>Local move:</strong> HIAB is best — lift and go. <strong>Further:</strong> lift into a trailer and drive it. <strong>Worst case:</strong> disassemble and reassemble. Can be moved as a full unit too.</p>
+    </div>
+    <div class="story">
+      <span class="story-tag">The reframe — this is a sales asset, not just an answer</span>
+      <p>"It adds value to the house sale — a mate of mine bought a house the other day, was between two, went with the one that had a hot tub."</p>
+    </div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div><strong>Cross-ref:</strong> works alongside <button class="xref" data-target="tab-scripts">Card 9 (Mobile Saunas)</button> — portability is a trust-builder, not just a get-out.</div>
+  </div>
+
+  <div class="card" data-ghost="11" id="q11">
+    <span class="num">Eleven</span>
+    <h2>Planning Permission</h2>
+    <span class="label">The answer</span>
+    <div class="say">
+      <p><strong>Eco glamping pods:</strong> no planning permission required — permitted development in most cases. Saunas and tubs generally sit under permitted development too, but it's site-dependent.</p>
+      <p>For big projects already in planning, the follow-up should be <strong>specific</strong>: where it's at, tips to help get it through — not a generic chase.</p>
+    </div>
+    <div class="confirm">
+      <span class="confirm-tag">Confirm with Liam — advisor pitch, write up separately</span>
+      The planning-permission partnership: Liam's met a specialist and partnered. BSUK can handle planning for the client, deposit comes off their build total, priced slightly under standalone planning admin. Needs the specialist tracked down, terms confirmed, and a section built onto the site.
+    </div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div><strong>Cross-ref:</strong> <button class="xref" data-target="tab-scripts">Card 9 (Mobile)</button> for the "ask forgiveness, not permission" angle — mobile sidesteps the planning wait entirely.</div>
+  </div>
+
+  <div class="card" data-ghost="12" id="q12">
+    <span class="num">Twelve</span>
+    <h2>The Excuse Bank</h2>
+    <span class="label">Deliberate hold-backs that earn a follow-up</span>
+    <div class="say">
+      <p>Park a real deliverable on the first call so there's a genuine reason to come back. Not fake — real things held on purpose. Every one lives in the content library as a native file, ready to send.</p>
+      <p><strong>1. Shingle pricing</strong> — "I'll check what those shingles cost and come back with the pricing." (The Scottish 5* castle example. Confirm: get the shingle video into the library.)</p>
+      <p><strong>2. Feet-spacing sketch</strong> — "I'll send a sketch of how far apart the feet sit." Being drawn.</p>
+      <p><strong>3. Sleeper-base pics</strong> — "I'll dig out example pics of the base." Frame it as specific to them.</p>
+      <p><strong>4. Access-route / delivery method</strong> — after they send the access video, come back with the delivery plan.</p>
+      <p><strong>5. Multi-item stall</strong> — if you owe several things, make the wait the excuse: "I'll send it all together in a couple of days."</p>
+    </div>
+    <div class="move hasic"><div class="move-head"><span class="chip move-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96502B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span class="mtag">The move</span></div>The follow-up flows both ways — you owe them a thing, they owe you a thing (video of the space, dimensions, groundworks). Holding a deliverable back on purpose means you always have a legitimate next touch, not a limp "just checking in."</div>
+  </div>
+
+  <div class="card" id="q-confirm" style="border-top:4px solid var(--terracotta);">
+    <span class="num">The gaps</span>
+    <h2>Confirm-With-Liam Checklist</h2>
+    <div class="say">
+      <p>Every open number and decision in one place — close these and the guide is airtight:</p>
+      <p>1. Exact diameters + internal length after changing room (spec sheet)<br>
+      2. Feet-spacing measurements per length (to remake the drawings)<br>
+      3. Free sleepers — standard or case-by-case?<br>
+      4. Thermowood hot tub — which price is standard?<br>
+      5. Double-dipper wood-burner +£1,000 — live to sell? Single too?<br>
+      6. <strong>Hot-tub price guide — the #1 missing customer-facing asset</strong><br>
+      7. Current base-sauna price list — table vs deal-example figures<br>
+      8. Wood burner vs electric price gap<br>
+      9. Tint Globe rear window price<br>
+      10. Roof edge — straight vs rounded, which is offered?<br>
+      11. Ice bath / hot tub dimensions &amp; electrics<br>
+      12. Planning partnership — terms + site section<br>
+      13. Shingle example video into the content library</p>
+    </div>
+  </div>
+
+</div><!-- /tab-qa -->
+
+
+<div class="tab-panel" id="tab-deposit">
+
+  <div class="oneliner">
+    <span class="oneliner-tag">The one-liner</span>
+    <p>"The £500 holds your place in the queue — it comes off your total, and it stops big orders jumping in front of you while you sort the details."</p>
+  </div>
+
+  <div class="ff-intro" style="border-top-color:var(--terracotta);">
+    <h3>Why the deposit is its own tab</h3>
+    <p>The £500 is where warm calls go cold if it's handled wrong — and where they close if it's handled right. This is the reframe, the worked examples, the spoken and WhatsApp versions, and the three pushbacks, so nobody freelances the most important sentence of the call.</p>
+    <p>It ties straight into <button class="xref" data-target="tab-scripts">Scripts Card 21 (The Close)</button> and <button class="xref" data-target="tab-scripts">Card 20 (Big Custom Projects)</button> — this is the detail behind both.</p>
+  </div>
+
+  <div class="card">
+    <span class="num">The story</span>
+    <h2>Three beats — why it exists, in order</h2>
+    <div class="beat">
+      <span class="beat-num">Beat one — the frame</span>
+      <h3>They were ordering anyway</h3>
+      <p>The deposit isn't a decision to buy — that decision's made. It's a way to <strong>hold their place</strong> while they finish the small stuff: final colour, moving money, checking a measurement. Never present it as "are you in or out." Present it as "let's make sure you don't lose your slot while you finish deciding the details."</p>
+    </div>
+    <div class="beat">
+      <span class="beat-num">Beat two — the mechanism</span>
+      <h3>The queue is real</h3>
+      <p>Builds go in order of deposit. A big commercial order landing next week genuinely pushes an undeposited build back. The £500 isn't a psychological trick — it's the actual thing that stops their September becoming November. That's why it can be said plainly and honestly.</p>
+    </div>
+    <div class="beat final">
+      <span class="beat-num">Beat three — the reassurance</span>
+      <h3>It comes off the total</h3>
+      <p>It's not an extra £500. It's the first £500 of a sauna they're buying regardless. "It's not money gone — it's money off, and it buys you a few days without losing your place." That's the sentence that unlocks the hesitant ones.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="num">Worked examples</span>
+    <h2>What it sounds like on a real total</h2>
+    <div class="script">
+      <span class="script-tag">Example one — the residential build</span>
+      <p>"So your build's coming in around £13,500. The £500 deposit comes straight off that, so there's £13,000 left on delivery. What it does right now is lock your place — you've told me you want it for August, and putting the deposit down today is what protects that date while you sort the remortgage. Without it, if a couple of big orders come in this week, August quietly becomes October."</p>
+    </div>
+    <div class="script">
+      <span class="script-tag">Example two — the commercial multi-item</span>
+      <p>"There's a lot in this plan and I want to do it properly for you — drawings, the layout, all of it. Let's lock in the sauna with the £500 so I can prioritise you and set the time aside. It comes off the total, and it means when I've built your full plan out, your slot's already held. If you'd rather not commit to even one item yet, that's fine — but that's the honest test of whether now's the right time."</p>
+    </div>
+  </div>
+
+  <div class="rulebox">
+    <span class="rulebox-tag">The reframe — say it every time</span>
+    <p>It's not £500 gone. It's the first £500 of a sauna they're buying anyway — and it buys them a few days without losing their place.</p>
+  </div>
+
+  <div class="card">
+    <span class="num">Guardrail</span>
+    <h2>Sequencing — don't send the link too early</h2>
+    <p class="say">The link after the first WhatsApp cools a warm lead. The business model is human-call-first, not self-serve. The deposit link goes out <em>after</em> the call, with the itemised estimate — never as the opening move.</p>
+    <ol class="seq">
+      <li>Call happens — rapport, spec, price, the queue framing explained out loud</li>
+      <li>Itemised estimate sent by email after the call</li>
+      <li class="gate">Deposit link sent <em>with</em> the estimate — never before the call, never as a cold link</li>
+      <li>They pay — place held, 72-hour window to finalise details</li>
+      <li>Details finalised → real invoice raised in the invoicing system → build scheduled</li>
+    </ol>
+    <div class="confirm">
+      <span class="confirm-tag">System note — for the Liam ping</span>
+      The deposit event is the central trigger for the entire post-purchase sequence. Until "deposit paid" is a real system event (Shopify gateway live, or the manual tag as stopgap), nothing downstream fires reliably — the 7-day colour clock, the AMP handover, the build-scheduling, all of it. This tab describes the human script; the automation behind it is the bigger unlock.
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="num">The spoken version</span>
+    <h2>Word for word, on the call</h2>
+    <div class="script">
+      <span class="script-tag">Say this near the close</span>
+      <p>"You'll get your fully itemised estimate by email, and with it a link for the £500 deposit. That deposit holds your place in the order queue — it comes off your total, and it means while you're deciding the finer details, or just moving money around, a load of big orders can't jump in front of you and push your build date back."</p>
+      <p>"You were ordering either way — this just gives you a few days to get your ducks in a row without losing your spot."</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="num">The WhatsApp version</span>
+    <h2>What goes in writing, after the call</h2>
+    <div class="wa">
+      <span class="wa-tag">WhatsApp — plain, no markdown</span>
+      <p>Great chatting today. I've popped your itemised estimate over to your email — everything we spoke about is in there.</p>
+      <p>The £500 deposit link is with it. That holds your place in the build queue and comes straight off your total — so it's money off, not money on top. It just means while you finalise the details, big orders can't push your build date back.</p>
+      <p>Any questions on the estimate, fire them over.</p>
+      <p>The Barrel Sauna UK Team</p>
+    </div>
+    <div class="confirm">
+      <span class="confirm-tag">Formatting rule</span>
+      Zero markdown in WhatsApp — no asterisks. They render as raw characters in GHL, not bold. Hierarchy comes from line breaks, not styling. Sign off "The Barrel Sauna UK Team," never a personal name.
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="num">Pushbacks</span>
+    <h2>The three objections — and the answer</h2>
+    <table class="dtable">
+      <tr><th>They say</th><th>You say</th></tr>
+      <tr>
+        <td>"Why do I have to pay to be in a queue?"</td>
+        <td>"You don't have to — you could order on delivery like anything else. But builds go in deposit order, so the £500 is just what stops a big order landing next week and pushing your date back. It's holding your slot, and it's money off the total, not extra."</td>
+      </tr>
+      <tr>
+        <td>"Is it refundable if I change my mind?"</td>
+        <td>"It's non-refundable, because it's what reserves your build slot and the materials against it — but it's not money gone, it's the first £500 of the sauna itself. If you're not sure enough to hold a slot yet, no pressure, we can talk again when you are." <em>(Honest, not pushy — a soft no here protects the brand.)</em></td>
+      </tr>
+      <tr>
+        <td>"Can I just pay it all on delivery?"</td>
+        <td>"Absolutely you can — the deposit's optional. The only thing it changes is your place in the queue. If your timeline's relaxed, no need. If you want a specific month, the deposit's what protects it."</td>
+      </tr>
+    </table>
+    <div class="confirm">
+      <span class="confirm-tag">Confirm with Liam</span>
+      Exact refund wording — the honest line above assumes non-refundable-but-comes-off-total. Confirm the official policy so every closer says the same thing.
+    </div>
+  </div>
+
+  <div class="card" style="border-top:4px solid var(--green);">
+    <span class="num">After they pay</span>
+    <h2>What happens the moment the £500 lands</h2>
+    <p class="say">So closers can say it with confidence — and so the customer never emails "I've paid, when's my sauna arriving?"</p>
+    <ol class="seq">
+      <li>Place in the build queue is secured — dated from the deposit</li>
+      <li>72-hour window opens to finalise the finer details (colour has up to 7 days)</li>
+      <li>Details confirmed → a real invoice is raised in the invoicing system (the estimate was an estimate; the invoice is the invoice)</li>
+      <li class="gate">Build scheduled → handover to aftercare / AMP for the post-purchase journey</li>
+    </ol>
+    <div class="confirm">
+      <span class="confirm-tag">Where this connects</span>
+      This hand-off is where the whole post-purchase system begins — AMP call sequence, install-day touchpoints, review request. All of it waits on "deposit paid" being a real system event. The closer's job ends at a clear, confident explanation of these four steps; the automation carries it from there.
+    </div>
+  </div>
 
   <footer>
-    <p class="rule">Hand-built in Wales. Built to last.</p>
-    <p>Barrel Sauna UK &middot; Internal closer reference</p>
+    <p class="rule">Hold the place, don't force the decision.</p>
+    <p>The Barrel Sauna UK Team &middot; barrelsaunauk.co.uk</p>
   </footer>
 
+</div><!-- /tab-deposit -->
+
 </div>
+
+<div class="prail" id="prail"><div class="prail-fill" id="prailFill"></div></div>
+<div class="pcount" id="pcount">Card <b><span id="pcur">1</span></b> / <span id="ptot">21</span></div>
 
 <div class="nav-btns" id="navBtns">
   <button id="toTop" aria-label="Scroll to top">&#8593;</button>
@@ -1040,25 +2036,73 @@
 <script>
   var tabBtns = document.querySelectorAll('.tab-btn');
   var tabPanels = document.querySelectorAll('.tab-panel');
+  function activateTab(id){
+    tabBtns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-tab')===id); });
+    tabPanels.forEach(function(p){ p.classList.toggle('active', p.id===id); });
+    updateProgress();
+  }
   tabBtns.forEach(function(btn){
     btn.addEventListener('click', function(){
-      tabBtns.forEach(function(b){ b.classList.remove('active'); });
-      tabPanels.forEach(function(p){ p.classList.remove('active'); });
-      btn.classList.add('active');
-      document.getElementById(btn.getAttribute('data-tab')).classList.add('active');
+      activateTab(btn.getAttribute('data-tab'));
       window.scrollTo({top:0,behavior:'instant'});
     });
   });
 
-  var navBtns = document.getElementById('navBtns');
-  var toTop = document.getElementById('toTop');
-  var toBottom = document.getElementById('toBottom');
-  window.addEventListener('scroll', function(){
-    if (window.scrollY > 300) { navBtns.classList.add('show'); }
-    else { navBtns.classList.remove('show'); }
+  /* cross-tab jump */
+  document.addEventListener('click', function(e){
+    var x = e.target.closest('.xref');
+    if(!x || !x.dataset.target) return;
+    e.preventDefault();
+    activateTab(x.dataset.target);
+    if(x.dataset.anchor){
+      var el = document.getElementById(x.dataset.anchor);
+      if(el){ el.scrollIntoView({behavior:'smooth',block:'start'}); return; }
+    }
+    window.scrollTo({top:0,behavior:'smooth'});
   });
-  toTop.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
-  toBottom.addEventListener('click', function(){ window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}); });
+
+  /* Fast Facts sub-tabs */
+  document.addEventListener('click', function(e){
+    var s = e.target.closest('.subtab');
+    if(!s) return;
+    var group = s.parentElement;
+    group.querySelectorAll('.subtab').forEach(function(b){ b.classList.remove('active'); });
+    s.classList.add('active');
+    document.querySelectorAll('.ff-section').forEach(function(sec){ sec.classList.toggle('active', sec.id===s.dataset.ff); });
+    window.scrollTo({top:0,behavior:'instant'});
+  });
+
+  /* progress rail — only on numbered card tabs (Scripts, Q&As) */
+  var prail=document.getElementById('prail'),prailFill=document.getElementById('prailFill'),
+      pcount=document.getElementById('pcount'),pcur=document.getElementById('pcur'),ptot=document.getElementById('ptot');
+  function numberedCards(){
+    var active=document.querySelector('.tab-panel.active');
+    if(!active) return [];
+    if(active.id!=='tab-scripts' && active.id!=='tab-qa') return [];
+    return Array.prototype.slice.call(active.querySelectorAll('.card[data-ghost]'));
+  }
+  function updateProgress(){
+    var cards=numberedCards();
+    if(!cards.length){ prail.classList.remove('show'); pcount.classList.remove('show'); return; }
+    ptot.textContent=cards.length;
+    var docH=document.body.scrollHeight-window.innerHeight;
+    var pct=docH>0?(window.scrollY/docH):0;
+    prailFill.style.height=(pct*100)+'%';
+    var mid=window.scrollY+window.innerHeight*0.35, cur=1;
+    for(var i=0;i<cards.length;i++){ if(cards[i].offsetTop<=mid) cur=i+1; }
+    pcur.textContent=cur;
+    if(window.scrollY>260){ prail.classList.add('show'); pcount.classList.add('show'); }
+    else{ prail.classList.remove('show'); pcount.classList.remove('show'); }
+  }
+
+  var navBtns=document.getElementById('navBtns');
+  window.addEventListener('scroll', function(){
+    if(window.scrollY>300){ navBtns.classList.add('show'); } else { navBtns.classList.remove('show'); }
+    updateProgress();
+  });
+  document.getElementById('toTop').addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+  document.getElementById('toBottom').addEventListener('click', function(){ window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}); });
+  updateProgress();
 </script>
 
 </body>
